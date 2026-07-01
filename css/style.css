@@ -323,6 +323,22 @@ p {
   border-color: var(--color-text-muted);
 }
 
+.btn[aria-disabled='true'] {
+  opacity: 0.8;
+}
+
+.btn.btn--disabled,
+.btn[aria-disabled='true'] {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.registration-status {
+  margin-top: 0.85rem;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+}
+
 /* ---- Stats bar --------------------------------------------- */
 .stats {
   background: var(--color-surface);

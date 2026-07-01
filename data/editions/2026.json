@@ -10,6 +10,17 @@
     "close": "2026-09-30T23:59:59+02:00",
     "link": "https://sessionize.com/xmasdev-2026/"
   },
+  "registration": {
+    "enabled": false,
+    "url": "",
+    "openCtaLabel": "Registrati gratuitamente →",
+    "closedCtaLabel": "Registrazione non ancora aperta",
+    "openSectionTitle": "Prenota il tuo posto 🎁",
+    "openSectionDescription": "I posti sono limitati. Registrati ora per assicurarti un posto alla conferenza più cool dell'anno!",
+    "closedSectionTitle": "Registrazione prossimamente disponibile",
+    "closedSectionDescription": "Le iscrizioni non sono ancora aperte. Ti aggiorneremo appena sarà possibile registrarsi.",
+    "closedMessage": "La registrazione non è ancora aperta. Torna presto per assicurarti un posto."
+  },
   "logistics": {
     "sectionTitle": "Location",
     "sectionDescription": "L'evento si terrà a Roma in una sede ancora TBD.",
@@ -17,7 +28,13 @@
     "addressLabel": "Indirizzo:",
     "address": "Da definire — la sede verrà comunicata nelle prossime settimane.",
     "transportLabel": "Come arrivare:",
-    "transport": "Raggiungibile con Metro A, B e C. Ampia disponibilità di mezzi di superficie nelle vicinanze."
+    "transport": "Raggiungibile con Metro A, B e C. Ampia disponibilità di mezzi di superficie nelle vicinanze.",
+    "map": {
+      "embedUrl": "https://www.openstreetmap.org/export/embed.html?bbox=12.44%2C41.87%2C12.54%2C41.93&layer=mapnik&marker=41.9028%2C12.4964",
+      "linkUrl": "https://www.openstreetmap.org/?mlat=41.9028&mlon=12.4964#map=12/41.9028/12.4964",
+      "linkLabel": "Apri la mappa di Roma",
+      "ariaLabel": "Mappa della location dell'evento"
+    }
   },
   "sponsors": {
     "pageContent": {

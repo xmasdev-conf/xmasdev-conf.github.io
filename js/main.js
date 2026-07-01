@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCfpBanner();
   initHomepageSponsors();
   initLocationSection();
+  initRegistrationCtas();
 });
 
 /* ---- Responsive hamburger menu ----------------------------- */
@@ -213,6 +214,9 @@ async function initLocationSection() {
   const addressEl = document.getElementById('location-address');
   const transportLabelEl = document.getElementById('location-transport-label');
   const transportEl = document.getElementById('location-transport');
+  const mapEmbedEl = document.getElementById('location-map-embed');
+  const mapFallbackEl = document.getElementById('location-map-fallback');
+  const mapLinkEl = document.getElementById('location-map-link');
 
   if (titleEl && logistics.sectionTitle) titleEl.textContent = logistics.sectionTitle;
   if (descriptionEl && logistics.sectionDescription) descriptionEl.textContent = logistics.sectionDescription;
@@ -221,6 +225,112 @@ async function initLocationSection() {
   if (addressEl && logistics.address) addressEl.textContent = logistics.address;
   if (transportLabelEl && logistics.transportLabel) transportLabelEl.textContent = logistics.transportLabel;
   if (transportEl && logistics.transport) transportEl.textContent = logistics.transport;
+
+  const map = logistics?.map || {};
+  const embedUrl = normalizeHttpUrl(map.embedUrl);
+  const linkUrl = normalizeHttpUrl(map.linkUrl);
+
+  if (mapEmbedEl) {
+    if (embedUrl) {
+      mapEmbedEl.src = embedUrl;
+      if (map.ariaLabel) mapEmbedEl.title = map.ariaLabel;
+      mapEmbedEl.style.display = 'block';
+      if (mapFallbackEl) mapFallbackEl.style.display = 'none';
+    } else {
+      mapEmbedEl.removeAttribute('src');
+      mapEmbedEl.style.display = 'none';
+      if (mapFallbackEl) mapFallbackEl.style.display = 'block';
+    }
+  }
+
+  if (mapLinkEl) {
+    if (linkUrl) {
+      mapLinkEl.href = linkUrl;
+      mapLinkEl.textContent = map.linkLabel || 'Apri la mappa';
+      mapLinkEl.style.display = 'inline-flex';
+    } else {
+      mapLinkEl.removeAttribute('href');
+      mapLinkEl.style.display = 'none';
+    }
+  }
+}
+
+/* ---- Registration CTAs (homepage) ------------------------- */
+async function initRegistrationCtas() {
+  const ctas = Array.from(document.querySelectorAll('[data-registration-cta="true"]'));
+  if (!ctas.length) return;
+
+  const ticketsTitleEl = document.getElementById('tickets-title');
+  const ticketsDescriptionEl = document.getElementById('tickets-description');
+
+  const configUrl = ctas[0].dataset.editionsIndex || 'data/editions.json';
+  const requestedEdition = ctas[0].dataset.edition;
+  const editionData = await loadEditionDataFromIndex(configUrl, requestedEdition);
+
+  const registration = editionData?.registration || {};
+  const registrationUrl = normalizeHttpUrl(registration.url);
+  const registrationEnabled = registration.enabled === true && Boolean(registrationUrl);
+  const closedMessage = registration.closedMessage || 'La registrazione non è ancora aperta.';
+  const openCtaLabel = registration.openCtaLabel || 'Registrati gratuitamente →';
+  const closedCtaLabel = registration.closedCtaLabel || 'Registrazione non ancora aperta';
+
+  if (ticketsTitleEl) {
+    ticketsTitleEl.textContent = registrationEnabled
+      ? (registration.openSectionTitle || 'Prenota il tuo posto 🎁')
+      : (registration.closedSectionTitle || 'Registrazione prossimamente disponibile');
+  }
+
+  if (ticketsDescriptionEl) {
+    ticketsDescriptionEl.textContent = registrationEnabled
+      ? (registration.openSectionDescription || "I posti sono limitati. Registrati ora per assicurarti un posto alla conferenza più cool dell'anno!")
+      : (registration.closedSectionDescription || 'Le iscrizioni non sono ancora aperte. Ti aggiorneremo appena sarà possibile registrarsi.');
+  }
+
+  ctas.forEach((cta) => {
+    const messageTargetId = cta.dataset.registrationMessageTarget;
+    const messageEl = messageTargetId ? document.getElementById(messageTargetId) : null;
+
+    cta.textContent = registrationEnabled
+      ? (registration.openCtaLabel || cta.textContent)
+      : closedCtaLabel;
+
+    if (registrationEnabled) {
+      cta.href = registrationUrl;
+      cta.removeAttribute('aria-disabled');
+      cta.removeAttribute('title');
+      cta.classList.remove('btn--disabled');
+      cta.removeAttribute('tabindex');
+
+      if (messageEl) {
+        messageEl.hidden = true;
+        messageEl.textContent = '';
+      }
+      return;
+    }
+
+    cta.removeAttribute('href');
+    cta.setAttribute('aria-disabled', 'true');
+    cta.setAttribute('title', closedMessage);
+    cta.classList.add('btn--disabled');
+    cta.setAttribute('tabindex', '-1');
+
+    if (messageEl) {
+      messageEl.hidden = false;
+      messageEl.textContent = closedMessage;
+    }
+  });
+}
+
+function normalizeHttpUrl(urlValue) {
+  if (!urlValue || typeof urlValue !== 'string') return null;
+
+  try {
+    const parsed = new URL(urlValue);
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return null;
+    return parsed.toString();
+  } catch {
+    return null;
+  }
 }
 
 function buildHomepageSponsorCard(sponsor, tierName) {
