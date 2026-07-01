@@ -276,9 +276,7 @@ async function initRegistrationCtas() {
   const registrationUrl = normalizeHttpUrl(registration.url);
   const registrationEnabled = registration.enabled === true && Boolean(registrationUrl);
   const closedMessage = registration.closedMessage || 'La registrazione non è ancora aperta.';
-  const openCtaLabel = registration.openCtaLabel || 'Registrati gratuitamente →';
   const closedCtaLabel = registration.closedCtaLabel || 'Registrazione non ancora aperta';
-
   if (ticketsTitleEl) {
     ticketsTitleEl.textContent = registrationEnabled
       ? (registration.openSectionTitle || 'Prenota il tuo posto 🎁')
