@@ -89,7 +89,7 @@ function renderSponsors(container, data) {
 
     currentSponsorTiers.forEach((tier) => {
       const section = document.createElement('div');
-      section.className = `sponsor-tier sponsor-tier--${tier.name.toLowerCase()}`;
+      section.className = `sponsor-tier sponsor-tier--${(tier.name || '').toLowerCase()}`;
 
       // Tier label
       const label = document.createElement('div');
