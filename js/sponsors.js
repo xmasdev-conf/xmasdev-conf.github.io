@@ -136,11 +136,24 @@ function buildSponsorshipPackSection(pack, tiers) {
 
   const header = document.createElement('div');
   header.className = 'section__header sponsor-pack__header';
-  header.innerHTML = `
-    <h3>${pack.title || 'Pacchetti sponsor'}</h3>
-    ${pack.subtitle ? `<p class="sponsor-pack__subtitle">${pack.subtitle}</p>` : ''}
-    ${pack.note ? `<p>${pack.note}</p>` : ''}
-  `;
+
+  const title = document.createElement('h3');
+  title.textContent = pack.title || 'Pacchetti sponsor';
+  header.appendChild(title);
+
+  if (pack.subtitle) {
+    const subtitle = document.createElement('p');
+    subtitle.className = 'sponsor-pack__subtitle';
+    subtitle.textContent = pack.subtitle;
+    header.appendChild(subtitle);
+  }
+
+  if (pack.note) {
+    const note = document.createElement('p');
+    note.textContent = pack.note;
+    header.appendChild(note);
+  }
+
   section.appendChild(header);
 
   const grid = document.createElement('div');
