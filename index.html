@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="XmasDev — la conferenza tecnica di fine anno. Sessioni, workshop e networking per sviluppatori." />
+  <meta property="og:title" content="XmasDev Conference" />
+  <meta property="og:description" content="La conferenza tecnica natalizia per sviluppatori italiani." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://xmasdev.net" />
+  <title>XmasDev — Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎄</text></svg>" />
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo" aria-label="XmasDev home">
+        <span class="logo-icon" aria-hidden="true">🎄</span>
+        <span>Xmas<span class="logo-accent">Dev</span></span>
+      </a>
+
+      <ul class="navbar__links" id="navbar-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="sponsors.html">Sponsor</a></li>
+        <li><a href="staff.html">Staff</a></li>
+        <li><a href="#tickets" class="navbar__cta">Registrati</a></li>
+      </ul>
+
+      <button class="navbar__hamburger" id="navbar-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navbar-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <header class="hero" role="banner">
+    <div class="snowflakes" aria-hidden="true"></div>
+    <div class="container" style="position:relative;z-index:1;">
+      <div class="hero__eyebrow">
+        <span>🎄</span>
+        <span>Edizione 2024</span>
+      </div>
+
+      <h1>La conferenza tecnica<br>di <span class="highlight">fine anno</span></h1>
+
+      <p class="hero__subtitle">
+        Una giornata di talk, workshop e networking dedicata alla community degli sviluppatori italiani.
+      </p>
+
+      <div class="hero__meta">
+        <div class="hero__meta-item">
+          <span class="icon" aria-hidden="true">📅</span>
+          <span>21 Dicembre 2024</span>
+        </div>
+        <div class="hero__meta-item">
+          <span class="icon" aria-hidden="true">📍</span>
+          <span>Milano, Italia</span>
+        </div>
+        <div class="hero__meta-item">
+          <span class="icon" aria-hidden="true">⏱</span>
+          <span>09:00 – 18:00</span>
+        </div>
+      </div>
+
+      <div class="hero__actions">
+        <a href="#tickets" class="btn btn--primary">
+          <span>Registrati ora</span>
+          <span aria-hidden="true">→</span>
+        </a>
+        <a href="agenda.html" class="btn btn--outline">
+          <span>Guarda l'agenda</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== STATS ========== -->
+  <section class="stats" aria-label="Conference statistics">
+    <div class="stats__grid container">
+      <div class="stats__item">
+        <span class="stats__number">20+</span>
+        <span class="stats__label">Speaker</span>
+      </div>
+      <div class="stats__item">
+        <span class="stats__number">4</span>
+        <span class="stats__label">Track</span>
+      </div>
+      <div class="stats__item">
+        <span class="stats__number">400+</span>
+        <span class="stats__label">Partecipanti</span>
+      </div>
+      <div class="stats__item">
+        <span class="stats__number">1</span>
+        <span class="stats__label">Giornata</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT ========== -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section__header">
+        <h2>Cos'è XmasDev?</h2>
+        <p>Una conferenza pensata per sviluppatori, by developers for developers, che si tiene ogni anno in prossimità delle festività natalizie.</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="about-card__icon" aria-hidden="true">🎤</div>
+          <h3>Talk tecnici</h3>
+          <p>Speaker di livello nazionale e internazionale affrontano argomenti concreti e di frontiera dello sviluppo software.</p>
+        </div>
+
+        <div class="about-card">
+          <div class="about-card__icon" aria-hidden="true">🛠</div>
+          <h3>Workshop pratici</h3>
+          <p>Sessioni hands-on per sporcarsi le mani con le tecnologie più interessanti del momento.</p>
+        </div>
+
+        <div class="about-card">
+          <div class="about-card__icon" aria-hidden="true">🤝</div>
+          <h3>Networking</h3>
+          <p>Spazi dedicati per incontrare altri sviluppatori, condividere esperienze e costruire connessioni professionali.</p>
+        </div>
+
+        <div class="about-card">
+          <div class="about-card__icon" aria-hidden="true">🌍</div>
+          <h3>Community</h3>
+          <p>Un evento organizzato dalla community, per la community. Gratuito o a costo contenuto, accessibile a tutti.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EVENT DETAILS ========== -->
+  <section class="section section--alt" id="event">
+    <div class="container">
+      <div class="feature">
+        <div class="feature__content">
+          <h2>Un giorno dedicato al <span style="color:var(--color-primary)">tuo</span> percorso da sviluppatore</h2>
+          <p>XmasDev nasce dall'idea che la crescita professionale passa anche dallo scambio con i propri pari. L'evento si svolge in una giornata intensa, ricca di contenuti di qualità e momenti informali.</p>
+          <ul class="feature__list">
+            <li>Sessioni su web, cloud, AI, devops e molto altro</li>
+            <li>Speaker selezionati dalla community</li>
+            <li>Slot da 30 e 45 minuti per ogni talk</li>
+            <li>Pranzo e coffee break inclusi</li>
+            <li>Streaming live per chi non può essere presente</li>
+          </ul>
+        </div>
+        <div class="feature__visual" aria-hidden="true">
+          🎄
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== LOCATION ========== -->
+  <section class="section" id="location">
+    <div class="container">
+      <div class="section__header">
+        <h2>Location</h2>
+        <p>L'evento si terrà nel cuore di Milano, in una sede facilmente raggiungibile con i mezzi pubblici.</p>
+      </div>
+
+      <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;" role="region" aria-label="Location details">
+        <div>
+          <h3 style="margin-bottom:1rem;">📍 Milano, Italia</h3>
+          <p style="margin-bottom:0.5rem;"><strong style="color:var(--color-text);">Indirizzo:</strong></p>
+          <p style="margin-bottom:1rem;">Da definire — la sede verrà comunicata nelle prossime settimane.</p>
+          <p style="margin-bottom:0.5rem;"><strong style="color:var(--color-text);">Come arrivare:</strong></p>
+          <p>Raggiungibile con Metro M1, M2 e M3. Ampia disponibilità di mezzi di superficie nelle vicinanze.</p>
+        </div>
+        <div style="background:var(--color-bg);border-radius:var(--radius-md);padding:1.5rem;text-align:center;font-size:5rem;" aria-hidden="true">
+          🗺
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA / TICKETS ========== -->
+  <section class="section section--alt" id="tickets">
+    <div class="container">
+      <div class="cta-banner">
+        <h2>Prenota il tuo posto 🎁</h2>
+        <p>I posti sono limitati. Registrati ora per assicurarti un posto alla conferenza più cool dell'anno!</p>
+        <a href="#" class="btn btn--primary" aria-label="Register for XmasDev 2024">
+          Registrati gratuitamente →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <a href="index.html" class="navbar__logo" aria-label="XmasDev home">
+          <span class="logo-icon" aria-hidden="true">🎄</span>
+          <span>Xmas<span class="logo-accent">Dev</span></span>
+        </a>
+        <p>La conferenza tecnica natalizia per la community degli sviluppatori italiani.</p>
+      </div>
+
+      <div class="footer__col">
+        <h4>Pagine</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="agenda.html">Agenda</a></li>
+          <li><a href="sponsors.html">Sponsor</a></li>
+          <li><a href="staff.html">Staff</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Evento</h4>
+        <ul>
+          <li><a href="#about">Chi siamo</a></li>
+          <li><a href="#location">Location</a></li>
+          <li><a href="#tickets">Registrazione</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="https://twitter.com/xmasdevconf" target="_blank" rel="noopener noreferrer">Twitter / X</a></li>
+          <li><a href="https://linkedin.com/company/xmasdev" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="https://github.com/xmasdev-conf" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© 2024 XmasDev Conference. Tutti i diritti riservati.</p>
+      <p>Made with ❤️ by the community</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

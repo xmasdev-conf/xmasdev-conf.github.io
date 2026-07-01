@@ -1,0 +1,61 @@
+/* ============================================================
+   XmasDev — main.js  (shared across all pages)
+   ============================================================ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  initNavbar();
+  initSnowflakes();
+  highlightActiveNav();
+});
+
+/* ---- Responsive hamburger menu ----------------------------- */
+function initNavbar() {
+  const hamburger = document.getElementById('navbar-hamburger');
+  const links = document.getElementById('navbar-links');
+  if (!hamburger || !links) return;
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = links.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+  });
+
+  // Close menu on link click (mobile)
+  links.querySelectorAll('a').forEach((a) => {
+    a.addEventListener('click', () => {
+      links.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
+
+/* ---- Highlight current page in nav ------------------------- */
+function highlightActiveNav() {
+  const currentPage = location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.navbar__links a').forEach((a) => {
+    const href = a.getAttribute('href');
+    if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+      a.classList.add('active');
+    }
+  });
+}
+
+/* ---- Animated snowflakes (hero section only) --------------- */
+function initSnowflakes() {
+  const container = document.querySelector('.snowflakes');
+  if (!container) return;
+
+  const symbols = ['❄', '❅', '❆', '✦', '✧'];
+  const count = 18;
+
+  for (let i = 0; i < count; i++) {
+    const el = document.createElement('span');
+    el.className = 'snowflake';
+    el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    el.style.left = `${Math.random() * 100}%`;
+    el.style.fontSize = `${0.6 + Math.random() * 1}rem`;
+    el.style.animationDuration = `${6 + Math.random() * 10}s`;
+    el.style.animationDelay = `-${Math.random() * 12}s`;
+    el.style.opacity = `${0.05 + Math.random() * 0.2}`;
+    container.appendChild(el);
+  }
+}

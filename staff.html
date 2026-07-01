@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="XmasDev — Conosci il team che organizza la conferenza." />
+  <meta property="og:title" content="XmasDev — Staff" />
+  <meta property="og:description" content="Il team dietro XmasDev Conference 2024." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://xmasdev.net/staff.html" />
+  <title>XmasDev — Staff</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎄</text></svg>" />
+</head>
+<body>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__logo" aria-label="XmasDev home">
+        <span class="logo-icon" aria-hidden="true">🎄</span>
+        <span>Xmas<span class="logo-accent">Dev</span></span>
+      </a>
+
+      <ul class="navbar__links" id="navbar-links" role="list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="sponsors.html">Sponsor</a></li>
+        <li><a href="staff.html">Staff</a></li>
+        <li><a href="index.html#tickets" class="navbar__cta">Registrati</a></li>
+      </ul>
+
+      <button class="navbar__hamburger" id="navbar-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navbar-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========== PAGE HERO ========== -->
+  <header class="page-hero">
+    <div class="container">
+      <h1>👥 Il nostro Staff</h1>
+      <p>Il team di volontari appassionati che ogni anno rende possibile XmasDev.</p>
+    </div>
+  </header>
+
+  <!-- ========== STAFF ========== -->
+  <main>
+    <section class="section" aria-label="Staff members">
+      <div class="container">
+
+        <!-- Dynamic staff content injected here -->
+        <div id="staff-container" aria-live="polite" aria-label="Staff content">
+          <!-- Rendered by staff.js -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Join the team CTA -->
+    <section class="section section--alt" aria-label="Join the team">
+      <div class="container">
+        <div class="cta-banner">
+          <h2>Vuoi far parte del team? 🙋</h2>
+          <p>XmasDev è un evento organizzato da volontari. Se hai voglia di contribuire, scrivici!</p>
+          <a href="mailto:staff@xmasdev.net" class="btn btn--primary" aria-label="Contact us to join the team">
+            Contattaci →
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer__inner">
+      <div class="footer__brand">
+        <a href="index.html" class="navbar__logo" aria-label="XmasDev home">
+          <span class="logo-icon" aria-hidden="true">🎄</span>
+          <span>Xmas<span class="logo-accent">Dev</span></span>
+        </a>
+        <p>La conferenza tecnica natalizia per la community degli sviluppatori italiani.</p>
+      </div>
+
+      <div class="footer__col">
+        <h4>Pagine</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="agenda.html">Agenda</a></li>
+          <li><a href="sponsors.html">Sponsor</a></li>
+          <li><a href="staff.html">Staff</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Evento</h4>
+        <ul>
+          <li><a href="index.html#about">Chi siamo</a></li>
+          <li><a href="index.html#location">Location</a></li>
+          <li><a href="index.html#tickets">Registrazione</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Community</h4>
+        <ul>
+          <li><a href="https://twitter.com/xmasdevconf" target="_blank" rel="noopener noreferrer">Twitter / X</a></li>
+          <li><a href="https://linkedin.com/company/xmasdev" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a href="https://github.com/xmasdev-conf" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <p>© 2024 XmasDev Conference. Tutti i diritti riservati.</p>
+      <p>Made with ❤️ by the community</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/staff.js"></script>
+</body>
+</html>
