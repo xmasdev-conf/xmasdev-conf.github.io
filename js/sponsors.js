@@ -29,7 +29,7 @@ async function fetchSponsors() {
 
 /* ---- Render ------------------------------------------------- */
 function renderSponsors(container, data) {
-  const tiers = data.tiers || [];
+  const tiers = (data.tiers || []).slice().sort(sortTiersByPriority);
   if (!tiers.length) {
     container.innerHTML = '<p class="state-empty">Sponsor information coming soon.</p>';
     return;
@@ -62,6 +62,21 @@ function renderSponsors(container, data) {
     section.appendChild(grid);
     container.appendChild(section);
   });
+}
+
+function sortTiersByPriority(a, b) {
+  const order = ['diamond', 'platinum', 'gold', 'silver'];
+  const aName = (a?.name || '').toLowerCase();
+  const bName = (b?.name || '').toLowerCase();
+
+  const aIdx = order.indexOf(aName);
+  const bIdx = order.indexOf(bName);
+
+  const safeA = aIdx === -1 ? Number.MAX_SAFE_INTEGER : aIdx;
+  const safeB = bIdx === -1 ? Number.MAX_SAFE_INTEGER : bIdx;
+
+  if (safeA !== safeB) return safeA - safeB;
+  return aName.localeCompare(bName);
 }
 
 /* ---- Build a single sponsor card --------------------------- */

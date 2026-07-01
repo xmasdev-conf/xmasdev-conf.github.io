@@ -1,70 +1,24 @@
 {
   "tiers": [
     {
+      "name": "Diamond",
+      "sponsors": [
+        {
+          "name": "Xebia",
+          "logo": "data/xebia.svg",
+          "url": "https://xebia.com",
+          "description": "Diamond sponsor di XmasDev 2026."
+        }
+      ]
+    },
+    {
       "name": "Platinum",
       "sponsors": [
         {
-          "name": "TechCorp Italia",
-          "logo": "https://via.placeholder.com/240x80?text=TechCorp+Italia",
-          "url": "https://example.com",
-          "description": "Leading provider of enterprise software solutions in Italy."
-        }
-      ]
-    },
-    {
-      "name": "Gold",
-      "sponsors": [
-        {
-          "name": "CloudSpark",
-          "logo": "https://via.placeholder.com/200x70?text=CloudSpark",
-          "url": "https://example.com",
-          "description": "Cloud infrastructure and DevOps automation platform."
-        },
-        {
-          "name": "DevFlow",
-          "logo": "https://via.placeholder.com/200x70?text=DevFlow",
-          "url": "https://example.com",
-          "description": "Developer productivity tools for modern engineering teams."
-        }
-      ]
-    },
-    {
-      "name": "Silver",
-      "sponsors": [
-        {
-          "name": "OpenBit",
-          "logo": "https://via.placeholder.com/160x60?text=OpenBit",
-          "url": "https://example.com",
-          "description": "Open-source first software consulting."
-        },
-        {
-          "name": "NetPulse",
-          "logo": "https://via.placeholder.com/160x60?text=NetPulse",
-          "url": "https://example.com",
-          "description": "High-performance networking solutions."
-        },
-        {
-          "name": "DataNest",
-          "logo": "https://via.placeholder.com/160x60?text=DataNest",
-          "url": "https://example.com",
-          "description": "Big data analytics and machine learning platform."
-        }
-      ]
-    },
-    {
-      "name": "Community",
-      "sponsors": [
-        {
-          "name": "ITDevCommunity",
-          "logo": "https://via.placeholder.com/130x50?text=ITDevCommunity",
-          "url": "https://example.com",
-          "description": "Italian developer community network."
-        },
-        {
-          "name": "HackItalia",
-          "logo": "https://via.placeholder.com/130x50?text=HackItalia",
-          "url": "https://example.com",
-          "description": "Italy's premier hackathon organization."
+          "name": "Reti",
+          "logo": "data/reti.png",
+          "url": "https://www.reti.it",
+          "description": "Platinum sponsor di XmasDev 2026."
         }
       ]
     }

@@ -471,6 +471,11 @@ p {
   margin-right: auto;
 }
 
+.cfp-banner__deadline {
+  color: var(--color-text);
+  margin-bottom: 1.5rem;
+}
+
 /* ---- Page hero (inner pages) ------------------------------- */
 .page-hero {
   background: linear-gradient(180deg, rgba(230, 57, 70, 0.08) 0%, transparent 100%);
@@ -753,6 +758,11 @@ p {
 /* ---- Sponsors ---------------------------------------------- */
 .sponsor-tier {
   margin-bottom: 3.5rem;
+  --tier-card-min: 200px;
+  --tier-card-max: 320px;
+  --tier-logo-max: 180px;
+  --tier-padding-y: 1.25rem;
+  --tier-padding-x: 1.5rem;
 }
 
 .sponsor-tier__label {
@@ -778,6 +788,7 @@ p {
 }
 
 .sponsor-tier--platinum .sponsor-tier__label h3 { color: #e2e8f0; }
+.sponsor-tier--diamond  .sponsor-tier__label h3 { color: #8dd8ff; }
 .sponsor-tier--gold     .sponsor-tier__label h3 { color: var(--color-accent); }
 .sponsor-tier--silver   .sponsor-tier__label h3 { color: #b8c4d0; }
 
@@ -786,13 +797,14 @@ p {
   flex-wrap: wrap;
   gap: 1.5rem;
   align-items: center;
+  justify-content: center;
 }
 
 .sponsor-card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: 1.5rem 2rem;
+  padding: var(--tier-padding-y) var(--tier-padding-x);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -800,7 +812,8 @@ p {
   text-align: center;
   transition: border-color var(--transition), transform var(--transition);
   flex: 1;
-  min-width: 200px;
+  min-width: var(--tier-card-min);
+  max-width: var(--tier-card-max);
 }
 
 .sponsor-card:hover {
@@ -808,13 +821,8 @@ p {
   transform: translateY(-3px);
 }
 
-.sponsor-tier--platinum .sponsor-card {
-  min-width: 280px;
-  padding: 2rem 2.5rem;
-}
-
 .sponsor-card img {
-  max-width: 200px;
+  max-width: var(--tier-logo-max);
   height: auto;
   filter: brightness(0.9);
   transition: filter var(--transition);
@@ -832,6 +840,39 @@ p {
 .sponsor-card__desc {
   font-size: 0.85rem;
   color: var(--color-text-muted);
+}
+
+/* Staircase sizing by tier: Diamond > Platinum > Gold > Silver */
+.sponsor-tier--diamond {
+  --tier-card-min: 360px;
+  --tier-card-max: 520px;
+  --tier-logo-max: 320px;
+  --tier-padding-y: 2rem;
+  --tier-padding-x: 2.5rem;
+}
+
+.sponsor-tier--platinum {
+  --tier-card-min: 300px;
+  --tier-card-max: 440px;
+  --tier-logo-max: 260px;
+  --tier-padding-y: 1.75rem;
+  --tier-padding-x: 2.1rem;
+}
+
+.sponsor-tier--gold {
+  --tier-card-min: 250px;
+  --tier-card-max: 360px;
+  --tier-logo-max: 220px;
+  --tier-padding-y: 1.5rem;
+  --tier-padding-x: 1.8rem;
+}
+
+.sponsor-tier--silver {
+  --tier-card-min: 220px;
+  --tier-card-max: 320px;
+  --tier-logo-max: 180px;
+  --tier-padding-y: 1.25rem;
+  --tier-padding-x: 1.5rem;
 }
 
 .become-sponsor {

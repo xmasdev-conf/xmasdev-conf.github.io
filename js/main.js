@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initSnowflakes();
   highlightActiveNav();
+  initCfpBanner();
 });
 
 /* ---- Responsive hamburger menu ----------------------------- */
@@ -58,4 +59,54 @@ function initSnowflakes() {
     el.style.opacity = `${0.05 + Math.random() * 0.2}`;
     container.appendChild(el);
   }
+}
+
+/* ---- CFP banner (homepage only) --------------------------- */
+function initCfpBanner() {
+  const cfpSection = document.getElementById('cfp');
+  if (!cfpSection) return;
+
+  const title = cfpSection.dataset.cfpTitle;
+  const closeRaw = cfpSection.dataset.cfpClose;
+  const linkRaw = cfpSection.dataset.cfpLink;
+
+  if (!title || !closeRaw || !linkRaw) {
+    cfpSection.hidden = true;
+    return;
+  }
+
+  const closeDate = new Date(closeRaw);
+  if (Number.isNaN(closeDate.getTime()) || Date.now() > closeDate.getTime()) {
+    cfpSection.hidden = true;
+    return;
+  }
+
+  let link;
+  try {
+    link = new URL(linkRaw);
+  } catch {
+    cfpSection.hidden = true;
+    return;
+  }
+
+  const titleEl = document.getElementById('cfp-title');
+  const deadlineEl = document.getElementById('cfp-deadline');
+  const linkEl = document.getElementById('cfp-link');
+
+  if (!titleEl || !deadlineEl || !linkEl) {
+    cfpSection.hidden = true;
+    return;
+  }
+
+  titleEl.textContent = title;
+  deadlineEl.textContent = closeDate.toLocaleString('it-IT', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+  linkEl.href = link.toString();
+
+  cfpSection.hidden = false;
 }
