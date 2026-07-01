@@ -29,6 +29,7 @@ async function fetchSponsors(container) {
     return {
       sponsors: editionData?.sponsors || { tiers: [] },
       sponsorshipPack: editionData?.sponsorshipPack || null,
+      sponsorsPageContent: editionData?.sponsors?.pageContent || null,
     };
   }
 
@@ -65,72 +66,68 @@ async function loadEditionDataFromIndex(indexUrl, requestedEdition) {
 /* ---- Render ------------------------------------------------- */
 function renderSponsors(container, data) {
   const tiers = (data?.sponsors?.tiers || []).slice().sort(sortTiersByPriority);
-  const sponsorshipPack = data?.sponsorshipPack;
+  const sponsorshipPack = data?.sponsorshipPack || {};
+  const sponsorsPageContent = data?.sponsorsPageContent || {};
+  const currentSponsorTiers = tiers.filter((tier) => Array.isArray(tier?.sponsors) && tier.sponsors.length > 0);
+  const sponsorshipTiers = tiers.filter((tier) => tier?.price || (Array.isArray(tier?.benefits) && tier.benefits.length > 0));
 
-  if (!tiers.length && !sponsorshipPack) {
+  if (!currentSponsorTiers.length && !sponsorshipTiers.length) {
     container.innerHTML = '<p class="state-empty">Le informazioni sugli sponsor saranno disponibili a breve.</p>';
     return;
   }
 
   container.innerHTML = '';
 
-  if (!tiers.length) {
-    if (sponsorshipPack) {
-      container.appendChild(buildSponsorshipPackSection(sponsorshipPack));
-    }
-    return;
+  if (currentSponsorTiers.length) {
+    const currentHeader = document.createElement('div');
+    currentHeader.className = 'section__header';
+    currentHeader.innerHTML = `
+      <h2>${sponsorsPageContent.currentSponsorsTitle || 'Sponsor attuali'}</h2>
+      <p>${sponsorsPageContent.currentSponsorsDescription || 'Le aziende già confermate per questa edizione.'}</p>
+    `;
+    container.appendChild(currentHeader);
+
+    currentSponsorTiers.forEach((tier) => {
+      const section = document.createElement('div');
+      section.className = `sponsor-tier sponsor-tier--${tier.name.toLowerCase()}`;
+
+      // Tier label
+      const label = document.createElement('div');
+      label.className = 'sponsor-tier__label';
+      const h3 = document.createElement('h3');
+      h3.textContent = tier.name;
+      label.appendChild(h3);
+      section.appendChild(label);
+
+      // Sponsor cards
+      const grid = document.createElement('div');
+      grid.className = 'sponsor-tier__grid';
+
+      tier.sponsors.forEach((sponsor) => {
+        grid.appendChild(buildSponsorCard(sponsor));
+      });
+
+      section.appendChild(grid);
+      container.appendChild(section);
+    });
   }
 
-  const currentHeader = document.createElement('div');
-  currentHeader.className = 'section__header';
-  currentHeader.innerHTML = `
-    <h2>Sponsor attuali</h2>
-    <p>Le aziende già confermate per XmasDev 2026.</p>
-  `;
-  container.appendChild(currentHeader);
-
-  tiers.forEach((tier) => {
-    if (!tier.sponsors || !tier.sponsors.length) return;
-
-    const section = document.createElement('div');
-    section.className = `sponsor-tier sponsor-tier--${tier.name.toLowerCase()}`;
-
-    // Tier label
-    const label = document.createElement('div');
-    label.className = 'sponsor-tier__label';
-    const h3 = document.createElement('h3');
-    h3.textContent = tier.name;
-    label.appendChild(h3);
-    section.appendChild(label);
-
-    // Sponsor cards
-    const grid = document.createElement('div');
-    grid.className = 'sponsor-tier__grid';
-
-    tier.sponsors.forEach((sponsor) => {
-      grid.appendChild(buildSponsorCard(sponsor));
-    });
-
-    section.appendChild(grid);
-    container.appendChild(section);
-  });
-
-  if (sponsorshipPack) {
+  if (sponsorshipTiers.length) {
     const tiersHeader = document.createElement('div');
     tiersHeader.className = 'section__header sponsors-current__header';
     tiersHeader.innerHTML = `
-      <h2>Diventa sponsor</h2>
-      <p>Scegli il livello più adatto alla tua azienda e supporta la community XmasDev.</p>
+      <h2>${sponsorsPageContent.packagesSectionTitle || 'Diventa sponsor'}</h2>
+      <p>${sponsorsPageContent.packagesSectionDescription || 'Scegli il livello più adatto alla tua azienda e supporta la community XmasDev.'}</p>
     `;
     container.appendChild(tiersHeader);
-    container.appendChild(buildSponsorshipPackSection(sponsorshipPack));
+    container.appendChild(buildSponsorshipPackSection(sponsorshipPack, sponsorshipTiers));
   }
 }
 
-function buildSponsorshipPackSection(pack) {
+function buildSponsorshipPackSection(pack, tiers) {
   const section = document.createElement('section');
   section.className = 'sponsor-pack';
-  section.setAttribute('aria-label', 'Sponsor pack tiers');
+  section.setAttribute('aria-label', 'Pacchetti sponsor');
 
   const header = document.createElement('div');
   header.className = 'section__header sponsor-pack__header';
@@ -144,7 +141,7 @@ function buildSponsorshipPackSection(pack) {
   const grid = document.createElement('div');
   grid.className = 'sponsor-pack__grid';
 
-  (pack.tiers || []).forEach((tier) => {
+  (tiers || []).forEach((tier) => {
     const card = document.createElement('article');
     const tierName = (tier?.name || '').toLowerCase();
     card.className = `sponsor-pack__card sponsor-pack__card--${tierName}`;
@@ -154,10 +151,8 @@ function buildSponsorshipPackSection(pack) {
       .join('');
 
     card.innerHTML = `
-      <div class="sponsor-pack__card-topline">${tier.code || ''} · ${tier.label || ''}</div>
       <h3>${tier.name || ''}</h3>
       <p class="sponsor-pack__price">${tier.price || ''}</p>
-      ${tier.query ? `<code class="sponsor-pack__query">${tier.query}</code>` : ''}
       <ul>${benefits}</ul>
     `;
 

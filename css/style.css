@@ -846,28 +846,12 @@ p {
   transform: translateY(-2px);
 }
 
-.sponsor-pack__card-topline {
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--color-text-muted);
-  margin-bottom: 0.45rem;
-}
-
 .sponsor-pack__price {
   color: var(--color-text);
   font-size: 1.35rem;
   font-weight: 800;
   margin-top: 0.35rem;
   margin-bottom: 0.25rem;
-}
-
-.sponsor-pack__query {
-  display: inline-block;
-  margin-bottom: 0.9rem;
-  color: var(--color-text-muted);
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
 }
 
 .sponsor-pack__card ul {
