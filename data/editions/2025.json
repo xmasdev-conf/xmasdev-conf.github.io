@@ -10,6 +10,32 @@
     "close": "2025-09-30T23:59:59+02:00",
     "link": "https://sessionize.com/xmasdev-2025/"
   },
+  "registration": {
+    "enabled": false,
+    "url": "",
+    "openCtaLabel": "Registrati gratuitamente →",
+    "closedCtaLabel": "Registrazione non ancora aperta",
+    "openSectionTitle": "Prenota il tuo posto 🎁",
+    "openSectionDescription": "I posti sono limitati. Registrati ora per assicurarti un posto alla conferenza.",
+    "closedSectionTitle": "Registrazione non disponibile",
+    "closedSectionDescription": "Per questa edizione la registrazione non è disponibile.",
+    "closedMessage": "La registrazione non è ancora aperta."
+  },
+  "logistics": {
+    "sectionTitle": "Location",
+    "sectionDescription": "L'evento si è tenuto a Roma.",
+    "city": "Roma, Italia",
+    "addressLabel": "Indirizzo:",
+    "address": "Informazioni di venue archiviate per l'edizione 2025.",
+    "transportLabel": "Come arrivare:",
+    "transport": "Raggiungibile tramite la rete metropolitana e i principali mezzi di superficie di Roma.",
+    "map": {
+      "embedUrl": "",
+      "linkUrl": "",
+      "linkLabel": "Apri la mappa",
+      "ariaLabel": "Mappa della location"
+    }
+  },
   "sponsors": {
     "tiers": []
   },

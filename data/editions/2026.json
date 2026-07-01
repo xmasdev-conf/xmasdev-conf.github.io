@@ -10,10 +10,57 @@
     "close": "2026-09-30T23:59:59+02:00",
     "link": "https://sessionize.com/xmasdev-2026/"
   },
+  "registration": {
+    "enabled": false,
+    "url": "",
+    "openCtaLabel": "Registrati gratuitamente →",
+    "closedCtaLabel": "Registrazione non ancora aperta",
+    "openSectionTitle": "Prenota il tuo posto 🎁",
+    "openSectionDescription": "I posti sono limitati. Registrati ora per assicurarti un posto alla conferenza più cool dell'anno!",
+    "closedSectionTitle": "Registrazione prossimamente disponibile",
+    "closedSectionDescription": "Le iscrizioni non sono ancora aperte. Ti aggiorneremo appena sarà possibile registrarsi.",
+    "closedMessage": "La registrazione non è ancora aperta. Torna presto per assicurarti un posto."
+  },
+  "logistics": {
+    "sectionTitle": "Location",
+    "sectionDescription": "L'evento si terrà a Roma in una sede ancora TBD.",
+    "city": "Roma, Italia",
+    "addressLabel": "Indirizzo:",
+    "address": "Da definire — la sede verrà comunicata nelle prossime settimane.",
+    "transportLabel": "Come arrivare:",
+    "transport": "Raggiungibile con Metro A, B e C. Ampia disponibilità di mezzi di superficie nelle vicinanze.",
+    "map": {
+      "embedUrl": "https://www.openstreetmap.org/export/embed.html?bbox=12.44%2C41.87%2C12.54%2C41.93&layer=mapnik&marker=41.9028%2C12.4964",
+      "linkUrl": "https://www.openstreetmap.org/?mlat=41.9028&mlon=12.4964#map=12/41.9028/12.4964",
+      "linkLabel": "Apri la mappa di Roma",
+      "ariaLabel": "Mappa della location dell'evento"
+    }
+  },
   "sponsors": {
+    "pageContent": {
+      "currentSponsorsTitle": "Sponsor attuali",
+      "currentSponsorsDescription": "Le aziende già confermate per XmasDev 2026.",
+      "packagesSectionTitle": "Diventa sponsor",
+      "packagesSectionDescription": "Scegli il livello più adatto alla tua azienda e supporta la community XmasDev."
+    },
+    "homepageContent": {
+      "title": "Gli sponsor che ci supportano",
+      "description": "Aziende che hanno già scelto di essere al fianco della community XmasDev 2026.",
+      "ctaLabel": "Scopri tutti i pacchetti sponsor",
+      "ctaHref": "sponsors.html",
+      "listAriaLabel": "Sponsor attuali in home page"
+    },
     "tiers": [
       {
         "name": "Diamond",
+        "price": "€2.000 + IVA",
+        "benefits": [
+          "Workshop tecnico dedicato (2 ore, mattina e/o pomeriggio)",
+          "Visibilità come partner principale su tutta la comunicazione",
+          "Canale preferenziale con il team organizzatore",
+          "Tutti i vantaggi del livello Platinum",
+          "4 ingressi omaggio"
+        ],
         "sponsors": [
           {
             "name": "Xebia",
@@ -25,6 +72,14 @@
       },
       {
         "name": "Platinum",
+        "price": "€1.000 + IVA",
+        "benefits": [
+          "Presentazione aziendale durante il keynote",
+          "Slot talk in una track (45 minuti)",
+          "Alta visibilità del logo su sito, slide e materiali",
+          "Tutti i vantaggi del livello Gold",
+          "4 ingressi omaggio"
+        ],
         "sponsors": [
           {
             "name": "Reti",
@@ -33,8 +88,34 @@
             "description": "Platinum sponsor di XmasDev 2026."
           }
         ]
+      },
+      {
+        "name": "Gold",
+        "price": "€500 + IVA",
+        "benefits": [
+          "Desk espositivo con branding personalizzato",
+          "Possibilità di recruiting durante l'evento",
+          "Tutti i vantaggi del livello Silver",
+          "2 ingressi omaggio"
+        ],
+        "sponsors": []
+      },
+      {
+        "name": "Silver",
+        "price": "€300 + IVA",
+        "benefits": [
+          "Logo su sito, slide, materiali stampati",
+          "Lista iscritti (nel rispetto del GDPR) per recruiting",
+          "Menzioni social prima, durante e dopo l'evento"
+        ],
+        "sponsors": []
       }
     ]
+  },
+  "sponsorshipPack": {
+    "title": "Pacchetti sponsor 2026",
+    "subtitle": "XMASDEV 2026 · 12 dicembre · 200+ sviluppatori",
+    "note": "Quattro livelli, con vantaggi crescenti: ogni livello include anche i vantaggi dei livelli inferiori."
   },
   "staff": [
     {

@@ -323,6 +323,22 @@ p {
   border-color: var(--color-text-muted);
 }
 
+.btn[aria-disabled='true'] {
+  opacity: 0.8;
+}
+
+.btn.btn--disabled,
+.btn[aria-disabled='true'] {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.registration-status {
+  margin-top: 0.85rem;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+}
+
 /* ---- Stats bar --------------------------------------------- */
 .stats {
   background: var(--color-surface);
@@ -807,6 +823,92 @@ p {
 }
 
 /* ---- Sponsors ---------------------------------------------- */
+.sponsors-current__header {
+  margin-top: 4rem;
+}
+
+.sponsor-pack {
+  margin-bottom: 2rem;
+}
+
+.sponsor-pack__header {
+  margin-bottom: 2rem;
+}
+
+.sponsor-pack__subtitle {
+  color: var(--color-text);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.82rem;
+  margin-bottom: 0.65rem;
+}
+
+.sponsor-pack__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.sponsor-pack__card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1.4rem;
+  transition: border-color var(--transition), transform var(--transition);
+}
+
+.sponsor-pack__card:hover {
+  transform: translateY(-2px);
+}
+
+.sponsor-pack__price {
+  color: var(--color-text);
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin-top: 0.35rem;
+  margin-bottom: 0.25rem;
+}
+
+.sponsor-pack__card ul {
+  list-style: disc;
+  padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.sponsor-pack__card li {
+  color: var(--color-text-light);
+  font-size: 0.92rem;
+}
+
+.sponsor-pack__card--diamond {
+  border-color: rgba(141, 216, 255, 0.4);
+}
+
+.sponsor-pack__card--platinum {
+  border-color: rgba(226, 232, 240, 0.38);
+}
+
+.sponsor-pack__card--gold {
+  border-color: rgba(244, 208, 63, 0.4);
+}
+
+.sponsor-pack__card--silver {
+  border-color: rgba(184, 196, 208, 0.35);
+}
+
+#home-sponsors-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.home-sponsor-tier {
+  margin-bottom: 0;
+}
+
 .sponsor-tier {
   margin-bottom: 3.5rem;
   --tier-card-min: 200px;

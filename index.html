@@ -71,7 +71,15 @@
       </div>
 
       <div class="hero__actions">
-        <a href="#tickets" class="btn btn--primary">
+        <a
+          id="register-hero-cta"
+          href="#tickets"
+          class="btn btn--primary"
+          data-registration-cta="true"
+          data-editions-index="data/editions.json"
+          data-edition="2026"
+          data-registration-message-target="registration-status-hero"
+        >
           <span>Registrati ora</span>
           <span aria-hidden="true">→</span>
         </a>
@@ -79,6 +87,7 @@
           <span>Guarda l'agenda</span>
         </a>
       </div>
+      <p id="registration-status-hero" class="registration-status" hidden aria-live="polite"></p>
     </div>
   </header>
 
@@ -162,6 +171,28 @@
     </div>
   </section>
 
+  <!-- ========== CURRENT SPONSORS ========== -->
+  <section
+    class="section"
+    id="home-sponsors"
+    data-editions-index="data/editions.json"
+    data-edition="2026"
+    hidden
+  >
+    <div class="container">
+      <div class="section__header">
+        <h2 id="home-sponsors-title">Gli sponsor che ci supportano</h2>
+        <p id="home-sponsors-description">Aziende che hanno già scelto di essere al fianco della community XmasDev 2026.</p>
+      </div>
+
+      <div id="home-sponsors-container" aria-live="polite" aria-label="Sponsor attuali in home page"></div>
+
+      <div class="text-center mt-3">
+        <a id="home-sponsors-cta" href="sponsors.html" class="btn btn--outline">Scopri tutti i pacchetti sponsor</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ========== CFP ========== -->
   <section
     class="section"
@@ -186,23 +217,31 @@
   </section>
 
   <!-- ========== LOCATION ========== -->
-  <section class="section" id="location">
+  <section class="section" id="location" data-editions-index="data/editions.json" data-edition="2026">
     <div class="container">
       <div class="section__header">
-        <h2>Location</h2>
-        <p>L'evento si terrà a Roma in una sede ancora TBD.</p>
+        <h2 id="location-title">Location</h2>
+        <p id="location-description">L'evento si terrà a Roma in una sede ancora TBD.</p>
       </div>
 
-      <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;" role="region" aria-label="Location details">
+      <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;" role="region" aria-label="Dettagli location">
         <div>
-          <h3 style="margin-bottom:1rem;">📍 Roma, Italia</h3>
-          <p style="margin-bottom:0.5rem;"><strong style="color:var(--color-text);">Indirizzo:</strong></p>
-          <p style="margin-bottom:1rem;">Da definire — la sede verrà comunicata nelle prossime settimane.</p>
-          <p style="margin-bottom:0.5rem;"><strong style="color:var(--color-text);">Come arrivare:</strong></p>
-          <p>Raggiungibile con Metro M1, M2 e M3. Ampia disponibilità di mezzi di superficie nelle vicinanze.</p>
+          <h3 id="location-city" style="margin-bottom:1rem;">📍 Roma, Italia</h3>
+          <p style="margin-bottom:0.5rem;"><strong id="location-address-label" style="color:var(--color-text);">Indirizzo:</strong></p>
+          <p id="location-address" style="margin-bottom:1rem;">Da definire — la sede verrà comunicata nelle prossime settimane.</p>
+          <p style="margin-bottom:0.5rem;"><strong id="location-transport-label" style="color:var(--color-text);">Come arrivare:</strong></p>
+          <p id="location-transport">Raggiungibile con Metro A, B e C. Ampia disponibilità di mezzi di superficie nelle vicinanze.</p>
         </div>
-        <div style="background:var(--color-bg);border-radius:var(--radius-md);padding:1.5rem;text-align:center;font-size:5rem;" aria-hidden="true">
-          🗺
+        <div id="location-map-container" style="background:var(--color-bg);border-radius:var(--radius-md);padding:1rem;min-height:280px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.75rem;">
+          <iframe
+            id="location-map-embed"
+            title="Mappa location"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            style="width:100%;height:280px;border:0;border-radius:8px;display:none;"
+          ></iframe>
+          <div id="location-map-fallback" style="text-align:center;font-size:4rem;line-height:1;">🗺</div>
+          <a id="location-map-link" href="#" target="_blank" rel="noopener noreferrer" style="display:none;">Apri la mappa</a>
         </div>
       </div>
     </div>
@@ -212,11 +251,21 @@
   <section class="section section--alt" id="tickets">
     <div class="container">
       <div class="cta-banner">
-        <h2>Prenota il tuo posto 🎁</h2>
-        <p>I posti sono limitati. Registrati ora per assicurarti un posto alla conferenza più cool dell'anno!</p>
-        <a href="#" class="btn btn--primary" aria-label="Register for XmasDev 2026">
+        <h2 id="tickets-title">Prenota il tuo posto 🎁</h2>
+        <p id="tickets-description">I posti sono limitati. Registrati ora per assicurarti un posto alla conferenza più cool dell'anno!</p>
+        <a
+          id="register-tickets-cta"
+          href="#"
+          class="btn btn--primary"
+          aria-label="Registrati a XmasDev 2026"
+          data-registration-cta="true"
+          data-editions-index="data/editions.json"
+          data-edition="2026"
+          data-registration-message-target="registration-status-tickets"
+        >
           Registrati gratuitamente →
         </a>
+        <p id="registration-status-tickets" class="registration-status" hidden aria-live="polite"></p>
       </div>
     </div>
   </section>

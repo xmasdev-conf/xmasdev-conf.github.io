@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initSnowflakes();
   highlightActiveNav();
   initCfpBanner();
+  initHomepageSponsors();
+  initLocationSection();
+  initRegistrationCtas();
 });
 
 /* ---- Responsive hamburger menu ----------------------------- */
@@ -122,34 +125,311 @@ async function initCfpBanner() {
   cfpSection.hidden = false;
 }
 
+/* ---- Homepage current sponsors ---------------------------- */
+async function initHomepageSponsors() {
+  const section = document.getElementById('home-sponsors');
+  const container = document.getElementById('home-sponsors-container');
+  const titleEl = document.getElementById('home-sponsors-title');
+  const descriptionEl = document.getElementById('home-sponsors-description');
+  const ctaEl = document.getElementById('home-sponsors-cta');
+  if (!section || !container) return;
+
+  const configUrl = section.dataset.editionsIndex || 'data/editions.json';
+  const requestedEdition = section.dataset.edition;
+
+  const editionData = await loadEditionDataFromIndex(configUrl, requestedEdition);
+  const homepageContent = editionData?.sponsors?.homepageContent || {};
+  const tiers = (editionData?.sponsors?.tiers || []).slice().sort(sortSponsorTiersByPriority);
+
+  if (titleEl && homepageContent.title) {
+    titleEl.textContent = homepageContent.title;
+  }
+
+  if (descriptionEl && homepageContent.description) {
+    descriptionEl.textContent = homepageContent.description;
+  }
+
+  if (ctaEl && homepageContent.ctaLabel) {
+    ctaEl.textContent = homepageContent.ctaLabel;
+  }
+
+  if (ctaEl && homepageContent.ctaHref) {
+    ctaEl.href = homepageContent.ctaHref;
+  }
+
+  if (homepageContent.listAriaLabel) {
+    container.setAttribute('aria-label', homepageContent.listAriaLabel);
+  }
+
+  if (!tiers.length) {
+    section.hidden = true;
+    return;
+  }
+
+  container.innerHTML = '';
+
+  tiers.forEach((tier) => {
+    if (!tier.sponsors || !tier.sponsors.length) return;
+
+    const tierSection = document.createElement('div');
+    tierSection.className = `sponsor-tier sponsor-tier--${(tier.name || '').toLowerCase()} home-sponsor-tier`;
+
+    const label = document.createElement('div');
+    label.className = 'sponsor-tier__label';
+    const h3 = document.createElement('h3');
+    h3.textContent = tier.name;
+    label.appendChild(h3);
+    tierSection.appendChild(label);
+
+    const grid = document.createElement('div');
+    grid.className = 'sponsor-tier__grid';
+
+    (tier.sponsors || []).forEach((sponsor) => {
+      grid.appendChild(buildHomepageSponsorCard(sponsor, tier.name));
+    });
+
+    tierSection.appendChild(grid);
+    container.appendChild(tierSection);
+  });
+
+  if (!container.childElementCount) {
+    section.hidden = true;
+    return;
+  }
+
+  section.hidden = false;
+}
+
+/* ---- Location section (homepage) -------------------------- */
+async function initLocationSection() {
+  const section = document.getElementById('location');
+  if (!section) return;
+
+  const configUrl = section.dataset.editionsIndex || 'data/editions.json';
+  const requestedEdition = section.dataset.edition;
+  const editionData = await loadEditionDataFromIndex(configUrl, requestedEdition);
+  const logistics = editionData?.logistics;
+
+  if (!logistics) return;
+
+  const titleEl = document.getElementById('location-title');
+  const descriptionEl = document.getElementById('location-description');
+  const cityEl = document.getElementById('location-city');
+  const addressLabelEl = document.getElementById('location-address-label');
+  const addressEl = document.getElementById('location-address');
+  const transportLabelEl = document.getElementById('location-transport-label');
+  const transportEl = document.getElementById('location-transport');
+  const mapEmbedEl = document.getElementById('location-map-embed');
+  const mapFallbackEl = document.getElementById('location-map-fallback');
+  const mapLinkEl = document.getElementById('location-map-link');
+
+  if (titleEl && logistics.sectionTitle) titleEl.textContent = logistics.sectionTitle;
+  if (descriptionEl && logistics.sectionDescription) descriptionEl.textContent = logistics.sectionDescription;
+  if (cityEl && logistics.city) cityEl.textContent = `📍 ${logistics.city}`;
+  if (addressLabelEl && logistics.addressLabel) addressLabelEl.textContent = logistics.addressLabel;
+  if (addressEl && logistics.address) addressEl.textContent = logistics.address;
+  if (transportLabelEl && logistics.transportLabel) transportLabelEl.textContent = logistics.transportLabel;
+  if (transportEl && logistics.transport) transportEl.textContent = logistics.transport;
+
+  const map = logistics?.map || {};
+  const embedUrl = normalizeHttpUrl(map.embedUrl);
+  const linkUrl = normalizeHttpUrl(map.linkUrl);
+
+  if (mapEmbedEl) {
+    if (embedUrl) {
+      mapEmbedEl.src = embedUrl;
+      if (map.ariaLabel) mapEmbedEl.title = map.ariaLabel;
+      mapEmbedEl.style.display = 'block';
+      if (mapFallbackEl) mapFallbackEl.style.display = 'none';
+    } else {
+      mapEmbedEl.removeAttribute('src');
+      mapEmbedEl.style.display = 'none';
+      if (mapFallbackEl) mapFallbackEl.style.display = 'block';
+    }
+  }
+
+  if (mapLinkEl) {
+    if (linkUrl) {
+      mapLinkEl.href = linkUrl;
+      mapLinkEl.textContent = map.linkLabel || 'Apri la mappa';
+      mapLinkEl.style.display = 'inline-flex';
+    } else {
+      mapLinkEl.removeAttribute('href');
+      mapLinkEl.style.display = 'none';
+    }
+  }
+}
+
+/* ---- Registration CTAs (homepage) ------------------------- */
+async function initRegistrationCtas() {
+  const ctas = Array.from(document.querySelectorAll('[data-registration-cta="true"]'));
+  if (!ctas.length) return;
+
+  const ticketsTitleEl = document.getElementById('tickets-title');
+  const ticketsDescriptionEl = document.getElementById('tickets-description');
+
+  const configUrl = ctas[0].dataset.editionsIndex || 'data/editions.json';
+  const requestedEdition = ctas[0].dataset.edition;
+  const editionData = await loadEditionDataFromIndex(configUrl, requestedEdition);
+
+  const registration = editionData?.registration || {};
+  const registrationUrl = normalizeHttpUrl(registration.url);
+  const registrationEnabled = registration.enabled === true && Boolean(registrationUrl);
+  const closedMessage = registration.closedMessage || 'La registrazione non è ancora aperta.';
+  const closedCtaLabel = registration.closedCtaLabel || 'Registrazione non ancora aperta';
+  if (ticketsTitleEl) {
+    ticketsTitleEl.textContent = registrationEnabled
+      ? (registration.openSectionTitle || 'Prenota il tuo posto 🎁')
+      : (registration.closedSectionTitle || 'Registrazione prossimamente disponibile');
+  }
+
+  if (ticketsDescriptionEl) {
+    ticketsDescriptionEl.textContent = registrationEnabled
+      ? (registration.openSectionDescription || "I posti sono limitati. Registrati ora per assicurarti un posto alla conferenza più cool dell'anno!")
+      : (registration.closedSectionDescription || 'Le iscrizioni non sono ancora aperte. Ti aggiorneremo appena sarà possibile registrarsi.');
+  }
+
+  ctas.forEach((cta) => {
+    const messageTargetId = cta.dataset.registrationMessageTarget;
+    const messageEl = messageTargetId ? document.getElementById(messageTargetId) : null;
+
+    cta.textContent = registrationEnabled
+      ? (registration.openCtaLabel || cta.textContent)
+      : closedCtaLabel;
+
+    if (registrationEnabled) {
+      cta.href = registrationUrl;
+      cta.removeAttribute('aria-disabled');
+      cta.removeAttribute('title');
+      cta.classList.remove('btn--disabled');
+      cta.removeAttribute('tabindex');
+
+      if (messageEl) {
+        messageEl.hidden = true;
+        messageEl.textContent = '';
+      }
+      return;
+    }
+
+    cta.removeAttribute('href');
+    cta.setAttribute('aria-disabled', 'true');
+    cta.setAttribute('title', closedMessage);
+    cta.classList.add('btn--disabled');
+    cta.setAttribute('tabindex', '-1');
+
+    if (messageEl) {
+      messageEl.hidden = false;
+      messageEl.textContent = closedMessage;
+    }
+  });
+}
+
+function normalizeHttpUrl(urlValue) {
+  if (!urlValue || typeof urlValue !== 'string') return null;
+
+  try {
+    const parsed = new URL(urlValue);
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') return null;
+    return parsed.toString();
+  } catch {
+    return null;
+  }
+}
+
+function buildHomepageSponsorCard(sponsor, tierName) {
+  const card = document.createElement('a');
+  card.className = 'sponsor-card';
+
+  let safeHref = '#';
+  const rawUrl = sponsor?.url;
+  if (typeof rawUrl === 'string' && rawUrl.trim() !== '') {
+    try {
+      const u = new URL(rawUrl, window.location.href);
+      if (u.protocol === 'http:' || u.protocol === 'https:') safeHref = u.toString();
+    } catch {}
+  }
+  card.href = safeHref;
+  card.target = '_blank';
+  card.rel = 'noopener noreferrer';
+  card.title = sponsor.name;
+  if (sponsor.logo) {
+    const img = document.createElement('img');
+    img.src = sponsor.logo;
+    img.alt = sponsor.name;
+    img.loading = 'lazy';
+    card.appendChild(img);
+  }
+
+  const name = document.createElement('div');
+  name.className = 'sponsor-card__name';
+  name.textContent = sponsor.name;
+  card.appendChild(name);
+
+  if (tierName) {
+    const tier = document.createElement('div');
+    tier.className = 'sponsor-card__desc';
+    tier.textContent = `Sponsor ${tierName}`;
+    card.appendChild(tier);
+  }
+
+  return card;
+}
+
+function sortSponsorTiersByPriority(a, b) {
+  const order = ['diamond', 'platinum', 'gold', 'silver'];
+  const aName = (a?.name || '').toLowerCase();
+  const bName = (b?.name || '').toLowerCase();
+
+  const aIdx = order.indexOf(aName);
+  const bIdx = order.indexOf(bName);
+
+  const safeA = aIdx === -1 ? Number.MAX_SAFE_INTEGER : aIdx;
+  const safeB = bIdx === -1 ? Number.MAX_SAFE_INTEGER : bIdx;
+
+  if (safeA !== safeB) return safeA - safeB;
+  return aName.localeCompare(bName);
+}
+
 async function loadCfpFromEditions(configUrl, requestedEdition) {
   const editionData = await loadEditionDataFromIndex(configUrl, requestedEdition);
   return editionData?.cfp || null;
 }
 
+const _editionDataCache = new Map();
+
 async function loadEditionDataFromIndex(configUrl, requestedEdition) {
-  try {
-    const res = await fetch(configUrl);
-    if (!res.ok) return null;
-
-    const payload = await res.json();
-    const editions = payload?.editions;
-    if (!editions || typeof editions !== 'object') return null;
-
-    const editionKey = requestedEdition || payload?.activeEdition;
-    if (!editionKey || !editions[editionKey]) return null;
-
-    const editionIndexEntry = editions[editionKey];
-    const configPath = editionIndexEntry?.configUrl;
-
-    if (!configPath) return editionIndexEntry;
-
-    const detailRes = await fetch(configPath);
-    if (!detailRes.ok) return editionIndexEntry;
-
-    const detailPayload = await detailRes.json();
-    return { ...editionIndexEntry, ...detailPayload };
-  } catch {
-    return null;
+  const cacheKey = `${configUrl}::${requestedEdition || ''}`;
+  if (_editionDataCache.has(cacheKey)) {
+    return _editionDataCache.get(cacheKey);
   }
+
+  const promise = (async () => {
+    try {
+      const res = await fetch(configUrl);
+      if (!res.ok) return null;
+
+      const payload = await res.json();
+      const editions = payload?.editions;
+      if (!editions || typeof editions !== 'object') return null;
+
+      const editionKey = requestedEdition || payload?.activeEdition;
+      if (!editionKey || !editions[editionKey]) return null;
+
+      const editionIndexEntry = editions[editionKey];
+      const configPath = editionIndexEntry?.configUrl;
+
+      if (!configPath) return editionIndexEntry;
+
+      const detailRes = await fetch(configPath);
+      if (!detailRes.ok) return editionIndexEntry;
+
+      const detailPayload = await detailRes.json();
+      return { ...editionIndexEntry, ...detailPayload };
+    } catch {
+      return null;
+    }
+  })();
+
+  _editionDataCache.set(cacheKey, promise);
+  return promise;
 }

@@ -25,7 +25,13 @@ async function fetchSponsors(container) {
   const requestedEdition = queryEdition || container.dataset.edition;
 
   const editionData = await loadEditionDataFromIndex(editionsIndexUrl, requestedEdition);
-  if (editionData?.sponsors) return editionData.sponsors;
+  if (editionData?.sponsors || editionData?.sponsorshipPack) {
+    return {
+      sponsors: editionData?.sponsors || { tiers: [] },
+      sponsorshipPack: editionData?.sponsorshipPack || null,
+      sponsorsPageContent: editionData?.sponsors?.pageContent || null,
+    };
+  }
 
   throw new Error('Sponsors config missing for selected edition.');
 }
@@ -59,39 +65,127 @@ async function loadEditionDataFromIndex(indexUrl, requestedEdition) {
 
 /* ---- Render ------------------------------------------------- */
 function renderSponsors(container, data) {
-  const tiers = (data.tiers || []).slice().sort(sortTiersByPriority);
-  if (!tiers.length) {
-    container.innerHTML = '<p class="state-empty">Sponsor information coming soon.</p>';
+  const tiers = (data?.sponsors?.tiers || []).slice().sort(sortTiersByPriority);
+  const sponsorshipPack = data?.sponsorshipPack || {};
+  const sponsorsPageContent = data?.sponsorsPageContent || {};
+  const currentSponsorTiers = tiers.filter((tier) => Array.isArray(tier?.sponsors) && tier.sponsors.length > 0);
+  const sponsorshipTiers = tiers.filter((tier) => tier?.price || (Array.isArray(tier?.benefits) && tier.benefits.length > 0));
+
+  if (!currentSponsorTiers.length && !sponsorshipTiers.length) {
+    container.innerHTML = '<p class="state-empty">Le informazioni sugli sponsor saranno disponibili a breve.</p>';
     return;
   }
 
   container.innerHTML = '';
 
-  tiers.forEach((tier) => {
-    if (!tier.sponsors || !tier.sponsors.length) return;
+  if (currentSponsorTiers.length) {
+    const currentHeader = document.createElement('div');
+    currentHeader.className = 'section__header';
+    currentHeader.innerHTML = `
+      <h2>${sponsorsPageContent.currentSponsorsTitle || 'Sponsor attuali'}</h2>
+      <p>${sponsorsPageContent.currentSponsorsDescription || 'Le aziende già confermate per questa edizione.'}</p>
+    `;
+    container.appendChild(currentHeader);
 
-    const section = document.createElement('div');
-    section.className = `sponsor-tier sponsor-tier--${tier.name.toLowerCase()}`;
+    currentSponsorTiers.forEach((tier) => {
+      const section = document.createElement('div');
+      section.className = `sponsor-tier sponsor-tier--${(tier.name || '').toLowerCase()}`;
 
-    // Tier label
-    const label = document.createElement('div');
-    label.className = 'sponsor-tier__label';
-    const h3 = document.createElement('h3');
-    h3.textContent = tier.name;
-    label.appendChild(h3);
-    section.appendChild(label);
+      // Tier label
+      const label = document.createElement('div');
+      label.className = 'sponsor-tier__label';
+      const h3 = document.createElement('h3');
+      h3.textContent = tier.name;
+      label.appendChild(h3);
+      section.appendChild(label);
 
-    // Sponsor cards
-    const grid = document.createElement('div');
-    grid.className = 'sponsor-tier__grid';
+      // Sponsor cards
+      const grid = document.createElement('div');
+      grid.className = 'sponsor-tier__grid';
 
-    tier.sponsors.forEach((sponsor) => {
-      grid.appendChild(buildSponsorCard(sponsor));
+      tier.sponsors.forEach((sponsor) => {
+        let safeUrl = '#';
+        try {
+          const u = new URL(sponsor.url, window.location.href);
+          if (u.protocol === 'http:' || u.protocol === 'https:') safeUrl = u.toString();
+        } catch {}
+        grid.appendChild(buildSponsorCard({ ...sponsor, url: safeUrl }));
+      });
+
+      section.appendChild(grid);
+      container.appendChild(section);
     });
+  }
 
-    section.appendChild(grid);
-    container.appendChild(section);
+  if (sponsorshipTiers.length) {
+    const tiersHeader = document.createElement('div');
+    tiersHeader.className = 'section__header sponsors-current__header';
+    tiersHeader.innerHTML = `
+      <h2>${sponsorsPageContent.packagesSectionTitle || 'Diventa sponsor'}</h2>
+      <p>${sponsorsPageContent.packagesSectionDescription || 'Scegli il livello più adatto alla tua azienda e supporta la community XmasDev.'}</p>
+    `;
+    container.appendChild(tiersHeader);
+    container.appendChild(buildSponsorshipPackSection(sponsorshipPack, sponsorshipTiers));
+  }
+}
+
+function buildSponsorshipPackSection(pack, tiers) {
+  const section = document.createElement('section');
+  section.className = 'sponsor-pack';
+  section.setAttribute('aria-label', 'Pacchetti sponsor');
+
+  const header = document.createElement('div');
+  header.className = 'section__header sponsor-pack__header';
+
+  const title = document.createElement('h3');
+  title.textContent = pack.title || 'Pacchetti sponsor';
+  header.appendChild(title);
+
+  if (pack.subtitle) {
+    const subtitle = document.createElement('p');
+    subtitle.className = 'sponsor-pack__subtitle';
+    subtitle.textContent = pack.subtitle;
+    header.appendChild(subtitle);
+  }
+
+  if (pack.note) {
+    const note = document.createElement('p');
+    note.textContent = pack.note;
+    header.appendChild(note);
+  }
+
+  section.appendChild(header);
+
+  const grid = document.createElement('div');
+  grid.className = 'sponsor-pack__grid';
+
+  (tiers || []).forEach((tier) => {
+    const card = document.createElement('article');
+    const tierName = (tier?.name || '').toLowerCase();
+    card.className = `sponsor-pack__card sponsor-pack__card--${tierName}`;
+
+    const title = document.createElement('h3');
+    title.textContent = tier?.name || '';
+    card.appendChild(title);
+
+    const price = document.createElement('p');
+    price.className = 'sponsor-pack__price';
+    price.textContent = tier?.price || '';
+    card.appendChild(price);
+
+    const ul = document.createElement('ul');
+    (tier?.benefits || []).forEach((benefit) => {
+      const li = document.createElement('li');
+      li.textContent = benefit;
+      ul.appendChild(li);
+    });
+    card.appendChild(ul);
+
+    grid.appendChild(card);
   });
+
+  section.appendChild(grid);
+  return section;
 }
 
 function sortTiersByPriority(a, b) {
@@ -146,13 +240,13 @@ function showLoading(container) {
   container.innerHTML = `
     <div class="state-loading">
       <div class="spinner"></div>
-      <p>Loading sponsors…</p>
+      <p>Caricamento sponsor in corso…</p>
     </div>`;
 }
 
 function showError(container) {
   container.innerHTML = `
     <div class="state-error">
-      <p>⚠️ Could not load sponsor data.</p>
+      <p>⚠️ Impossibile caricare i dati degli sponsor.</p>
     </div>`;
 }
