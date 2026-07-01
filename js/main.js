@@ -336,11 +336,19 @@ function normalizeHttpUrl(urlValue) {
 function buildHomepageSponsorCard(sponsor, tierName) {
   const card = document.createElement('a');
   card.className = 'sponsor-card';
-  card.href = sponsor.url || '#';
+
+  let safeHref = '#';
+  const rawUrl = sponsor?.url;
+  if (typeof rawUrl === 'string' && rawUrl.trim() !== '') {
+    try {
+      const u = new URL(rawUrl, window.location.href);
+      if (u.protocol === 'http:' || u.protocol === 'https:') safeHref = u.toString();
+    } catch {}
+  }
+  card.href = safeHref;
   card.target = '_blank';
   card.rel = 'noopener noreferrer';
   card.title = sponsor.name;
-
   if (sponsor.logo) {
     const img = document.createElement('img');
     img.src = sponsor.logo;
