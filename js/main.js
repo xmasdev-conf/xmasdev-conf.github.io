@@ -395,29 +395,41 @@ async function loadCfpFromEditions(configUrl, requestedEdition) {
   return editionData?.cfp || null;
 }
 
+const _editionDataCache = new Map();
+
 async function loadEditionDataFromIndex(configUrl, requestedEdition) {
-  try {
-    const res = await fetch(configUrl);
-    if (!res.ok) return null;
-
-    const payload = await res.json();
-    const editions = payload?.editions;
-    if (!editions || typeof editions !== 'object') return null;
-
-    const editionKey = requestedEdition || payload?.activeEdition;
-    if (!editionKey || !editions[editionKey]) return null;
-
-    const editionIndexEntry = editions[editionKey];
-    const configPath = editionIndexEntry?.configUrl;
-
-    if (!configPath) return editionIndexEntry;
-
-    const detailRes = await fetch(configPath);
-    if (!detailRes.ok) return editionIndexEntry;
-
-    const detailPayload = await detailRes.json();
-    return { ...editionIndexEntry, ...detailPayload };
-  } catch {
-    return null;
+  const cacheKey = `${configUrl}::${requestedEdition || ''}`;
+  if (_editionDataCache.has(cacheKey)) {
+    return _editionDataCache.get(cacheKey);
   }
+
+  const promise = (async () => {
+    try {
+      const res = await fetch(configUrl);
+      if (!res.ok) return null;
+
+      const payload = await res.json();
+      const editions = payload?.editions;
+      if (!editions || typeof editions !== 'object') return null;
+
+      const editionKey = requestedEdition || payload?.activeEdition;
+      if (!editionKey || !editions[editionKey]) return null;
+
+      const editionIndexEntry = editions[editionKey];
+      const configPath = editionIndexEntry?.configUrl;
+
+      if (!configPath) return editionIndexEntry;
+
+      const detailRes = await fetch(configPath);
+      if (!detailRes.ok) return editionIndexEntry;
+
+      const detailPayload = await detailRes.json();
+      return { ...editionIndexEntry, ...detailPayload };
+    } catch {
+      return null;
+    }
+  })();
+
+  _editionDataCache.set(cacheKey, promise);
+  return promise;
 }
