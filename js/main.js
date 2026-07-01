@@ -192,6 +192,11 @@ async function initHomepageSponsors() {
     container.appendChild(tierSection);
   });
 
+  if (!container.childElementCount) {
+    section.hidden = true;
+    return;
+  }
+
   section.hidden = false;
 }
 
