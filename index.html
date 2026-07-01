@@ -172,14 +172,14 @@
   >
     <div class="container">
       <div class="section__header">
-        <h2>Gli sponsor che ci supportano</h2>
-        <p>Aziende che hanno già scelto di essere al fianco della community XmasDev 2026.</p>
+        <h2 id="home-sponsors-title">Gli sponsor che ci supportano</h2>
+        <p id="home-sponsors-description">Aziende che hanno già scelto di essere al fianco della community XmasDev 2026.</p>
       </div>
 
       <div id="home-sponsors-container" aria-live="polite" aria-label="Sponsor attuali in home page"></div>
 
       <div class="text-center mt-3">
-        <a href="sponsors.html" class="btn btn--outline">Scopri tutti i pacchetti sponsor</a>
+        <a id="home-sponsors-cta" href="sponsors.html" class="btn btn--outline">Scopri tutti i pacchetti sponsor</a>
       </div>
     </div>
   </section>
@@ -208,20 +208,20 @@
   </section>
 
   <!-- ========== LOCATION ========== -->
-  <section class="section" id="location">
+  <section class="section" id="location" data-editions-index="data/editions.json" data-edition="2026">
     <div class="container">
       <div class="section__header">
-        <h2>Location</h2>
-        <p>L'evento si terrà a Roma in una sede ancora TBD.</p>
+        <h2 id="location-title">Location</h2>
+        <p id="location-description">L'evento si terrà a Roma in una sede ancora TBD.</p>
       </div>
 
       <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;" role="region" aria-label="Location details">
         <div>
-          <h3 style="margin-bottom:1rem;">📍 Roma, Italia</h3>
-          <p style="margin-bottom:0.5rem;"><strong style="color:var(--color-text);">Indirizzo:</strong></p>
-          <p style="margin-bottom:1rem;">Da definire — la sede verrà comunicata nelle prossime settimane.</p>
-          <p style="margin-bottom:0.5rem;"><strong style="color:var(--color-text);">Come arrivare:</strong></p>
-          <p>Raggiungibile con Metro M1, M2 e M3. Ampia disponibilità di mezzi di superficie nelle vicinanze.</p>
+          <h3 id="location-city" style="margin-bottom:1rem;">📍 Roma, Italia</h3>
+          <p style="margin-bottom:0.5rem;"><strong id="location-address-label" style="color:var(--color-text);">Indirizzo:</strong></p>
+          <p id="location-address" style="margin-bottom:1rem;">Da definire — la sede verrà comunicata nelle prossime settimane.</p>
+          <p style="margin-bottom:0.5rem;"><strong id="location-transport-label" style="color:var(--color-text);">Come arrivare:</strong></p>
+          <p id="location-transport">Raggiungibile con Metro A, B e C. Ampia disponibilità di mezzi di superficie nelle vicinanze.</p>
         </div>
         <div style="background:var(--color-bg);border-radius:var(--radius-md);padding:1.5rem;text-align:center;font-size:5rem;" aria-hidden="true">
           🗺

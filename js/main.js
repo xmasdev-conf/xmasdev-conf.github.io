@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   highlightActiveNav();
   initCfpBanner();
   initHomepageSponsors();
+  initLocationSection();
 });
 
 /* ---- Responsive hamburger menu ----------------------------- */
@@ -127,13 +128,37 @@ async function initCfpBanner() {
 async function initHomepageSponsors() {
   const section = document.getElementById('home-sponsors');
   const container = document.getElementById('home-sponsors-container');
+  const titleEl = document.getElementById('home-sponsors-title');
+  const descriptionEl = document.getElementById('home-sponsors-description');
+  const ctaEl = document.getElementById('home-sponsors-cta');
   if (!section || !container) return;
 
   const configUrl = section.dataset.editionsIndex || 'data/editions.json';
   const requestedEdition = section.dataset.edition;
 
   const editionData = await loadEditionDataFromIndex(configUrl, requestedEdition);
+  const homepageContent = editionData?.sponsors?.homepageContent || {};
   const tiers = (editionData?.sponsors?.tiers || []).slice().sort(sortSponsorTiersByPriority);
+
+  if (titleEl && homepageContent.title) {
+    titleEl.textContent = homepageContent.title;
+  }
+
+  if (descriptionEl && homepageContent.description) {
+    descriptionEl.textContent = homepageContent.description;
+  }
+
+  if (ctaEl && homepageContent.ctaLabel) {
+    ctaEl.textContent = homepageContent.ctaLabel;
+  }
+
+  if (ctaEl && homepageContent.ctaHref) {
+    ctaEl.href = homepageContent.ctaHref;
+  }
+
+  if (homepageContent.listAriaLabel) {
+    container.setAttribute('aria-label', homepageContent.listAriaLabel);
+  }
 
   if (!tiers.length) {
     section.hidden = true;
@@ -167,6 +192,35 @@ async function initHomepageSponsors() {
   });
 
   section.hidden = false;
+}
+
+/* ---- Location section (homepage) -------------------------- */
+async function initLocationSection() {
+  const section = document.getElementById('location');
+  if (!section) return;
+
+  const configUrl = section.dataset.editionsIndex || 'data/editions.json';
+  const requestedEdition = section.dataset.edition;
+  const editionData = await loadEditionDataFromIndex(configUrl, requestedEdition);
+  const logistics = editionData?.logistics;
+
+  if (!logistics) return;
+
+  const titleEl = document.getElementById('location-title');
+  const descriptionEl = document.getElementById('location-description');
+  const cityEl = document.getElementById('location-city');
+  const addressLabelEl = document.getElementById('location-address-label');
+  const addressEl = document.getElementById('location-address');
+  const transportLabelEl = document.getElementById('location-transport-label');
+  const transportEl = document.getElementById('location-transport');
+
+  if (titleEl && logistics.sectionTitle) titleEl.textContent = logistics.sectionTitle;
+  if (descriptionEl && logistics.sectionDescription) descriptionEl.textContent = logistics.sectionDescription;
+  if (cityEl && logistics.city) cityEl.textContent = `📍 ${logistics.city}`;
+  if (addressLabelEl && logistics.addressLabel) addressLabelEl.textContent = logistics.addressLabel;
+  if (addressEl && logistics.address) addressEl.textContent = logistics.address;
+  if (transportLabelEl && logistics.transportLabel) transportLabelEl.textContent = logistics.transportLabel;
+  if (transportEl && logistics.transport) transportEl.textContent = logistics.transport;
 }
 
 function buildHomepageSponsorCard(sponsor, tierName) {

@@ -10,12 +10,28 @@
     "close": "2026-09-30T23:59:59+02:00",
     "link": "https://sessionize.com/xmasdev-2026/"
   },
+  "logistics": {
+    "sectionTitle": "Location",
+    "sectionDescription": "L'evento si terrà a Roma in una sede ancora TBD.",
+    "city": "Roma, Italia",
+    "addressLabel": "Indirizzo:",
+    "address": "Da definire — la sede verrà comunicata nelle prossime settimane.",
+    "transportLabel": "Come arrivare:",
+    "transport": "Raggiungibile con Metro A, B e C. Ampia disponibilità di mezzi di superficie nelle vicinanze."
+  },
   "sponsors": {
     "pageContent": {
       "currentSponsorsTitle": "Sponsor attuali",
       "currentSponsorsDescription": "Le aziende già confermate per XmasDev 2026.",
       "packagesSectionTitle": "Diventa sponsor",
       "packagesSectionDescription": "Scegli il livello più adatto alla tua azienda e supporta la community XmasDev."
+    },
+    "homepageContent": {
+      "title": "Gli sponsor che ci supportano",
+      "description": "Aziende che hanno già scelto di essere al fianco della community XmasDev 2026.",
+      "ctaLabel": "Scopri tutti i pacchetti sponsor",
+      "ctaHref": "sponsors.html",
+      "listAriaLabel": "Sponsor attuali in home page"
     },
     "tiers": [
       {
