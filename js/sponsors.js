@@ -146,15 +146,22 @@ function buildSponsorshipPackSection(pack, tiers) {
     const tierName = (tier?.name || '').toLowerCase();
     card.className = `sponsor-pack__card sponsor-pack__card--${tierName}`;
 
-    const benefits = (tier?.benefits || [])
-      .map((benefit) => `<li>${benefit}</li>`)
-      .join('');
+    const title = document.createElement('h3');
+    title.textContent = tier?.name || '';
+    card.appendChild(title);
 
-    card.innerHTML = `
-      <h3>${tier.name || ''}</h3>
-      <p class="sponsor-pack__price">${tier.price || ''}</p>
-      <ul>${benefits}</ul>
-    `;
+    const price = document.createElement('p');
+    price.className = 'sponsor-pack__price';
+    price.textContent = tier?.price || '';
+    card.appendChild(price);
+
+    const ul = document.createElement('ul');
+    (tier?.benefits || []).forEach((benefit) => {
+      const li = document.createElement('li');
+      li.textContent = benefit;
+      ul.appendChild(li);
+    });
+    card.appendChild(ul);
 
     grid.appendChild(card);
   });
