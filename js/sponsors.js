@@ -104,7 +104,12 @@ function renderSponsors(container, data) {
       grid.className = 'sponsor-tier__grid';
 
       tier.sponsors.forEach((sponsor) => {
-        grid.appendChild(buildSponsorCard(sponsor));
+        let safeUrl = '#';
+        try {
+          const u = new URL(sponsor.url, window.location.href);
+          if (u.protocol === 'http:' || u.protocol === 'https:') safeUrl = u.toString();
+        } catch {}
+        grid.appendChild(buildSponsorCard({ ...sponsor, url: safeUrl }));
       });
 
       section.appendChild(grid);
