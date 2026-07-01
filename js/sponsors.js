@@ -25,7 +25,12 @@ async function fetchSponsors(container) {
   const requestedEdition = queryEdition || container.dataset.edition;
 
   const editionData = await loadEditionDataFromIndex(editionsIndexUrl, requestedEdition);
-  if (editionData?.sponsors) return editionData.sponsors;
+  if (editionData?.sponsors || editionData?.sponsorshipPack) {
+    return {
+      sponsors: editionData?.sponsors || { tiers: [] },
+      sponsorshipPack: editionData?.sponsorshipPack || null,
+    };
+  }
 
   throw new Error('Sponsors config missing for selected edition.');
 }
@@ -59,13 +64,30 @@ async function loadEditionDataFromIndex(indexUrl, requestedEdition) {
 
 /* ---- Render ------------------------------------------------- */
 function renderSponsors(container, data) {
-  const tiers = (data.tiers || []).slice().sort(sortTiersByPriority);
-  if (!tiers.length) {
-    container.innerHTML = '<p class="state-empty">Sponsor information coming soon.</p>';
+  const tiers = (data?.sponsors?.tiers || []).slice().sort(sortTiersByPriority);
+  const sponsorshipPack = data?.sponsorshipPack;
+
+  if (!tiers.length && !sponsorshipPack) {
+    container.innerHTML = '<p class="state-empty">Le informazioni sugli sponsor saranno disponibili a breve.</p>';
     return;
   }
 
   container.innerHTML = '';
+
+  if (!tiers.length) {
+    if (sponsorshipPack) {
+      container.appendChild(buildSponsorshipPackSection(sponsorshipPack));
+    }
+    return;
+  }
+
+  const currentHeader = document.createElement('div');
+  currentHeader.className = 'section__header';
+  currentHeader.innerHTML = `
+    <h2>Sponsor attuali</h2>
+    <p>Le aziende già confermate per XmasDev 2026.</p>
+  `;
+  container.appendChild(currentHeader);
 
   tiers.forEach((tier) => {
     if (!tier.sponsors || !tier.sponsors.length) return;
@@ -92,6 +114,58 @@ function renderSponsors(container, data) {
     section.appendChild(grid);
     container.appendChild(section);
   });
+
+  if (sponsorshipPack) {
+    const tiersHeader = document.createElement('div');
+    tiersHeader.className = 'section__header sponsors-current__header';
+    tiersHeader.innerHTML = `
+      <h2>Diventa sponsor</h2>
+      <p>Scegli il livello più adatto alla tua azienda e supporta la community XmasDev.</p>
+    `;
+    container.appendChild(tiersHeader);
+    container.appendChild(buildSponsorshipPackSection(sponsorshipPack));
+  }
+}
+
+function buildSponsorshipPackSection(pack) {
+  const section = document.createElement('section');
+  section.className = 'sponsor-pack';
+  section.setAttribute('aria-label', 'Sponsor pack tiers');
+
+  const header = document.createElement('div');
+  header.className = 'section__header sponsor-pack__header';
+  header.innerHTML = `
+    <h3>${pack.title || 'Pacchetti sponsor'}</h3>
+    ${pack.subtitle ? `<p class="sponsor-pack__subtitle">${pack.subtitle}</p>` : ''}
+    ${pack.note ? `<p>${pack.note}</p>` : ''}
+  `;
+  section.appendChild(header);
+
+  const grid = document.createElement('div');
+  grid.className = 'sponsor-pack__grid';
+
+  (pack.tiers || []).forEach((tier) => {
+    const card = document.createElement('article');
+    const tierName = (tier?.name || '').toLowerCase();
+    card.className = `sponsor-pack__card sponsor-pack__card--${tierName}`;
+
+    const benefits = (tier?.benefits || [])
+      .map((benefit) => `<li>${benefit}</li>`)
+      .join('');
+
+    card.innerHTML = `
+      <div class="sponsor-pack__card-topline">${tier.code || ''} · ${tier.label || ''}</div>
+      <h3>${tier.name || ''}</h3>
+      <p class="sponsor-pack__price">${tier.price || ''}</p>
+      ${tier.query ? `<code class="sponsor-pack__query">${tier.query}</code>` : ''}
+      <ul>${benefits}</ul>
+    `;
+
+    grid.appendChild(card);
+  });
+
+  section.appendChild(grid);
+  return section;
 }
 
 function sortTiersByPriority(a, b) {
@@ -146,13 +220,13 @@ function showLoading(container) {
   container.innerHTML = `
     <div class="state-loading">
       <div class="spinner"></div>
-      <p>Loading sponsors…</p>
+      <p>Caricamento sponsor in corso…</p>
     </div>`;
 }
 
 function showError(container) {
   container.innerHTML = `
     <div class="state-error">
-      <p>⚠️ Could not load sponsor data.</p>
+      <p>⚠️ Impossibile caricare i dati degli sponsor.</p>
     </div>`;
 }

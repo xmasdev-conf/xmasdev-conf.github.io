@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSnowflakes();
   highlightActiveNav();
   initCfpBanner();
+  initHomepageSponsors();
 });
 
 /* ---- Responsive hamburger menu ----------------------------- */
@@ -120,6 +121,98 @@ async function initCfpBanner() {
   linkEl.href = link.toString();
 
   cfpSection.hidden = false;
+}
+
+/* ---- Homepage current sponsors ---------------------------- */
+async function initHomepageSponsors() {
+  const section = document.getElementById('home-sponsors');
+  const container = document.getElementById('home-sponsors-container');
+  if (!section || !container) return;
+
+  const configUrl = section.dataset.editionsIndex || 'data/editions.json';
+  const requestedEdition = section.dataset.edition;
+
+  const editionData = await loadEditionDataFromIndex(configUrl, requestedEdition);
+  const tiers = (editionData?.sponsors?.tiers || []).slice().sort(sortSponsorTiersByPriority);
+
+  if (!tiers.length) {
+    section.hidden = true;
+    return;
+  }
+
+  container.innerHTML = '';
+
+  tiers.forEach((tier) => {
+    if (!tier.sponsors || !tier.sponsors.length) return;
+
+    const tierSection = document.createElement('div');
+    tierSection.className = `sponsor-tier sponsor-tier--${(tier.name || '').toLowerCase()} home-sponsor-tier`;
+
+    const label = document.createElement('div');
+    label.className = 'sponsor-tier__label';
+    const h3 = document.createElement('h3');
+    h3.textContent = tier.name;
+    label.appendChild(h3);
+    tierSection.appendChild(label);
+
+    const grid = document.createElement('div');
+    grid.className = 'sponsor-tier__grid';
+
+    (tier.sponsors || []).forEach((sponsor) => {
+      grid.appendChild(buildHomepageSponsorCard(sponsor, tier.name));
+    });
+
+    tierSection.appendChild(grid);
+    container.appendChild(tierSection);
+  });
+
+  section.hidden = false;
+}
+
+function buildHomepageSponsorCard(sponsor, tierName) {
+  const card = document.createElement('a');
+  card.className = 'sponsor-card';
+  card.href = sponsor.url || '#';
+  card.target = '_blank';
+  card.rel = 'noopener noreferrer';
+  card.title = sponsor.name;
+
+  if (sponsor.logo) {
+    const img = document.createElement('img');
+    img.src = sponsor.logo;
+    img.alt = sponsor.name;
+    img.loading = 'lazy';
+    card.appendChild(img);
+  }
+
+  const name = document.createElement('div');
+  name.className = 'sponsor-card__name';
+  name.textContent = sponsor.name;
+  card.appendChild(name);
+
+  if (tierName) {
+    const tier = document.createElement('div');
+    tier.className = 'sponsor-card__desc';
+    tier.textContent = `Sponsor ${tierName}`;
+    card.appendChild(tier);
+  }
+
+  return card;
+}
+
+function sortSponsorTiersByPriority(a, b) {
+  const order = ['diamond', 'platinum', 'gold', 'silver'];
+  const aName = (a?.name || '').toLowerCase();
+  const bName = (b?.name || '').toLowerCase();
+
+  const aIdx = order.indexOf(aName);
+  const bIdx = order.indexOf(bName);
+
+  const safeA = aIdx === -1 ? Number.MAX_SAFE_INTEGER : aIdx;
+  const safeB = bIdx === -1 ? Number.MAX_SAFE_INTEGER : bIdx;
+
+  if (safeA !== safeB) return safeA - safeB;
+  return aName.localeCompare(bName);
 }
 
 async function loadCfpFromEditions(configUrl, requestedEdition) {

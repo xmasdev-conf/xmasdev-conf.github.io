@@ -36,6 +36,62 @@
       }
     ]
   },
+  "sponsorshipPack": {
+    "title": "Pacchetti sponsor 2026",
+    "subtitle": "XMASDEV 2026 · 12 dicembre · 200+ sviluppatori",
+    "note": "Quattro livelli, con vantaggi crescenti: ogni livello include anche i vantaggi dei livelli inferiori.",
+    "tiers": [
+      {
+        "code": "01",
+        "label": "Partner principale",
+        "name": "Diamond",
+        "price": "€2.000 + IVA",
+        "benefits": [
+          "Workshop tecnico dedicato (2 ore, mattina e/o pomeriggio)",
+          "Visibilità come partner principale su tutta la comunicazione",
+          "Canale preferenziale con il team organizzatore",
+          "Tutti i vantaggi del livello Platinum",
+          "4 ingressi omaggio"
+        ]
+      },
+      {
+        "code": "02",
+        "label": "Talk aziendale",
+        "name": "Platinum",
+        "price": "€1.000 + IVA",
+        "benefits": [
+          "Presentazione aziendale durante il keynote",
+          "Slot talk in una track (30–45 minuti)",
+          "Alta visibilità del logo su sito, slide e materiali",
+          "Tutti i vantaggi del livello Gold",
+          "4 ingressi omaggio"
+        ]
+      },
+      {
+        "code": "03",
+        "label": "Presenza in venue",
+        "name": "Gold",
+        "price": "€500 + IVA",
+        "benefits": [
+          "Desk espositivo con branding personalizzato",
+          "Possibilità di recruiting durante l'evento",
+          "Tutti i vantaggi del livello Silver",
+          "2 ingressi omaggio"
+        ]
+      },
+      {
+        "code": "04",
+        "label": "Visibilità brand",
+        "name": "Silver",
+        "price": "€300 + IVA",
+        "benefits": [
+          "Logo su sito, slide, materiali stampati",
+          "Lista iscritti (nel rispetto del GDPR) per recruiting",
+          "Menzioni social prima, durante e dopo l'evento"
+        ]
+      }
+    ]
+  },
   "staff": [
     {
       "id": 1,
