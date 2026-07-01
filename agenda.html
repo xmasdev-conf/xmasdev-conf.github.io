@@ -28,6 +28,7 @@
       <ul class="navbar__links" id="navbar-links" role="list">
         <li><a href="index.html">Home</a></li>
         <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="edizioni-precedenti.html">Edizioni precedenti</a></li>
         <li><a href="sponsors.html">Sponsor</a></li>
         <li><a href="staff.html">Staff</a></li>
         <li><a href="index.html#tickets" class="navbar__cta">Registrati</a></li>
@@ -43,7 +44,7 @@
   <header class="page-hero">
     <div class="container">
       <h1>🗓 Agenda</h1>
-      <p>Il programma completo della conferenza. 3 track + workshop, con slot da 40 minuti + 5 di domande.</p>
+      <p id="agenda-subtitle">Il programma completo della conferenza. 3 track + workshop, con slot da 40 minuti + 5 di domande.</p>
     </div>
   </header>
 
@@ -52,16 +53,8 @@
     <section class="section" aria-label="Conference agenda">
       <div class="container">
 
-        <!-- Sessionize notice -->
-        <div style="background:rgba(56,139,253,0.08);border:1px solid rgba(56,139,253,0.25);border-radius:var(--radius-md);padding:1rem 1.5rem;margin-bottom:2rem;font-size:0.9rem;color:#79c0ff;" role="note" aria-label="Sessionize integration note">
-          <strong>ℹ️ Integrazione Sessionize:</strong>
-          Il programma viene caricato dinamicamente dalla piattaforma
-          <a href="https://sessionize.com" target="_blank" rel="noopener noreferrer" style="color:#79c0ff;">Sessionize</a>.
-          Configura l'ID del tuo evento in <code style="background:rgba(0,0,0,0.3);padding:0.1rem 0.4rem;border-radius:4px;">js/agenda.js</code> per visualizzare il programma reale.
-        </div>
-
         <!-- Dynamic agenda content injected here -->
-        <div id="agenda-container" aria-live="polite" aria-label="Agenda content">
+        <div id="agenda-container" data-agenda-config="data/editions.json" data-edition="2026" aria-live="polite" aria-label="Agenda content">
           <!-- Rendered by agenda.js -->
         </div>
 
@@ -85,6 +78,7 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="agenda.html">Agenda</a></li>
+          <li><a href="edizioni-precedenti.html">Edizioni precedenti</a></li>
           <li><a href="sponsors.html">Sponsor</a></li>
           <li><a href="staff.html">Staff</a></li>
         </ul>

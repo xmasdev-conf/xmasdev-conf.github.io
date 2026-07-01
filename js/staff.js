@@ -1,16 +1,15 @@
 /* ============================================================
    XmasDev — staff.js
-   Loads staff data from data/staff.json and renders cards.
+  Loads staff data from editions index + edition config and renders cards.
    ============================================================ */
 
-const STAFF_DATA_URL = 'data/staff.json';
-
 const SOCIAL_ICONS = {
-  twitter:   { icon: '𝕏', label: 'Twitter / X' },
+  x:         { icon: '𝕏', label: 'X' },
+  twitter:   { icon: '𝕏', label: 'X' },
+  bluesky:   { icon: '🦋', label: 'Bluesky' },
   linkedin:  { icon: 'in', label: 'LinkedIn' },
-  github:    { icon: '⌥', label: 'GitHub' },
   instagram: { icon: '📸', label: 'Instagram' },
-  website:   { icon: '🌐', label: 'Website' },
+  facebook:  { icon: 'f', label: 'Facebook' },
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -20,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   showLoading(container);
 
   try {
-    const staff = await fetchStaff();
+    const staff = await fetchStaff(container);
     renderStaff(container, staff);
   } catch (err) {
     console.error('Staff fetch error:', err);
@@ -29,10 +28,42 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 /* ---- Data fetching ----------------------------------------- */
-async function fetchStaff() {
-  const res = await fetch(STAFF_DATA_URL);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+async function fetchStaff(container) {
+  const editionsIndexUrl = container.dataset.editionsIndex || 'data/editions.json';
+  const queryEdition = new URLSearchParams(window.location.search).get('edition');
+  const requestedEdition = queryEdition || container.dataset.edition;
+
+  const editionData = await loadEditionDataFromIndex(editionsIndexUrl, requestedEdition);
+  if (Array.isArray(editionData?.staff)) return editionData.staff;
+
+  throw new Error('Staff config missing for selected edition.');
+}
+
+async function loadEditionDataFromIndex(indexUrl, requestedEdition) {
+  try {
+    const res = await fetch(indexUrl);
+    if (!res.ok) return null;
+
+    const payload = await res.json();
+    const editions = payload?.editions;
+    if (!editions || typeof editions !== 'object') return null;
+
+    const editionKey = requestedEdition || payload?.activeEdition;
+    if (!editionKey || !editions[editionKey]) return null;
+
+    const editionIndexEntry = editions[editionKey];
+    const configPath = editionIndexEntry?.configUrl;
+
+    if (!configPath) return editionIndexEntry;
+
+    const detailRes = await fetch(configPath);
+    if (!detailRes.ok) return editionIndexEntry;
+
+    const detailPayload = await detailRes.json();
+    return { ...editionIndexEntry, ...detailPayload };
+  } catch {
+    return null;
+  }
 }
 
 /* ---- Render ------------------------------------------------- */
@@ -42,11 +73,13 @@ function renderStaff(container, staff) {
     return;
   }
 
+  const randomizedStaff = randomizeStaffOrder(staff);
+
   container.innerHTML = '';
   const grid = document.createElement('div');
   grid.className = 'staff-grid';
 
-  staff.forEach((member) => {
+  randomizedStaff.forEach((member) => {
     grid.appendChild(buildStaffCard(member));
   });
 
@@ -102,10 +135,11 @@ function buildStaffCard(member) {
     socials.className = 'staff-card__socials';
 
     Object.entries(member.socials).forEach(([platform, url]) => {
-      if (!url) return;
-      const meta = SOCIAL_ICONS[platform.toLowerCase()] || { icon: '🔗', label: platform };
+      if (typeof url !== 'string' || !url.trim()) return;
+      const normalizedPlatform = platform.toLowerCase() === 'twitter' ? 'x' : platform.toLowerCase();
+      const meta = SOCIAL_ICONS[normalizedPlatform] || { icon: '🔗', label: platform };
       const a = document.createElement('a');
-      a.href = url;
+      a.href = url.trim();
       a.target = '_blank';
       a.rel = 'noopener noreferrer';
       a.title = meta.label;
@@ -118,6 +152,43 @@ function buildStaffCard(member) {
   }
 
   return card;
+}
+
+function randomizeStaffOrder(staff) {
+  if (!Array.isArray(staff) || staff.length < 2) return staff;
+
+  const key = 'xmasdev-staff-last-order';
+  const previousOrder = sessionStorage.getItem(key) || '';
+
+  let shuffled = shuffle([...staff]);
+  let currentOrder = serializeOrder(shuffled);
+  let attempts = 0;
+
+  while (currentOrder === previousOrder && attempts < 8) {
+    shuffled = shuffle([...staff]);
+    currentOrder = serializeOrder(shuffled);
+    attempts += 1;
+  }
+
+  if (currentOrder === previousOrder) {
+    shuffled.push(shuffled.shift());
+    currentOrder = serializeOrder(shuffled);
+  }
+
+  sessionStorage.setItem(key, currentOrder);
+  return shuffled;
+}
+
+function shuffle(items) {
+  for (let i = items.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [items[i], items[j]] = [items[j], items[i]];
+  }
+  return items;
+}
+
+function serializeOrder(staff) {
+  return staff.map((member) => String(member.id ?? `${member.firstName}-${member.lastName}`)).join('|');
 }
 
 /* ---- State helpers ----------------------------------------- */

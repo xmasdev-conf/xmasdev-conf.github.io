@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="XmasDev — Conosci il team che organizza la conferenza." />
-  <meta property="og:title" content="XmasDev — Staff" />
-  <meta property="og:description" content="Il team dietro XmasDev Conference 2026." />
+  <meta name="description" content="XmasDev — archivio delle edizioni precedenti della conferenza." />
+  <meta property="og:title" content="XmasDev — Edizioni precedenti" />
+  <meta property="og:description" content="Rivivi le edizioni passate di XmasDev." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://xmasdev.net/staff.html" />
-  <title>XmasDev — Staff</title>
+  <meta property="og:url" content="https://xmasdev.net/edizioni-precedenti.html" />
+  <title>XmasDev — Edizioni precedenti</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -17,7 +17,6 @@
 </head>
 <body>
 
-  <!-- ========== NAVBAR ========== -->
   <nav class="navbar" aria-label="Main navigation">
     <div class="navbar__inner">
       <a href="index.html" class="navbar__logo" aria-label="XmasDev home">
@@ -40,42 +39,23 @@
     </div>
   </nav>
 
-  <!-- ========== PAGE HERO ========== -->
   <header class="page-hero">
     <div class="container">
-      <h1>👥 Il nostro Staff</h1>
-      <p>Il team di volontari appassionati che rende possibile questa edizione di XmasDev.</p>
+      <h1>🗂 Edizioni precedenti</h1>
+      <p>Uno sguardo rapido agli anni passati della community XmasDev.</p>
     </div>
   </header>
 
-  <!-- ========== STAFF ========== -->
   <main>
-    <section class="section" aria-label="Staff members">
+    <section class="section" aria-label="Archivio edizioni">
       <div class="container">
-
-        <!-- Dynamic staff content injected here -->
-        <div id="staff-container" data-editions-index="data/editions.json" data-edition="2026" aria-live="polite" aria-label="Staff content">
-          <!-- Rendered by staff.js -->
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Join the team CTA -->
-    <section class="section section--alt" aria-label="Join the team">
-      <div class="container">
-        <div class="cta-banner">
-          <h2>Vuoi far parte del team? 🙋</h2>
-          <p>XmasDev è un evento organizzato da volontari. Se hai voglia di contribuire, scrivici!</p>
-          <a href="mailto:staff@xmasdev.net" class="btn btn--primary" aria-label="Contact us to join the team">
-            Contattaci →
-          </a>
+        <div id="editions-archive" class="about-grid" data-editions-index="data/editions.json" aria-live="polite" aria-label="Elenco delle edizioni precedenti">
+          <!-- Rendered by editions.js -->
         </div>
       </div>
     </section>
   </main>
 
-  <!-- ========== FOOTER ========== -->
   <footer class="footer" role="contentinfo">
     <div class="footer__inner">
       <div class="footer__brand">
@@ -123,6 +103,6 @@
   </footer>
 
   <script src="js/main.js"></script>
-  <script src="js/staff.js"></script>
+  <script src="js/editions.js"></script>
 </body>
 </html>

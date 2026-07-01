@@ -1,0 +1,17 @@
+{
+  "activeEdition": "2026",
+  "editions": {
+    "2026": {
+      "name": "XmasDev 2026",
+      "eventDate": "2026-12-11",
+      "city": "Roma, Italia",
+      "configUrl": "data/editions/2026.json"
+    },
+    "2025": {
+      "name": "XmasDev 2025",
+      "eventDate": "2025-12-12",
+      "city": "Roma, Italia",
+      "configUrl": "data/editions/2025.json"
+    }
+  }
+}

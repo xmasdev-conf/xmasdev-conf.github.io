@@ -1,9 +1,7 @@
 /* ============================================================
    XmasDev — sponsors.js
-   Loads sponsor data from data/sponsors.json and renders tiers.
+  Loads sponsor data from editions index + edition config.
    ============================================================ */
-
-const SPONSORS_DATA_URL = 'data/sponsors.json';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('sponsors-container');
@@ -12,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   showLoading(container);
 
   try {
-    const data = await fetchSponsors();
+    const data = await fetchSponsors(container);
     renderSponsors(container, data);
   } catch (err) {
     console.error('Sponsors fetch error:', err);
@@ -21,10 +19,42 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 /* ---- Data fetching ----------------------------------------- */
-async function fetchSponsors() {
-  const res = await fetch(SPONSORS_DATA_URL);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+async function fetchSponsors(container) {
+  const editionsIndexUrl = container.dataset.editionsIndex || 'data/editions.json';
+  const queryEdition = new URLSearchParams(window.location.search).get('edition');
+  const requestedEdition = queryEdition || container.dataset.edition;
+
+  const editionData = await loadEditionDataFromIndex(editionsIndexUrl, requestedEdition);
+  if (editionData?.sponsors) return editionData.sponsors;
+
+  throw new Error('Sponsors config missing for selected edition.');
+}
+
+async function loadEditionDataFromIndex(indexUrl, requestedEdition) {
+  try {
+    const res = await fetch(indexUrl);
+    if (!res.ok) return null;
+
+    const payload = await res.json();
+    const editions = payload?.editions;
+    if (!editions || typeof editions !== 'object') return null;
+
+    const editionKey = requestedEdition || payload?.activeEdition;
+    if (!editionKey || !editions[editionKey]) return null;
+
+    const editionIndexEntry = editions[editionKey];
+    const configPath = editionIndexEntry?.configUrl;
+
+    if (!configPath) return editionIndexEntry;
+
+    const detailRes = await fetch(configPath);
+    if (!detailRes.ok) return editionIndexEntry;
+
+    const detailPayload = await detailRes.json();
+    return { ...editionIndexEntry, ...detailPayload };
+  } catch {
+    return null;
+  }
 }
 
 /* ---- Render ------------------------------------------------- */

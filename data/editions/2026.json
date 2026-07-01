@@ -1,0 +1,131 @@
+{
+  "agenda": {
+    "enabled": true,
+    "sessionizeApiUrl": "",
+    "subtitle": "Il programma completo della conferenza. 3 track + workshop, con slot da 40 minuti + 5 di domande."
+  },
+  "cfp": {
+    "enabled": true,
+    "title": "Call for Papers XmasDev 2026",
+    "close": "2026-09-30T23:59:59+02:00",
+    "link": "https://sessionize.com/xmasdev-2026/"
+  },
+  "sponsors": {
+    "tiers": [
+      {
+        "name": "Diamond",
+        "sponsors": [
+          {
+            "name": "Xebia",
+            "logo": "assets/sponsors/xebia.svg",
+            "url": "https://xebia.com",
+            "description": "Diamond sponsor di XmasDev 2026."
+          }
+        ]
+      },
+      {
+        "name": "Platinum",
+        "sponsors": [
+          {
+            "name": "Reti",
+            "logo": "assets/sponsors/reti.png",
+            "url": "https://www.reti.it",
+            "description": "Platinum sponsor di XmasDev 2026."
+          }
+        ]
+      }
+    ]
+  },
+  "staff": [
+    {
+      "id": 1,
+      "firstName": "Marco",
+      "lastName": "Dal Pino",
+      "role": "Co-organizer",
+      "photo": "assets/staff/marco-dal-pino.png",
+      "socials": {
+        "linkedin": "https://linkedin.com/in/"
+      }
+    },
+    {
+      "id": 2,
+      "firstName": "Alessio",
+      "lastName": "Iafrate",
+      "role": "Co-organizer",
+      "photo": "assets/staff/alessio-iafrate.png",
+      "socials": {
+        "linkedin": "https://linkedin.com/in/"
+      }
+    },
+    {
+      "id": 3,
+      "firstName": "Fabio",
+      "lastName": "Spaziani",
+      "role": "Co-organizer",
+      "photo": "assets/staff/fabio-spaziani.png",
+      "socials": {
+        "linkedin": "https://linkedin.com/in/"
+      }
+    },
+    {
+      "id": 4,
+      "firstName": "Emanuele",
+      "lastName": "Garofalo",
+      "role": "Co-organizer",
+      "photo": "assets/staff/emanuele-garofalo.png",
+      "socials": {
+        "linkedin": "https://linkedin.com/in/"
+      }
+    },
+    {
+      "id": 5,
+      "firstName": "Massimo",
+      "lastName": "Bonanni",
+      "role": "Co-organizer",
+      "photo": "assets/staff/massimo-bonanni.png",
+      "socials": {
+        "linkedin": "https://linkedin.com/in/"
+      }
+    },
+    {
+      "id": 6,
+      "firstName": "Francesco",
+      "lastName": "Gallo",
+      "role": "Co-organizer",
+      "photo": "assets/staff/francesco-gallo.png",
+      "socials": {
+        "linkedin": "https://linkedin.com/in/"
+      }
+    },
+    {
+      "id": 7,
+      "firstName": "Fabio",
+      "lastName": "Piras",
+      "role": "Co-organizer",
+      "photo": "assets/staff/fabio-piras.png",
+      "socials": {
+        "linkedin": "https://linkedin.com/in/"
+      }
+    },
+    {
+      "id": 8,
+      "firstName": "Antonio",
+      "lastName": "Pierascenzi",
+      "role": "Co-organizer",
+      "photo": "assets/staff/antonio-pierascenzi.png",
+      "socials": {
+        "linkedin": "https://linkedin.com/in/"
+      }
+    },
+    {
+      "id": 9,
+      "firstName": "Ivano",
+      "lastName": "Scifoni",
+      "role": "Co-organizer",
+      "photo": "assets/staff/ivano-scifoni.png",
+      "socials": {
+        "linkedin": "https://linkedin.com/in/"
+      }
+    }
+  ]
+}

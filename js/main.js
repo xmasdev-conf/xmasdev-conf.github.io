@@ -62,13 +62,24 @@ function initSnowflakes() {
 }
 
 /* ---- CFP banner (homepage only) --------------------------- */
-function initCfpBanner() {
+async function initCfpBanner() {
   const cfpSection = document.getElementById('cfp');
   if (!cfpSection) return;
 
-  const title = cfpSection.dataset.cfpTitle;
-  const closeRaw = cfpSection.dataset.cfpClose;
-  const linkRaw = cfpSection.dataset.cfpLink;
+  const configUrl = cfpSection.dataset.cfpConfig || 'data/editions.json';
+  const requestedEdition = cfpSection.dataset.edition;
+
+  const cfpData = await loadCfpFromEditions(configUrl, requestedEdition);
+
+  const title = cfpData?.title || cfpSection.dataset.cfpTitle;
+  const closeRaw = cfpData?.close || cfpSection.dataset.cfpClose;
+  const linkRaw = cfpData?.link || cfpSection.dataset.cfpLink;
+  const enabled = cfpData?.enabled;
+
+  if (enabled === false) {
+    cfpSection.hidden = true;
+    return;
+  }
 
   if (!title || !closeRaw || !linkRaw) {
     cfpSection.hidden = true;
@@ -109,4 +120,36 @@ function initCfpBanner() {
   linkEl.href = link.toString();
 
   cfpSection.hidden = false;
+}
+
+async function loadCfpFromEditions(configUrl, requestedEdition) {
+  const editionData = await loadEditionDataFromIndex(configUrl, requestedEdition);
+  return editionData?.cfp || null;
+}
+
+async function loadEditionDataFromIndex(configUrl, requestedEdition) {
+  try {
+    const res = await fetch(configUrl);
+    if (!res.ok) return null;
+
+    const payload = await res.json();
+    const editions = payload?.editions;
+    if (!editions || typeof editions !== 'object') return null;
+
+    const editionKey = requestedEdition || payload?.activeEdition;
+    if (!editionKey || !editions[editionKey]) return null;
+
+    const editionIndexEntry = editions[editionKey];
+    const configPath = editionIndexEntry?.configUrl;
+
+    if (!configPath) return editionIndexEntry;
+
+    const detailRes = await fetch(configPath);
+    if (!detailRes.ok) return editionIndexEntry;
+
+    const detailPayload = await detailRes.json();
+    return { ...editionIndexEntry, ...detailPayload };
+  } catch {
+    return null;
+  }
 }

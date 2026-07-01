@@ -1,0 +1,17 @@
+{
+  "agenda": {
+    "enabled": true,
+    "sessionizeApiUrl": "https://sessionize.com/api/v2/xqt335vh/view/All",
+    "subtitle": "Il programma completo della conferenza 2025. 2 track, con slot da 40 minuti + 5 di domande."
+  },
+  "cfp": {
+    "enabled": false,
+    "title": "Call for Papers XmasDev 2025",
+    "close": "2025-09-30T23:59:59+02:00",
+    "link": "https://sessionize.com/xmasdev-2025/"
+  },
+  "sponsors": {
+    "tiers": []
+  },
+  "staff": []
+}
