@@ -218,18 +218,11 @@ function buildSponsorCard(sponsor) {
     img.alt = sponsor.name;
     img.loading = 'lazy';
     card.appendChild(img);
-  }
-
-  const name = document.createElement('div');
-  name.className = 'sponsor-card__name';
-  name.textContent = sponsor.name;
-  card.appendChild(name);
-
-  if (sponsor.description) {
-    const desc = document.createElement('div');
-    desc.className = 'sponsor-card__desc';
-    desc.textContent = sponsor.description;
-    card.appendChild(desc);
+  } else {
+    const name = document.createElement('div');
+    name.className = 'sponsor-card__name';
+    name.textContent = sponsor.name;
+    card.appendChild(name);
   }
 
   return card;
