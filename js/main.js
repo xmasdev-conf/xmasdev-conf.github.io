@@ -358,18 +358,11 @@ function buildHomepageSponsorCard(sponsor, tierName) {
     img.alt = sponsor.name;
     img.loading = 'lazy';
     card.appendChild(img);
-  }
-
-  const name = document.createElement('div');
-  name.className = 'sponsor-card__name';
-  name.textContent = sponsor.name;
-  card.appendChild(name);
-
-  if (tierName) {
-    const tier = document.createElement('div');
-    tier.className = 'sponsor-card__desc';
-    tier.textContent = `Sponsor ${tierName}`;
-    card.appendChild(tier);
+  } else {
+    const name = document.createElement('div');
+    name.className = 'sponsor-card__name';
+    name.textContent = sponsor.name;
+    card.appendChild(name);
   }
 
   return card;
