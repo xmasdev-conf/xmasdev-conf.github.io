@@ -86,6 +86,12 @@
             "logo": "assets/sponsors/reti.png",
             "url": "https://www.reti.it",
             "description": "Platinum sponsor di XmasDev 2026."
+          },
+          {
+            "name": "Cybera",
+            "logo": "assets/sponsors/CYBERA_10.png",
+            "url": "https://www.cybera.it/",
+            "description": "Platinum sponsor di XmasDev 2026."
           }
         ]
       },
