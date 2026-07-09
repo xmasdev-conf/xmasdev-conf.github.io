@@ -963,11 +963,10 @@ p {
 
 .sponsor-tier {
   margin-bottom: 3.5rem;
-  --tier-card-min: 200px;
-  --tier-card-max: 320px;
-  --tier-logo-max: 180px;
-  --tier-padding-y: 1.25rem;
-  --tier-padding-x: 1.5rem;
+  --tier-card-w: 220px;
+  --tier-card-h: 130px;
+  --tier-logo-w: 150px;
+  --tier-logo-h: 64px;
 }
 
 .sponsor-tier__label {
@@ -1009,16 +1008,16 @@ p {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  padding: var(--tier-padding-y) var(--tier-padding-x);
+  box-sizing: border-box;
+  width: var(--tier-card-w);
+  height: var(--tier-card-h);
+  max-width: 100%;
+  padding: 1.25rem 1.5rem;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: center;
   text-align: center;
   transition: border-color var(--transition), transform var(--transition);
-  flex: 1;
-  min-width: var(--tier-card-min);
-  max-width: var(--tier-card-max);
 }
 
 .sponsor-card:hover {
@@ -1027,8 +1026,11 @@ p {
 }
 
 .sponsor-card img {
-  max-width: var(--tier-logo-max);
-  height: auto;
+  width: 100%;
+  height: 100%;
+  max-width: var(--tier-logo-w);
+  max-height: var(--tier-logo-h);
+  object-fit: contain;
   filter: brightness(0.9);
   transition: filter var(--transition);
 }
@@ -1047,37 +1049,39 @@ p {
   color: var(--color-text-muted);
 }
 
-/* Staircase sizing by tier: Diamond > Platinum > Gold > Silver */
+/* Staircase sizing by tier: Diamond > Platinum > Gold > Silver.
+   Every card in a tier is an identical fixed box, and every logo is
+   fit into it via object-fit: contain (no distortion). Logos with an
+   unusually wide/flat native aspect ratio (e.g. a flat wordmark) will
+   naturally occupy less of the box height than a squarer logo — that
+   is an intrinsic property of the source file's shape, not something
+   CSS sizing can equalize without stretching the logo. */
 .sponsor-tier--diamond {
-  --tier-card-min: 360px;
-  --tier-card-max: 520px;
-  --tier-logo-max: 320px;
-  --tier-padding-y: 2rem;
-  --tier-padding-x: 2.5rem;
+  --tier-card-w: 340px;
+  --tier-card-h: 190px;
+  --tier-logo-w: 260px;
+  --tier-logo-h: 110px;
 }
 
 .sponsor-tier--platinum {
-  --tier-card-min: 300px;
-  --tier-card-max: 440px;
-  --tier-logo-max: 260px;
-  --tier-padding-y: 1.75rem;
-  --tier-padding-x: 2.1rem;
+  --tier-card-w: 300px;
+  --tier-card-h: 170px;
+  --tier-logo-w: 220px;
+  --tier-logo-h: 94px;
 }
 
 .sponsor-tier--gold {
-  --tier-card-min: 250px;
-  --tier-card-max: 360px;
-  --tier-logo-max: 220px;
-  --tier-padding-y: 1.5rem;
-  --tier-padding-x: 1.8rem;
+  --tier-card-w: 260px;
+  --tier-card-h: 150px;
+  --tier-logo-w: 190px;
+  --tier-logo-h: 80px;
 }
 
 .sponsor-tier--silver {
-  --tier-card-min: 220px;
-  --tier-card-max: 320px;
-  --tier-logo-max: 180px;
-  --tier-padding-y: 1.25rem;
-  --tier-padding-x: 1.5rem;
+  --tier-card-w: 220px;
+  --tier-card-h: 130px;
+  --tier-logo-w: 150px;
+  --tier-logo-h: 64px;
 }
 
 .become-sponsor {
@@ -1301,5 +1305,13 @@ p {
 
   .agenda-tracks-header {
     display: none;
+  }
+
+  .sponsor-tier--diamond,
+  .sponsor-tier--platinum {
+    --tier-card-w: 260px;
+    --tier-card-h: 150px;
+    --tier-logo-w: 190px;
+    --tier-logo-h: 80px;
   }
 }
