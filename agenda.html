@@ -9,6 +9,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://xmasdev.net/agenda.html" />
   <title>XmasDev — Agenda</title>
+  <script src="js/i18n.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -17,27 +18,27 @@
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 </head>
-<body>
+<body data-page-title-key="meta.agendaTitle">
 
-  <a class="skip-link" href="#main-content">Salta al contenuto principale</a>
+  <a class="skip-link" href="#main-content" data-i18n="skip">Salta al contenuto principale</a>
 
   <!-- ========== NAVBAR ========== -->
-  <nav class="navbar" aria-label="Navigazione principale">
+  <nav class="navbar" data-i18n-attr="aria-label:nav.aria" aria-label="Navigazione principale">
     <div class="navbar__inner">
       <a href="index.html" class="navbar__logo" aria-label="XmasDev home">
         <img src="assets/logo/logo-xmasdev_white.png" alt="XmasDev" class="navbar__logo-img" />
       </a>
 
       <ul class="navbar__links" id="navbar-links" role="list">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="agenda.html" aria-current="page">Agenda</a></li>
-        <li><a href="sponsors.html">Sponsor</a></li>
-        <li><a href="staff.html">Staff</a></li>
-        <li><a href="edizioni-precedenti.html">Edizioni precedenti</a></li>
-        <li><a href="index.html#tickets" class="navbar__cta">Registrati</a></li>
+        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+        <li><a href="agenda.html" aria-current="page" data-i18n="nav.agenda">Agenda</a></li>
+        <li><a href="sponsors.html" data-i18n="nav.sponsors">Sponsor</a></li>
+        <li><a href="staff.html" data-i18n="nav.staff">Staff</a></li>
+        <li><a href="edizioni-precedenti.html" data-i18n="nav.editions">Edizioni precedenti</a></li>
+        <li><a href="index.html#tickets" class="navbar__cta" data-i18n="nav.register">Registrati</a></li>
       </ul>
 
-      <button class="navbar__hamburger" id="navbar-hamburger" aria-label="Apri o chiudi il menu di navigazione" aria-expanded="false" aria-controls="navbar-links">
+      <button class="navbar__hamburger" id="navbar-hamburger" data-i18n-attr="aria-label:nav.menuToggle" aria-label="Apri o chiudi il menu di navigazione" aria-expanded="false" aria-controls="navbar-links">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -46,8 +47,8 @@
   <!-- ========== PAGE HERO ========== -->
   <header class="page-hero">
     <div class="container">
-      <h1>🗓 Agenda</h1>
-      <p id="agenda-subtitle">Il programma completo della conferenza. 3 track + workshop, con slot da 40 minuti + 5 di domande.</p>
+      <h1 data-i18n="agendaPage.title">🗓 Agenda</h1>
+      <p id="agenda-subtitle" data-i18n="agendaPage.subtitle">Il programma completo della conferenza. 3 track + workshop, con slot da 40 minuti + 5 di domande.</p>
     </div>
   </header>
 
@@ -72,31 +73,31 @@
         <a href="index.html" class="navbar__logo" aria-label="XmasDev home">
           <img src="assets/logo/logo-xmasdev_white.png" alt="XmasDev" class="navbar__logo-img" />
         </a>
-        <p>La conferenza tecnica natalizia per la community degli sviluppatori italiani.</p>
+        <p data-i18n="footer.brandDesc">La conferenza tecnica natalizia per la community degli sviluppatori italiani.</p>
       </div>
 
       <div class="footer__col">
-        <h4>Pagine</h4>
+        <h4 data-i18n="footer.pages">Pagine</h4>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="agenda.html">Agenda</a></li>
-          <li><a href="edizioni-precedenti.html">Edizioni precedenti</a></li>
-          <li><a href="sponsors.html">Sponsor</a></li>
-          <li><a href="staff.html">Staff</a></li>
+          <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+          <li><a href="agenda.html" data-i18n="nav.agenda">Agenda</a></li>
+          <li><a href="edizioni-precedenti.html" data-i18n="nav.editions">Edizioni precedenti</a></li>
+          <li><a href="sponsors.html" data-i18n="nav.sponsors">Sponsor</a></li>
+          <li><a href="staff.html" data-i18n="nav.staff">Staff</a></li>
         </ul>
       </div>
 
       <div class="footer__col">
-        <h4>Evento</h4>
+        <h4 data-i18n="footer.event">Evento</h4>
         <ul>
-          <li><a href="index.html#about">Chi siamo</a></li>
-          <li><a href="index.html#location">Location</a></li>
-          <li><a href="index.html#tickets">Registrazione</a></li>
+          <li><a href="index.html#about" data-i18n="footer.about">Chi siamo</a></li>
+          <li><a href="index.html#location" data-i18n="footer.location">Location</a></li>
+          <li><a href="index.html#tickets" data-i18n="footer.registration">Registrazione</a></li>
         </ul>
       </div>
 
       <div class="footer__col">
-        <h4>Community</h4>
+        <h4 data-i18n="footer.community">Community</h4>
         <ul>
           <li><a href="https://twitter.com/xmasdevconf" target="_blank" rel="noopener noreferrer">Twitter / X</a></li>
           <li><a href="https://linkedin.com/company/xmasdev" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
@@ -106,8 +107,8 @@
     </div>
 
     <div class="footer__bottom">
-      <p>© 2026 XmasDev Conference. Tutti i diritti riservati.</p>
-      <p>Made with ❤️ by the community</p>
+      <p data-i18n="footer.rights">© 2026 XmasDev Conference. Tutti i diritti riservati.</p>
+      <p data-i18n="footer.madeWith">Made with ❤️ by the community</p>
     </div>
   </footer>
 

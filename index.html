@@ -9,6 +9,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://xmasdev.net" />
   <title>XmasDev — Home</title>
+  <script src="js/i18n.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -17,27 +18,27 @@
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 </head>
-<body>
+<body data-page-title-key="meta.homeTitle">
 
-  <a class="skip-link" href="#main-content">Salta al contenuto principale</a>
+  <a class="skip-link" href="#main-content" data-i18n="skip">Salta al contenuto principale</a>
 
   <!-- ========== NAVBAR ========== -->
-  <nav class="navbar" aria-label="Navigazione principale">
+  <nav class="navbar" data-i18n-attr="aria-label:nav.aria" aria-label="Navigazione principale">
     <div class="navbar__inner">
       <a href="index.html" class="navbar__logo" aria-label="XmasDev home">
         <img src="assets/logo/logo-xmasdev_white.png" alt="XmasDev" class="navbar__logo-img" />
       </a>
 
       <ul class="navbar__links" id="navbar-links" role="list">
-        <li><a href="index.html" aria-current="page">Home</a></li>
-        <li><a href="agenda.html">Agenda</a></li>
-        <li><a href="sponsors.html">Sponsor</a></li>
-        <li><a href="staff.html">Staff</a></li>
-        <li><a href="edizioni-precedenti.html">Edizioni precedenti</a></li>
-        <li><a href="#tickets" class="navbar__cta">Registrati</a></li>
+        <li><a href="index.html" aria-current="page" data-i18n="nav.home">Home</a></li>
+        <li><a href="agenda.html" data-i18n="nav.agenda">Agenda</a></li>
+        <li><a href="sponsors.html" data-i18n="nav.sponsors">Sponsor</a></li>
+        <li><a href="staff.html" data-i18n="nav.staff">Staff</a></li>
+        <li><a href="edizioni-precedenti.html" data-i18n="nav.editions">Edizioni precedenti</a></li>
+        <li><a href="#tickets" class="navbar__cta" data-i18n="nav.register">Registrati</a></li>
       </ul>
 
-      <button class="navbar__hamburger" id="navbar-hamburger" aria-label="Apri o chiudi il menu di navigazione" aria-expanded="false" aria-controls="navbar-links">
+      <button class="navbar__hamburger" id="navbar-hamburger" data-i18n-attr="aria-label:nav.menuToggle" aria-label="Apri o chiudi il menu di navigazione" aria-expanded="false" aria-controls="navbar-links">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -51,27 +52,27 @@
     <div class="container" style="position:relative;z-index:1;">
       <div class="hero__eyebrow">
         <span>🎄</span>
-        <span>Edizione 2026</span>
+        <span data-i18n="hero.eyebrow">Edizione 2026</span>
       </div>
 
-      <h1>La conferenza tecnica<br>di <span class="highlight">fine anno</span></h1>
+      <h1 data-i18n-html="hero.title">La conferenza tecnica<br>di <span class="highlight">fine anno</span></h1>
 
-      <p class="hero__subtitle">
+      <p class="hero__subtitle" data-i18n="hero.subtitle">
         Una giornata di talk, workshop e networking dedicata a una community unita: lo stesso spirito di condivisione e vicinanza tipico del periodo natalizio, in chiave inclusiva e aperta a tutti.
       </p>
 
       <div class="hero__meta">
         <div class="hero__meta-item">
           <span class="icon" aria-hidden="true">📅</span>
-          <span>11 Dicembre 2026</span>
+          <span data-i18n="hero.date">11 Dicembre 2026</span>
         </div>
         <div class="hero__meta-item">
           <span class="icon" aria-hidden="true">📍</span>
-          <span>Roma, Italia</span>
+          <span data-i18n="hero.place">Roma, Italia</span>
         </div>
         <div class="hero__meta-item">
           <span class="icon" aria-hidden="true">⏱</span>
-          <span>09:00 – 18:00</span>
+          <span data-i18n="hero.time">09:00 – 18:00</span>
         </div>
       </div>
 
@@ -85,11 +86,11 @@
           data-edition="2026"
           data-registration-message-target="registration-status-hero"
         >
-          <span>Registrati ora</span>
+          <span data-i18n="hero.registerNow">Registrati ora</span>
           <span aria-hidden="true">→</span>
         </a>
         <a href="agenda.html" class="btn btn--outline">
-          <span>Guarda l'agenda</span>
+          <span data-i18n="hero.viewAgenda">Guarda l'agenda</span>
         </a>
       </div>
       <p id="registration-status-hero" class="registration-status" hidden aria-live="polite"></p>
@@ -101,19 +102,19 @@
     <div class="stats__grid container">
       <div class="stats__item">
         <span class="stats__number">20+</span>
-        <span class="stats__label">Speaker</span>
+        <span class="stats__label" data-i18n="stats.speakers">Speaker</span>
       </div>
       <div class="stats__item">
         <span class="stats__number">3</span>
-        <span class="stats__label">Track</span>
+        <span class="stats__label" data-i18n="stats.tracks">Track</span>
       </div>
       <div class="stats__item">
         <span class="stats__number">100+</span>
-        <span class="stats__label">Partecipanti</span>
+        <span class="stats__label" data-i18n="stats.participants">Partecipanti</span>
       </div>
       <div class="stats__item">
         <span class="stats__number">1</span>
-        <span class="stats__label">Giornata</span>
+        <span class="stats__label" data-i18n="stats.day">Giornata</span>
       </div>
     </div>
   </section>
@@ -122,33 +123,33 @@
   <section class="section" id="about">
     <div class="container">
       <div class="section__header">
-        <h2>Cos'è XmasDev?</h2>
-        <p>Una conferenza pensata per sviluppatori, by developers for developers, che celebra la collaborazione e l'unione della community nel periodo di fine anno.</p>
+        <h2 data-i18n="about.title">Cos'è XmasDev?</h2>
+        <p data-i18n="about.desc">Una conferenza pensata per sviluppatori, by developers for developers, che celebra la collaborazione e l'unione della community nel periodo di fine anno.</p>
       </div>
 
       <div class="about-grid">
         <div class="about-card">
           <div class="about-card__icon" aria-hidden="true">🎤</div>
-          <h3>Talk tecnici</h3>
-          <p>Speaker di livello nazionale e internazionale affrontano argomenti concreti e di frontiera dello sviluppo software.</p>
+          <h3 data-i18n="about.talksTitle">Talk tecnici</h3>
+          <p data-i18n="about.talksDesc">Speaker di livello nazionale e internazionale affrontano argomenti concreti e di frontiera dello sviluppo software.</p>
         </div>
 
         <div class="about-card">
           <div class="about-card__icon" aria-hidden="true">🛠</div>
-          <h3>Workshop pratici</h3>
-          <p>Sessioni hands-on per sporcarsi le mani con le tecnologie più interessanti del momento.</p>
+          <h3 data-i18n="about.workshopTitle">Workshop pratici</h3>
+          <p data-i18n="about.workshopDesc">Sessioni hands-on per sporcarsi le mani con le tecnologie più interessanti del momento.</p>
         </div>
 
         <div class="about-card">
           <div class="about-card__icon" aria-hidden="true">🤝</div>
-          <h3>Networking</h3>
-          <p>Spazi dedicati per incontrare altri sviluppatori, condividere esperienze e costruire connessioni professionali.</p>
+          <h3 data-i18n="about.networkingTitle">Networking</h3>
+          <p data-i18n="about.networkingDesc">Spazi dedicati per incontrare altri sviluppatori, condividere esperienze e costruire connessioni professionali.</p>
         </div>
 
         <div class="about-card">
           <div class="about-card__icon" aria-hidden="true">🌍</div>
-          <h3>Community</h3>
-          <p>Un evento organizzato dalla community, per la community. Gratuito o a costo contenuto, accessibile a tutti.</p>
+          <h3 data-i18n="about.communityTitle">Community</h3>
+          <p data-i18n="about.communityDesc">Un evento organizzato dalla community, per la community. Gratuito o a costo contenuto, accessibile a tutti.</p>
         </div>
       </div>
     </div>
@@ -159,14 +160,14 @@
     <div class="container">
       <div class="feature">
         <div class="feature__content">
-          <h2>Un giorno dedicato al <span style="color:var(--color-primary)">tuo</span> percorso da sviluppatore</h2>
-          <p>XmasDev nasce dall'idea che la crescita professionale passa anche dallo scambio con i propri pari. L'evento si svolge in una giornata intensa, ricca di contenuti di qualità e momenti informali, con l'obiettivo di creare legami duraturi nella community.</p>
+          <h2 data-i18n-html="event.title">Un giorno dedicato al <span style="color:var(--color-primary)">tuo</span> percorso da sviluppatore</h2>
+          <p data-i18n="event.desc">XmasDev nasce dall'idea che la crescita professionale passa anche dallo scambio con i propri pari. L'evento si svolge in una giornata intensa, ricca di contenuti di qualità e momenti informali, con l'obiettivo di creare legami duraturi nella community.</p>
           <ul class="feature__list">
-            <li>3 track tecniche + 1 workshop pratico</li>
-            <li>Speaker selezionati dalla community</li>
-            <li>Solo slot da 40 minuti + 5 minuti di domande</li>
-            <li>Pranzo e coffee break inclusi</li>
-            <li>Streaming live per chi non può essere presente</li>
+            <li data-i18n="event.li1">3 track tecniche + 1 workshop pratico</li>
+            <li data-i18n="event.li2">Speaker selezionati dalla community</li>
+            <li data-i18n="event.li3">Solo slot da 40 minuti + 5 minuti di domande</li>
+            <li data-i18n="event.li4">Pranzo e coffee break inclusi</li>
+            <li data-i18n="event.li5">Streaming live per chi non può essere presente</li>
           </ul>
         </div>
         <div class="feature__visual" aria-hidden="true">
@@ -194,7 +195,7 @@
 
       <div class="text-center mt-3">
         <a id="home-sponsors-cta" href="sponsors.html" class="btn btn--outline">Scopri tutti i pacchetti sponsor</a>
-        <a href="mailto:info@xmasdev.net?subject=Candidatura%20sponsor" class="btn btn--primary">Diventa sponsor</a>
+        <a href="mailto:info@xmasdev.net?subject=Candidatura%20sponsor" class="btn btn--primary" data-i18n="homeSponsors.becomeSponsor">Diventa sponsor</a>
       </div>
     </div>
   </section>
@@ -210,12 +211,12 @@
     <div class="container">
       <div class="cta-banner cfp-banner">
         <h2 id="cfp-title">Call for Papers aperta</h2>
-        <p>
+        <p data-i18n="cfp.body">
           Condividi la tua esperienza con la community: stiamo cercando talk che ispirino confronto,
           collaborazione e unione tra professionisti con background diversi.
         </p>
-        <p class="cfp-banner__deadline"><strong>Chiusura CFP:</strong> <span id="cfp-deadline"></span></p>
-        <a id="cfp-link" href="#" class="btn btn--primary" target="_blank" rel="noopener noreferrer">
+        <p class="cfp-banner__deadline"><strong data-i18n="cfp.deadlineLabel">Chiusura CFP:</strong> <span id="cfp-deadline"></span></p>
+        <a id="cfp-link" href="#" class="btn btn--primary" target="_blank" rel="noopener noreferrer" data-i18n="cfp.submit">
           Invia la tua proposta →
         </a>
       </div>
@@ -285,31 +286,31 @@
         <a href="index.html" class="navbar__logo" aria-label="XmasDev home">
           <img src="assets/logo/logo-xmasdev_white.png" alt="XmasDev" class="navbar__logo-img" />
         </a>
-        <p>La conferenza tecnica natalizia per la community degli sviluppatori italiani.</p>
+        <p data-i18n="footer.brandDesc">La conferenza tecnica natalizia per la community degli sviluppatori italiani.</p>
       </div>
 
       <div class="footer__col">
-        <h4>Pagine</h4>
+        <h4 data-i18n="footer.pages">Pagine</h4>
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="agenda.html">Agenda</a></li>
-          <li><a href="edizioni-precedenti.html">Edizioni precedenti</a></li>
-          <li><a href="sponsors.html">Sponsor</a></li>
-          <li><a href="staff.html">Staff</a></li>
+          <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+          <li><a href="agenda.html" data-i18n="nav.agenda">Agenda</a></li>
+          <li><a href="edizioni-precedenti.html" data-i18n="nav.editions">Edizioni precedenti</a></li>
+          <li><a href="sponsors.html" data-i18n="nav.sponsors">Sponsor</a></li>
+          <li><a href="staff.html" data-i18n="nav.staff">Staff</a></li>
         </ul>
       </div>
 
       <div class="footer__col">
-        <h4>Evento</h4>
+        <h4 data-i18n="footer.event">Evento</h4>
         <ul>
-          <li><a href="#about">Chi siamo</a></li>
-          <li><a href="#location">Location</a></li>
-          <li><a href="#tickets">Registrazione</a></li>
+          <li><a href="#about" data-i18n="footer.about">Chi siamo</a></li>
+          <li><a href="#location" data-i18n="footer.location">Location</a></li>
+          <li><a href="#tickets" data-i18n="footer.registration">Registrazione</a></li>
         </ul>
       </div>
 
       <div class="footer__col">
-        <h4>Community</h4>
+        <h4 data-i18n="footer.community">Community</h4>
         <ul>
           <li><a href="https://twitter.com/xmasdevconf" target="_blank" rel="noopener noreferrer">Twitter / X</a></li>
           <li><a href="https://linkedin.com/company/xmasdev" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
@@ -319,8 +320,8 @@
     </div>
 
     <div class="footer__bottom">
-      <p>© 2026 XmasDev Conference. Tutti i diritti riservati.</p>
-      <p>Made with ❤️ by the community</p>
+      <p data-i18n="footer.rights">© 2026 XmasDev Conference. Tutti i diritti riservati.</p>
+      <p data-i18n="footer.madeWith">Made with ❤️ by the community</p>
     </div>
   </footer>
 

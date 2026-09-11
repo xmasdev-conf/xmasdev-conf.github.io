@@ -2,7 +2,10 @@
   "agenda": {
     "enabled": true,
     "sessionizeApiUrl": "",
-    "subtitle": "Il programma completo della conferenza. 3 track + workshop, con slot da 40 minuti + 5 di domande."
+    "subtitle": {
+      "it": "Il programma completo della conferenza. 3 track + workshop, con slot da 40 minuti + 5 di domande.",
+      "en": "The full conference program. 3 tracks + workshop, with 40-minute slots + 5 for questions."
+    }
   },
   "cfp": {
     "enabled": true,
@@ -13,53 +16,80 @@
   "registration": {
     "enabled": false,
     "url": "",
-    "openCtaLabel": "Registrati gratuitamente →",
-    "closedCtaLabel": "Registrazione non ancora aperta",
-    "openSectionTitle": "Prenota il tuo posto 🎁",
-    "openSectionDescription": "I posti sono limitati. Registrati ora per assicurarti un posto alla conferenza più cool dell'anno!",
-    "closedSectionTitle": "Registrazione prossimamente disponibile",
-    "closedSectionDescription": "Le iscrizioni non sono ancora aperte. Ti aggiorneremo appena sarà possibile registrarsi.",
-    "closedMessage": "La registrazione non è ancora aperta. Torna presto per assicurarti un posto."
+    "openCtaLabel": { "it": "Registrati gratuitamente →", "en": "Register for free →" },
+    "closedCtaLabel": { "it": "Registrazione non ancora aperta", "en": "Registration not open yet" },
+    "openSectionTitle": { "it": "Prenota il tuo posto 🎁", "en": "Book your seat 🎁" },
+    "openSectionDescription": {
+      "it": "I posti sono limitati. Registrati ora per assicurarti un posto alla conferenza più cool dell'anno!",
+      "en": "Seats are limited. Register now to secure your spot at the coolest conference of the year!"
+    },
+    "closedSectionTitle": { "it": "Registrazione prossimamente disponibile", "en": "Registration coming soon" },
+    "closedSectionDescription": {
+      "it": "Le iscrizioni non sono ancora aperte. Ti aggiorneremo appena sarà possibile registrarsi.",
+      "en": "Registration is not open yet. We will keep you posted as soon as it becomes available."
+    },
+    "closedMessage": {
+      "it": "La registrazione non è ancora aperta. Torna presto per assicurarti un posto.",
+      "en": "Registration is not open yet. Check back soon to secure your seat."
+    }
   },
   "logistics": {
-    "sectionTitle": "Location",
-    "sectionDescription": "L'evento si terrà a Roma in una sede ancora TBD.",
-    "city": "Roma, Italia",
-    "addressLabel": "Indirizzo:",
-    "address": "Da definire — la sede verrà comunicata nelle prossime settimane.",
-    "transportLabel": "Come arrivare:",
-    "transport": "Raggiungibile con Metro A, B e C. Ampia disponibilità di mezzi di superficie nelle vicinanze.",
+    "sectionTitle": { "it": "Location", "en": "Location" },
+    "sectionDescription": {
+      "it": "L'evento si terrà a Roma in una sede ancora TBD.",
+      "en": "The event will take place in Rome at a venue still to be defined."
+    },
+    "city": { "it": "Roma, Italia", "en": "Rome, Italy" },
+    "addressLabel": { "it": "Indirizzo:", "en": "Address:" },
+    "address": {
+      "it": "Da definire — la sede verrà comunicata nelle prossime settimane.",
+      "en": "To be defined — the venue will be announced in the coming weeks."
+    },
+    "transportLabel": { "it": "Come arrivare:", "en": "Getting there:" },
+    "transport": {
+      "it": "Raggiungibile con Metro A, B e C. Ampia disponibilità di mezzi di superficie nelle vicinanze.",
+      "en": "Reachable via Metro A, B and C. Plenty of surface transport available nearby."
+    },
     "map": {
       "embedUrl": "https://www.openstreetmap.org/export/embed.html?bbox=12.44%2C41.87%2C12.54%2C41.93&layer=mapnik&marker=41.9028%2C12.4964",
       "linkUrl": "https://www.openstreetmap.org/?mlat=41.9028&mlon=12.4964#map=12/41.9028/12.4964",
-      "linkLabel": "Apri la mappa di Roma",
-      "ariaLabel": "Mappa della location dell'evento"
+      "linkLabel": { "it": "Apri la mappa di Roma", "en": "Open the map of Rome" },
+      "ariaLabel": { "it": "Mappa della location dell'evento", "en": "Map of the event location" }
     }
   },
   "sponsors": {
     "pageContent": {
-      "currentSponsorsTitle": "Sponsor attuali",
-      "currentSponsorsDescription": "Le aziende già confermate per XmasDev 2026.",
-      "packagesSectionTitle": "Diventa sponsor",
-      "packagesSectionDescription": "Scegli il livello più adatto alla tua azienda e supporta la community XmasDev."
+      "currentSponsorsTitle": { "it": "Sponsor attuali", "en": "Current sponsors" },
+      "currentSponsorsDescription": {
+        "it": "Le aziende già confermate per XmasDev 2026.",
+        "en": "The companies already confirmed for XmasDev 2026."
+      },
+      "packagesSectionTitle": { "it": "Diventa sponsor", "en": "Become a sponsor" },
+      "packagesSectionDescription": {
+        "it": "Scegli il livello più adatto alla tua azienda e supporta la community XmasDev.",
+        "en": "Choose the level that best fits your company and support the XmasDev community."
+      }
     },
     "homepageContent": {
-      "title": "Gli sponsor che ci supportano",
-      "description": "Aziende che hanno già scelto di essere al fianco della community XmasDev 2026.",
-      "ctaLabel": "Scopri tutti i pacchetti sponsor",
+      "title": { "it": "Gli sponsor che ci supportano", "en": "The sponsors that support us" },
+      "description": {
+        "it": "Aziende che hanno già scelto di essere al fianco della community XmasDev 2026.",
+        "en": "Companies that have already chosen to stand with the XmasDev 2026 community."
+      },
+      "ctaLabel": { "it": "Scopri tutti i pacchetti sponsor", "en": "Discover all sponsorship packages" },
       "ctaHref": "sponsors.html",
-      "listAriaLabel": "Sponsor attuali in home page"
+      "listAriaLabel": { "it": "Sponsor attuali in home page", "en": "Current sponsors on the home page" }
     },
     "tiers": [
       {
         "name": "Diamond",
-        "price": "€2.000 + IVA",
+        "price": { "it": "€2.000 + IVA", "en": "€2,000 + VAT" },
         "benefits": [
-          "Workshop tecnico dedicato (2 ore, mattina e/o pomeriggio)",
-          "Visibilità come partner principale su tutta la comunicazione",
-          "Canale preferenziale con il team organizzatore",
-          "Tutti i vantaggi del livello Platinum",
-          "4 ingressi omaggio"
+          { "it": "Workshop tecnico dedicato (2 ore, mattina e/o pomeriggio)", "en": "Dedicated technical workshop (2 hours, morning and/or afternoon)" },
+          { "it": "Visibilità come partner principale su tutta la comunicazione", "en": "Visibility as a main partner across all communications" },
+          { "it": "Canale preferenziale con il team organizzatore", "en": "Priority channel with the organizing team" },
+          { "it": "Tutti i vantaggi del livello Platinum", "en": "All the benefits of the Platinum level" },
+          { "it": "4 ingressi omaggio", "en": "4 complimentary tickets" }
         ],
         "sponsors": [
           {
@@ -72,13 +102,13 @@
       },
       {
         "name": "Platinum",
-        "price": "€1.000 + IVA",
+        "price": { "it": "€1.000 + IVA", "en": "€1,000 + VAT" },
         "benefits": [
-          "Presentazione aziendale durante il keynote",
-          "Slot talk in una track (45 minuti)",
-          "Alta visibilità del logo su sito, slide e materiali",
-          "Tutti i vantaggi del livello Gold",
-          "4 ingressi omaggio"
+          { "it": "Presentazione aziendale durante il keynote", "en": "Company presentation during the keynote" },
+          { "it": "Slot talk in una track (45 minuti)", "en": "Talk slot in a track (45 minutes)" },
+          { "it": "Alta visibilità del logo su sito, slide e materiali", "en": "High logo visibility on website, slides and materials" },
+          { "it": "Tutti i vantaggi del livello Gold", "en": "All the benefits of the Gold level" },
+          { "it": "4 ingressi omaggio", "en": "4 complimentary tickets" }
         ],
         "sponsors": [
           {
@@ -97,12 +127,12 @@
       },
       {
         "name": "Gold",
-        "price": "€500 + IVA",
+        "price": { "it": "€500 + IVA", "en": "€500 + VAT" },
         "benefits": [
-          "Desk espositivo con branding personalizzato",
-          "Possibilità di recruiting durante l'evento",
-          "Tutti i vantaggi del livello Silver",
-          "2 ingressi omaggio"
+          { "it": "Desk espositivo con branding personalizzato", "en": "Exhibition desk with custom branding" },
+          { "it": "Possibilità di recruiting durante l'evento", "en": "Recruiting opportunities during the event" },
+          { "it": "Tutti i vantaggi del livello Silver", "en": "All the benefits of the Silver level" },
+          { "it": "2 ingressi omaggio", "en": "2 complimentary tickets" }
         ],
         "sponsors": [
           {
@@ -115,20 +145,26 @@
       },
       {
         "name": "Silver",
-        "price": "€300 + IVA",
+        "price": { "it": "€300 + IVA", "en": "€300 + VAT" },
         "benefits": [
-          "Logo su sito, slide, materiali stampati",
-          "Lista iscritti (nel rispetto del GDPR) per recruiting",
-          "Menzioni social prima, durante e dopo l'evento"
+          { "it": "Logo su sito, slide, materiali stampati", "en": "Logo on website, slides and printed materials" },
+          { "it": "Lista iscritti (nel rispetto del GDPR) per recruiting", "en": "Attendee list (GDPR-compliant) for recruiting" },
+          { "it": "Menzioni social prima, durante e dopo l'evento", "en": "Social mentions before, during and after the event" }
         ],
         "sponsors": []
       }
     ]
   },
   "sponsorshipPack": {
-    "title": "Pacchetti sponsor 2026",
-    "subtitle": "XMASDEV 2026 · 11 dicembre · 100+ sviluppatori",
-    "note": "Quattro livelli, con vantaggi crescenti: ogni livello include anche i vantaggi dei livelli inferiori."
+    "title": { "it": "Pacchetti sponsor 2026", "en": "2026 sponsorship packages" },
+    "subtitle": {
+      "it": "XMASDEV 2026 · 11 dicembre · 100+ sviluppatori",
+      "en": "XMASDEV 2026 · December 11 · 100+ developers"
+    },
+    "note": {
+      "it": "Quattro livelli, con vantaggi crescenti: ogni livello include anche i vantaggi dei livelli inferiori.",
+      "en": "Four levels with increasing benefits: each level also includes the benefits of the lower levels."
+    }
   },
   "communities": {
     "pageContent": {

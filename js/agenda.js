@@ -137,9 +137,9 @@ function applyAgendaSubtitle(editionData) {
   const subtitleEl = document.getElementById('agenda-subtitle');
   if (!subtitleEl) return;
 
-  const configured = editionData?.agenda?.subtitle;
-  if (configured && configured.trim()) {
-    subtitleEl.textContent = configured.trim();
+  const configured = agenda_tr(editionData?.agenda?.subtitle);
+  if (configured && String(configured).trim()) {
+    subtitleEl.textContent = String(configured).trim();
   }
 }
 
@@ -292,7 +292,7 @@ function renderMultiTrackView(container, sessions, rooms, speakers, trackColors)
   let selectedRoomId = null;
 
   const allTab = createEl('button', 'agenda-tab active');
-  allTab.textContent = 'Tutte le track';
+  allTab.textContent = agendaUi('agenda.allTracks', 'Tutte le track');
   tabs.appendChild(allTab);
 
   rooms.forEach((room) => {
@@ -334,7 +334,7 @@ function renderMultiTrackView(container, sessions, rooms, speakers, trackColors)
     });
 
     if (!Object.keys(byTime).length) {
-      panel.innerHTML = '<p class="state-empty">Nessuna sessione disponibile per questa track.</p>';
+      panel.innerHTML = `<p class="state-empty">${agendaUi('agenda.noSessionsTrack', 'Nessuna sessione disponibile per questa track.')}</p>`;
     }
   }
 
@@ -369,7 +369,7 @@ function buildTracksGridPanel(sessions, rooms, speakers, trackColors) {
   });
 
   if (!Object.keys(byTime).length) {
-    panel.innerHTML = '<p class="state-empty">Nessuna sessione disponibile per questa edizione.</p>';
+    panel.innerHTML = `<p class="state-empty">${agendaUi('agenda.noSessionsEdition', 'Nessuna sessione disponibile per questa edizione.')}</p>`;
   }
 
   return panel;
@@ -557,7 +557,7 @@ function formatTime(isoOrTime) {
   try {
     const d = new Date(isoOrTime);
     if (isNaN(d.getTime())) return isoOrTime;
-    return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return d.toLocaleTimeString(agendaLocale(), { hour: '2-digit', minute: '2-digit' });
   } catch {
     return isoOrTime;
   }
@@ -570,18 +570,28 @@ function createEl(tag, className) {
 }
 
 /* ---- State helpers ----------------------------------------- */
+function agenda_tr(value) {
+  return (window.I18n && typeof window.I18n.pick === 'function') ? window.I18n.pick(value) : value;
+}
+function agendaUi(key, fallback) {
+  return (window.I18n && typeof window.I18n.t === 'function') ? window.I18n.t(key, fallback) : fallback;
+}
+function agendaLocale() {
+  return (window.I18n && window.I18n.lang === 'en') ? 'en-GB' : 'it-IT';
+}
+
 function showLoading(container) {
   container.innerHTML = `
     <div class="state-loading">
       <div class="spinner"></div>
-      <p>Loading agenda…</p>
+      <p>${agendaUi('agenda.loading', 'Caricamento agenda in corso…')}</p>
     </div>`;
 }
 
 function showError(container, message) {
   container.innerHTML = `
     <div class="state-error">
-      <p>⚠️ Could not load the agenda.</p>
+      <p>⚠️ ${agendaUi('agenda.error', "Impossibile caricare l'agenda.")}</p>
       <p style="font-size:0.85rem;margin-top:0.5rem;">${escapeHtml(message)}</p>
     </div>`;
 }
@@ -589,14 +599,14 @@ function showError(container, message) {
 function showEmpty(container) {
   container.innerHTML = `
     <div class="state-empty">
-      <p>🗓 The agenda will be published soon. Stay tuned!</p>
+      <p>🗓 ${agendaUi('agenda.empty', 'Nessuna sessione disponibile per il momento.')}</p>
     </div>`;
 }
 
 function showAgendaSoon(container) {
   container.innerHTML = `
     <div class="state-empty">
-      <p>🗓 Agenda disponibile presto.</p>
+      <p>🗓 ${agendaUi('agenda.soon', "L'agenda sarà disponibile a breve. Torna presto!")}</p>
     </div>`;
 }
 

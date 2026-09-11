@@ -25,6 +25,16 @@ async function fetchEditionsIndex(url) {
   return res.json();
 }
 
+function ed_ui(key, fallback) {
+  return (window.I18n && typeof window.I18n.t === 'function') ? window.I18n.t(key, fallback) : fallback;
+}
+function ed_tr(value) {
+  return (window.I18n && typeof window.I18n.pick === 'function') ? window.I18n.pick(value) : value;
+}
+function ed_locale() {
+  return (window.I18n && window.I18n.lang === 'en') ? 'en-GB' : 'it-IT';
+}
+
 function renderPreviousEditions(container, payload) {
   const activeEdition = String(payload?.activeEdition || '').trim();
   const editions = payload?.editions || {};
@@ -34,7 +44,7 @@ function renderPreviousEditions(container, payload) {
     .sort(([a], [b]) => Number(b) - Number(a));
 
   if (!previous.length) {
-    container.innerHTML = '<p class="state-empty">Nessuna edizione precedente disponibile al momento.</p>';
+    container.innerHTML = `<p class="state-empty">${ed_ui('editions.empty', 'Nessuna edizione precedente disponibile al momento.')}</p>`;
     return;
   }
 
@@ -56,12 +66,12 @@ function renderPreviousEditions(container, payload) {
 
     const details = [];
     if (edition?.eventDate) details.push(formatDate(edition.eventDate));
-    if (edition?.city) details.push(edition.city);
+    if (edition?.city) details.push(ed_tr(edition.city));
 
     const desc = document.createElement('p');
     desc.textContent = details.length
-      ? `Edizione del ${details.join(' — ')}.`
-      : 'Edizione precedente della conference XmasDev.';
+      ? `${ed_ui('editions.editionOf', 'Edizione del')} ${details.join(' — ')}.`
+      : ed_ui('editions.genericDesc', 'Edizione precedente della conference XmasDev.');
     card.appendChild(desc);
 
     const links = document.createElement('div');
@@ -69,9 +79,9 @@ function renderPreviousEditions(container, payload) {
     links.style.gap = '0.75rem';
     links.style.flexWrap = 'wrap';
 
-    links.appendChild(buildLink(`agenda.html?edition=${encodeURIComponent(key)}`, 'Agenda'));
-    links.appendChild(buildLink(`sponsors.html?edition=${encodeURIComponent(key)}`, 'Sponsor'));
-    links.appendChild(buildLink(`staff.html?edition=${encodeURIComponent(key)}`, 'Staff'));
+    links.appendChild(buildLink(`agenda.html?edition=${encodeURIComponent(key)}`, ed_ui('nav.agenda', 'Agenda')));
+    links.appendChild(buildLink(`sponsors.html?edition=${encodeURIComponent(key)}`, ed_ui('nav.sponsors', 'Sponsor')));
+    links.appendChild(buildLink(`staff.html?edition=${encodeURIComponent(key)}`, ed_ui('nav.staff', 'Staff')));
 
     card.appendChild(links);
     container.appendChild(card);
@@ -90,7 +100,7 @@ function buildLink(href, label) {
 function formatDate(raw) {
   const date = new Date(raw);
   if (Number.isNaN(date.getTime())) return raw;
-  return date.toLocaleDateString('it-IT', {
+  return date.toLocaleDateString(ed_locale(), {
     day: '2-digit',
     month: 'long',
     year: 'numeric',
@@ -101,13 +111,13 @@ function showLoading(container) {
   container.innerHTML = `
     <div class="state-loading">
       <div class="spinner"></div>
-      <p>Caricamento edizioni…</p>
+      <p>${ed_ui('editions.loading', 'Caricamento edizioni…')}</p>
     </div>`;
 }
 
 function showError(container) {
   container.innerHTML = `
     <div class="state-error">
-      <p>⚠️ Impossibile caricare le edizioni precedenti.</p>
+      <p>⚠️ ${ed_ui('editions.error', 'Impossibile caricare le edizioni precedenti.')}</p>
     </div>`;
 }

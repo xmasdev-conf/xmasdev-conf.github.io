@@ -67,9 +67,16 @@ async function loadEditionDataFromIndex(indexUrl, requestedEdition) {
 }
 
 /* ---- Render ------------------------------------------------- */
+function st_tr(value) {
+  return (window.I18n && typeof window.I18n.pick === 'function') ? window.I18n.pick(value) : value;
+}
+function st_ui(key, fallback) {
+  return (window.I18n && typeof window.I18n.t === 'function') ? window.I18n.t(key, fallback) : fallback;
+}
+
 function renderStaff(container, staff) {
   if (!staff || !staff.length) {
-    container.innerHTML = '<p class="state-empty">No staff information available yet.</p>';
+    container.innerHTML = `<p class="state-empty">${st_ui('staff.empty', 'Informazioni sullo staff non ancora disponibili.')}</p>`;
     return;
   }
 
@@ -117,7 +124,7 @@ function buildStaffCard(member) {
   if (member.role) {
     const role = document.createElement('div');
     role.className = 'staff-card__role';
-    role.textContent = member.role;
+    role.textContent = st_tr(member.role);
     card.appendChild(role);
   }
 
@@ -125,7 +132,7 @@ function buildStaffCard(member) {
   if (member.bio) {
     const bio = document.createElement('p');
     bio.className = 'staff-card__bio';
-    bio.textContent = member.bio;
+    bio.textContent = st_tr(member.bio);
     card.appendChild(bio);
   }
 
@@ -143,7 +150,7 @@ function buildStaffCard(member) {
       a.target = '_blank';
       a.rel = 'noopener noreferrer';
       a.title = meta.label;
-      a.setAttribute('aria-label', `${fullName} on ${meta.label}`);
+      a.setAttribute('aria-label', `${fullName} — ${meta.label}`);
       a.textContent = meta.icon;
       socials.appendChild(a);
     });
@@ -196,14 +203,14 @@ function showLoading(container) {
   container.innerHTML = `
     <div class="state-loading">
       <div class="spinner"></div>
-      <p>Loading staff…</p>
+      <p>${st_ui('staff.loading', 'Caricamento staff…')}</p>
     </div>`;
 }
 
 function showError(container, message) {
   container.innerHTML = `
     <div class="state-error">
-      <p>⚠️ Could not load staff data.</p>
+      <p>⚠️ ${st_ui('staff.error', 'Impossibile caricare i dati dello staff.')}</p>
     </div>`;
   console.error(message);
 }

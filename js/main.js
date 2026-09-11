@@ -13,6 +13,23 @@ document.addEventListener('DOMContentLoaded', () => {
   initFooterCommunities();
 });
 
+/* ---- i18n helpers ----------------------------------------- */
+function tr(value) {
+  return (window.I18n && typeof window.I18n.pick === 'function')
+    ? window.I18n.pick(value)
+    : value;
+}
+
+function i18nLocale() {
+  return (window.I18n && window.I18n.lang === 'en') ? 'en-GB' : 'it-IT';
+}
+
+function uiText(key, fallback) {
+  return (window.I18n && typeof window.I18n.t === 'function')
+    ? window.I18n.t(key, fallback)
+    : fallback;
+}
+
 /* ---- Responsive hamburger menu ----------------------------- */
 function initNavbar() {
   const hamburger = document.getElementById('navbar-hamburger');
@@ -114,7 +131,7 @@ async function initCfpBanner() {
   }
 
   titleEl.textContent = title;
-  deadlineEl.textContent = closeDate.toLocaleString('it-IT', {
+  deadlineEl.textContent = closeDate.toLocaleString(i18nLocale(), {
     day: '2-digit',
     month: 'long',
     year: 'numeric',
@@ -143,15 +160,15 @@ async function initHomepageSponsors() {
   const tiers = (editionData?.sponsors?.tiers || []).slice().sort(sortSponsorTiersByPriority);
 
   if (titleEl && homepageContent.title) {
-    titleEl.textContent = homepageContent.title;
+    titleEl.textContent = tr(homepageContent.title);
   }
 
   if (descriptionEl && homepageContent.description) {
-    descriptionEl.textContent = homepageContent.description;
+    descriptionEl.textContent = tr(homepageContent.description);
   }
 
   if (ctaEl && homepageContent.ctaLabel) {
-    ctaEl.textContent = homepageContent.ctaLabel;
+    ctaEl.textContent = tr(homepageContent.ctaLabel);
   }
 
   if (ctaEl && homepageContent.ctaHref) {
@@ -159,7 +176,7 @@ async function initHomepageSponsors() {
   }
 
   if (homepageContent.listAriaLabel) {
-    container.setAttribute('aria-label', homepageContent.listAriaLabel);
+    container.setAttribute('aria-label', tr(homepageContent.listAriaLabel));
   }
 
   if (!tiers.length) {
@@ -224,13 +241,13 @@ async function initLocationSection() {
   const mapFallbackEl = document.getElementById('location-map-fallback');
   const mapLinkEl = document.getElementById('location-map-link');
 
-  if (titleEl && logistics.sectionTitle) titleEl.textContent = logistics.sectionTitle;
-  if (descriptionEl && logistics.sectionDescription) descriptionEl.textContent = logistics.sectionDescription;
-  if (cityEl && logistics.city) cityEl.textContent = `📍 ${logistics.city}`;
-  if (addressLabelEl && logistics.addressLabel) addressLabelEl.textContent = logistics.addressLabel;
-  if (addressEl && logistics.address) addressEl.textContent = logistics.address;
-  if (transportLabelEl && logistics.transportLabel) transportLabelEl.textContent = logistics.transportLabel;
-  if (transportEl && logistics.transport) transportEl.textContent = logistics.transport;
+  if (titleEl && logistics.sectionTitle) titleEl.textContent = tr(logistics.sectionTitle);
+  if (descriptionEl && logistics.sectionDescription) descriptionEl.textContent = tr(logistics.sectionDescription);
+  if (cityEl && logistics.city) cityEl.textContent = `📍 ${tr(logistics.city)}`;
+  if (addressLabelEl && logistics.addressLabel) addressLabelEl.textContent = tr(logistics.addressLabel);
+  if (addressEl && logistics.address) addressEl.textContent = tr(logistics.address);
+  if (transportLabelEl && logistics.transportLabel) transportLabelEl.textContent = tr(logistics.transportLabel);
+  if (transportEl && logistics.transport) transportEl.textContent = tr(logistics.transport);
 
   const map = logistics?.map || {};
   const embedUrl = normalizeHttpUrl(map.embedUrl);
@@ -239,7 +256,7 @@ async function initLocationSection() {
   if (mapEmbedEl) {
     if (embedUrl) {
       mapEmbedEl.src = embedUrl;
-      if (map.ariaLabel) mapEmbedEl.title = map.ariaLabel;
+      if (map.ariaLabel) mapEmbedEl.title = tr(map.ariaLabel);
       mapEmbedEl.style.display = 'block';
       if (mapFallbackEl) mapFallbackEl.style.display = 'none';
     } else {
@@ -252,7 +269,7 @@ async function initLocationSection() {
   if (mapLinkEl) {
     if (linkUrl) {
       mapLinkEl.href = linkUrl;
-      mapLinkEl.textContent = map.linkLabel || 'Apri la mappa';
+      mapLinkEl.textContent = tr(map.linkLabel) || 'Apri la mappa';
       mapLinkEl.style.display = 'inline-flex';
     } else {
       mapLinkEl.removeAttribute('href');
@@ -276,18 +293,18 @@ async function initRegistrationCtas() {
   const registration = editionData?.registration || {};
   const registrationUrl = normalizeHttpUrl(registration.url);
   const registrationEnabled = registration.enabled === true && Boolean(registrationUrl);
-  const closedMessage = registration.closedMessage || 'La registrazione non è ancora aperta.';
-  const closedCtaLabel = registration.closedCtaLabel || 'Registrazione non ancora aperta';
+  const closedMessage = tr(registration.closedMessage) || uiText('registration.closedMessage', 'La registrazione non è ancora aperta.');
+  const closedCtaLabel = tr(registration.closedCtaLabel) || uiText('registration.closedCta', 'Registrazione non ancora aperta');
   if (ticketsTitleEl) {
     ticketsTitleEl.textContent = registrationEnabled
-      ? (registration.openSectionTitle || 'Prenota il tuo posto 🎁')
-      : (registration.closedSectionTitle || 'Registrazione prossimamente disponibile');
+      ? (tr(registration.openSectionTitle) || uiText('registration.openTitle', 'Prenota il tuo posto 🎁'))
+      : (tr(registration.closedSectionTitle) || uiText('registration.closedTitle', 'Registrazione prossimamente disponibile'));
   }
 
   if (ticketsDescriptionEl) {
     ticketsDescriptionEl.textContent = registrationEnabled
-      ? (registration.openSectionDescription || "I posti sono limitati. Registrati ora per assicurarti un posto alla conferenza più cool dell'anno!")
-      : (registration.closedSectionDescription || 'Le iscrizioni non sono ancora aperte. Ti aggiorneremo appena sarà possibile registrarsi.');
+      ? (tr(registration.openSectionDescription) || uiText('registration.openDesc', "I posti sono limitati. Registrati ora per assicurarti un posto alla conferenza più cool dell'anno!"))
+      : (tr(registration.closedSectionDescription) || uiText('registration.closedDesc', 'Le iscrizioni non sono ancora aperte. Ti aggiorneremo appena sarà possibile registrarsi.'));
   }
 
   ctas.forEach((cta) => {
@@ -295,7 +312,7 @@ async function initRegistrationCtas() {
     const messageEl = messageTargetId ? document.getElementById(messageTargetId) : null;
 
     cta.textContent = registrationEnabled
-      ? (registration.openCtaLabel || cta.textContent)
+      ? (tr(registration.openCtaLabel) || cta.textContent)
       : closedCtaLabel;
 
     if (registrationEnabled) {
@@ -343,7 +360,7 @@ async function initFooterCommunities() {
   strip.className = 'footer__communities';
 
   const heading = document.createElement('h4');
-  heading.textContent = 'Organizzato dalle community';
+  heading.textContent = uiText('footer.organizedBy', 'Organizzato dalle community');
   strip.appendChild(heading);
 
   const list = document.createElement('div');
@@ -369,7 +386,7 @@ function buildFooterCommunity(community) {
   link.target = '_blank';
   link.rel = 'noopener noreferrer';
   link.title = community.name;
-  link.setAttribute('aria-label', `${community.name} (si apre in una nuova scheda)`);
+  link.setAttribute('aria-label', `${community.name} (${uiText('sponsors.newTab', 'si apre in una nuova scheda')})`);
 
   if (typeof community.background === 'string' && /^#[0-9a-fA-F]{3,8}$/.test(community.background.trim())) {
     link.style.background = community.background.trim();
@@ -437,8 +454,8 @@ function buildHomepageSponsorCard(sponsor, tierName) {
   card.target = '_blank';
   card.rel = 'noopener noreferrer';
   card.title = sponsor.name;
-  const tierPart = tierName ? ` — sponsor ${tierName}` : '';
-  card.setAttribute('aria-label', `${sponsor.name}${tierPart} (si apre in una nuova scheda)`);
+  const tierPart = tierName ? ` — ${uiText('sponsors.tierSuffix', 'sponsor')} ${tierName}` : '';
+  card.setAttribute('aria-label', `${sponsor.name}${tierPart} (${uiText('sponsors.newTab', 'si apre in una nuova scheda')})`);
   if (sponsor.logo) {
     const img = document.createElement('img');
     img.src = sponsor.logo;

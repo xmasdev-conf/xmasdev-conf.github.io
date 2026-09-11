@@ -247,6 +247,46 @@ p {
   color: #fff !important;
 }
 
+/* Language toggle */
+.navbar__lang {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__lang-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.navbar__lang-flag {
+  background: transparent;
+  border: none;
+  border-radius: calc(var(--radius-sm) - 2px);
+  padding: 0.15rem 0.4rem;
+  font-size: 1.15rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.45;
+  filter: grayscale(1);
+  transition: opacity var(--transition), filter var(--transition), background var(--transition);
+}
+
+.navbar__lang-flag:hover,
+.navbar__lang-flag:focus-visible {
+  opacity: 0.85;
+  filter: grayscale(0);
+}
+
+.navbar__lang-flag.is-active {
+  opacity: 1;
+  filter: grayscale(0);
+  background: rgba(230, 57, 70, 0.12);
+}
+
 /* Hamburger */
 .navbar__hamburger {
   display: none;
