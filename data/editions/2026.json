@@ -130,6 +130,48 @@
     "subtitle": "XMASDEV 2026 · 11 dicembre · 100+ sviluppatori",
     "note": "Quattro livelli, con vantaggi crescenti: ogni livello include anche i vantaggi dei livelli inferiori."
   },
+  "communities": {
+    "pageContent": {
+      "organizingTitle": "Evento organizzato da",
+      "organizingDescription": "Le community che organizzano XmasDev 2026.",
+      "supportingTitle": "Evento supportato da",
+      "supportingDescription": "Le community che sostengono XmasDev 2026."
+    },
+    "organizing": [
+      {
+        "name": ".NET Toscana",
+        "url": "https://www.dotnettoscana.org/",
+        "logo": "assets/communities/dotnettoscana.png",
+        "background": "#1f2733"
+      },
+      {
+        "name": ".NET Lombardia",
+        "url": "https://community.codemotion.com/dotnetlombardia",
+        "logo": "assets/communities/dotnetlombardia.png",
+        "background": "#ffffff"
+      },
+      {
+        "name": "DotNetCode",
+        "url": "https://www.dotnetcode.it/",
+        "logo": "assets/communities/dotnetcode.png",
+        "background": "#ffffff"
+      },
+      {
+        "name": "SharpCoding",
+        "url": "https://www.sharpcoding.it/",
+        "logo": "assets/communities/sharpcoding.png",
+        "background": "#ffffff"
+      },
+      {
+        "name": "Tech4Grow AQ",
+        "url": "https://www.tech4grow.it/",
+        "logo": "assets/communities/tech4grow.jpeg",
+        "background": "#f7f7f7",
+        "logoMaxWidth": "240px"
+      }
+    ],
+    "supporting": []
+  },
   "staff": [
     {
       "id": 1,

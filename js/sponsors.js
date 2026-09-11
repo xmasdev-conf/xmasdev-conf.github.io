@@ -109,7 +109,7 @@ function renderSponsors(container, data) {
           const u = new URL(sponsor.url, window.location.href);
           if (u.protocol === 'http:' || u.protocol === 'https:') safeUrl = u.toString();
         } catch {}
-        grid.appendChild(buildSponsorCard({ ...sponsor, url: safeUrl }));
+        grid.appendChild(buildSponsorCard({ ...sponsor, url: safeUrl }, tier.name));
       });
 
       section.appendChild(grid);
@@ -128,6 +128,7 @@ function renderSponsors(container, data) {
     container.appendChild(buildSponsorshipPackSection(sponsorshipPack, sponsorshipTiers));
   }
 }
+
 
 function buildSponsorshipPackSection(pack, tiers) {
   const section = document.createElement('section');
@@ -204,13 +205,14 @@ function sortTiersByPriority(a, b) {
 }
 
 /* ---- Build a single sponsor card --------------------------- */
-function buildSponsorCard(sponsor) {
+function buildSponsorCard(sponsor, tierName) {
   const card = document.createElement('a');
   card.className = 'sponsor-card';
   card.href = sponsor.url || '#';
   card.target = '_blank';
   card.rel = 'noopener noreferrer';
   card.title = sponsor.name;
+  card.setAttribute('aria-label', buildSponsorAriaLabel(sponsor.name, tierName));
 
   if (sponsor.logo) {
     const img = document.createElement('img');
@@ -226,6 +228,12 @@ function buildSponsorCard(sponsor) {
   }
 
   return card;
+}
+
+/* ---- Accessible label for a sponsor card ------------------- */
+function buildSponsorAriaLabel(name, tierName) {
+  const tierPart = tierName ? ` — sponsor ${tierName}` : '';
+  return `${name}${tierPart} (si apre in una nuova scheda)`;
 }
 
 /* ---- State helpers ----------------------------------------- */

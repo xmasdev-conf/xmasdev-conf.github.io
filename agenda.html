@@ -19,8 +19,10 @@
 </head>
 <body>
 
+  <a class="skip-link" href="#main-content">Salta al contenuto principale</a>
+
   <!-- ========== NAVBAR ========== -->
-  <nav class="navbar" aria-label="Main navigation">
+  <nav class="navbar" aria-label="Navigazione principale">
     <div class="navbar__inner">
       <a href="index.html" class="navbar__logo" aria-label="XmasDev home">
         <img src="assets/logo/logo-xmasdev_white.png" alt="XmasDev" class="navbar__logo-img" />
@@ -28,14 +30,14 @@
 
       <ul class="navbar__links" id="navbar-links" role="list">
         <li><a href="index.html">Home</a></li>
-        <li><a href="agenda.html">Agenda</a></li>
+        <li><a href="agenda.html" aria-current="page">Agenda</a></li>
         <li><a href="sponsors.html">Sponsor</a></li>
         <li><a href="staff.html">Staff</a></li>
         <li><a href="edizioni-precedenti.html">Edizioni precedenti</a></li>
         <li><a href="index.html#tickets" class="navbar__cta">Registrati</a></li>
       </ul>
 
-      <button class="navbar__hamburger" id="navbar-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navbar-links">
+      <button class="navbar__hamburger" id="navbar-hamburger" aria-label="Apri o chiudi il menu di navigazione" aria-expanded="false" aria-controls="navbar-links">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -50,12 +52,12 @@
   </header>
 
   <!-- ========== AGENDA ========== -->
-  <main>
-    <section class="section" aria-label="Conference agenda">
+  <main id="main-content" tabindex="-1">
+    <section class="section" aria-label="Programma della conferenza">
       <div class="container">
 
         <!-- Dynamic agenda content injected here -->
-        <div id="agenda-container" data-agenda-config="data/editions.json" data-edition="2026" aria-live="polite" aria-label="Agenda content">
+        <div id="agenda-container" data-agenda-config="data/editions.json" data-edition="2026" aria-live="polite" aria-label="Contenuto dell'agenda">
           <!-- Rendered by agenda.js -->
         </div>
 

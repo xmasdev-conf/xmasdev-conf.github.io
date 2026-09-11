@@ -19,15 +19,17 @@
 </head>
 <body>
 
+  <a class="skip-link" href="#main-content">Salta al contenuto principale</a>
+
   <!-- ========== NAVBAR ========== -->
-  <nav class="navbar" aria-label="Main navigation">
+  <nav class="navbar" aria-label="Navigazione principale">
     <div class="navbar__inner">
       <a href="index.html" class="navbar__logo" aria-label="XmasDev home">
         <img src="assets/logo/logo-xmasdev_white.png" alt="XmasDev" class="navbar__logo-img" />
       </a>
 
       <ul class="navbar__links" id="navbar-links" role="list">
-        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html" aria-current="page">Home</a></li>
         <li><a href="agenda.html">Agenda</a></li>
         <li><a href="sponsors.html">Sponsor</a></li>
         <li><a href="staff.html">Staff</a></li>
@@ -35,14 +37,16 @@
         <li><a href="#tickets" class="navbar__cta">Registrati</a></li>
       </ul>
 
-      <button class="navbar__hamburger" id="navbar-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navbar-links">
+      <button class="navbar__hamburger" id="navbar-hamburger" aria-label="Apri o chiudi il menu di navigazione" aria-expanded="false" aria-controls="navbar-links">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
+  <main id="main-content" tabindex="-1">
+
   <!-- ========== HERO ========== -->
-  <header class="hero" role="banner">
+  <header class="hero">
     <div class="snowflakes" aria-hidden="true"></div>
     <div class="container" style="position:relative;z-index:1;">
       <div class="hero__eyebrow">
@@ -93,7 +97,7 @@
   </header>
 
   <!-- ========== STATS ========== -->
-  <section class="stats" aria-label="Conference statistics">
+  <section class="stats" aria-label="Statistiche della conferenza">
     <div class="stats__grid container">
       <div class="stats__item">
         <span class="stats__number">20+</span>
@@ -271,6 +275,8 @@
       </div>
     </div>
   </section>
+
+  </main>
 
   <!-- ========== FOOTER ========== -->
   <footer class="footer" role="contentinfo">

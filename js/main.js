@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHomepageSponsors();
   initLocationSection();
   initRegistrationCtas();
+  initFooterCommunities();
 });
 
 /* ---- Responsive hamburger menu ----------------------------- */
@@ -324,6 +325,90 @@ async function initRegistrationCtas() {
   });
 }
 
+/* ---- Footer communities (all pages) ----------------------- */
+async function initFooterCommunities() {
+  const footer = document.querySelector('.footer');
+  if (!footer) return;
+
+  const configUrl = footer.dataset.editionsIndex || 'data/editions.json';
+  const requestedEdition = footer.dataset.edition;
+  const editionData = await loadEditionDataFromIndex(configUrl, requestedEdition);
+
+  const organizing = (editionData?.communities?.organizing || []).filter((c) => c && c.name);
+  if (!organizing.length) return;
+
+  const bottom = footer.querySelector('.footer__bottom');
+
+  const strip = document.createElement('div');
+  strip.className = 'footer__communities';
+
+  const heading = document.createElement('h4');
+  heading.textContent = 'Organizzato dalle community';
+  strip.appendChild(heading);
+
+  const list = document.createElement('div');
+  list.className = 'footer__communities-list';
+
+  shuffleArray(organizing.slice()).forEach((community) => {
+    list.appendChild(buildFooterCommunity(community));
+  });
+
+  strip.appendChild(list);
+
+  if (bottom) {
+    footer.insertBefore(strip, bottom);
+  } else {
+    footer.appendChild(strip);
+  }
+}
+
+function buildFooterCommunity(community) {
+  const link = document.createElement('a');
+  link.className = 'footer__community';
+  link.href = normalizeHttpUrl(community.url) || '#';
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  link.title = community.name;
+  link.setAttribute('aria-label', `${community.name} (si apre in una nuova scheda)`);
+
+  if (typeof community.background === 'string' && /^#[0-9a-fA-F]{3,8}$/.test(community.background.trim())) {
+    link.style.background = community.background.trim();
+  }
+
+  if (community.logo) {
+    const img = document.createElement('img');
+    img.src = community.logo;
+    img.alt = community.name;
+    img.loading = 'lazy';
+    if (typeof community.logoMaxWidth === 'string' && /^\d+(px|rem|em|%)$/.test(community.logoMaxWidth.trim())) {
+      img.style.maxWidth = community.logoMaxWidth.trim();
+    }
+    img.addEventListener('error', () => {
+      const name = document.createElement('span');
+      name.className = 'footer__community-name';
+      name.textContent = community.name;
+      link.replaceChildren(name);
+    });
+    link.appendChild(img);
+  } else {
+    const name = document.createElement('span');
+    name.className = 'footer__community-name';
+    name.textContent = community.name;
+    link.appendChild(name);
+  }
+
+  return link;
+}
+
+/* ---- Shuffle helper (Fisher–Yates) ------------------------ */
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
 function normalizeHttpUrl(urlValue) {
   if (!urlValue || typeof urlValue !== 'string') return null;
 
@@ -352,6 +437,8 @@ function buildHomepageSponsorCard(sponsor, tierName) {
   card.target = '_blank';
   card.rel = 'noopener noreferrer';
   card.title = sponsor.name;
+  const tierPart = tierName ? ` — sponsor ${tierName}` : '';
+  card.setAttribute('aria-label', `${sponsor.name}${tierPart} (si apre in una nuova scheda)`);
   if (sponsor.logo) {
     const img = document.createElement('img');
     img.src = sponsor.logo;

@@ -19,7 +19,9 @@
 </head>
 <body>
 
-  <nav class="navbar" aria-label="Main navigation">
+  <a class="skip-link" href="#main-content">Salta al contenuto principale</a>
+
+  <nav class="navbar" aria-label="Navigazione principale">
     <div class="navbar__inner">
       <a href="index.html" class="navbar__logo" aria-label="XmasDev home">
         <img src="assets/logo/logo-xmasdev_white.png" alt="XmasDev" class="navbar__logo-img" />
@@ -30,11 +32,11 @@
         <li><a href="agenda.html">Agenda</a></li>
         <li><a href="sponsors.html">Sponsor</a></li>
         <li><a href="staff.html">Staff</a></li>
-        <li><a href="edizioni-precedenti.html">Edizioni precedenti</a></li>
+        <li><a href="edizioni-precedenti.html" aria-current="page">Edizioni precedenti</a></li>
         <li><a href="index.html#tickets" class="navbar__cta">Registrati</a></li>
       </ul>
 
-      <button class="navbar__hamburger" id="navbar-hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navbar-links">
+      <button class="navbar__hamburger" id="navbar-hamburger" aria-label="Apri o chiudi il menu di navigazione" aria-expanded="false" aria-controls="navbar-links">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -47,7 +49,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main-content" tabindex="-1">
     <section class="section" aria-label="Archivio edizioni">
       <div class="container">
         <div id="editions-archive" class="about-grid" data-editions-index="data/editions.json" aria-live="polite" aria-label="Elenco delle edizioni precedenti">
