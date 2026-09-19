@@ -96,7 +96,7 @@
             "name": "Xebia",
             "logo": "assets/sponsors/xebia.svg",
             "url": "https://xebia.com",
-            "description": "Diamond sponsor di XmasDev 2026."
+            "description": "Xebia è Diamond sponsor di XmasDev 2026."
           }
         ]
       },
@@ -115,13 +115,13 @@
             "name": "Reti",
             "logo": "assets/sponsors/reti.png",
             "url": "https://www.reti.it",
-            "description": "Platinum sponsor di XmasDev 2026."
+            "description": "Reti è Platinum sponsor di XmasDev 2026."
           },
           {
             "name": "Cybera",
             "logo": "assets/sponsors/CYBERA_10.png",
             "url": "https://www.cybera.it/",
-            "description": "Platinum sponsor di XmasDev 2026."
+            "description": "Cybera è Platinum sponsor di XmasDev 2026."
           }
         ]
       },
@@ -139,7 +139,13 @@
             "name": "Ready2Use",
             "logo": "assets/sponsors/ready2use.svg",
             "url": "https://r2u.it/",
-            "description": "Gold sponsor di XmasDev 2026."
+            "description": "Ready2Use è Gold sponsor di XmasDev 2026."
+          },
+          {
+            "name": "BcSoft",
+            "logo": "assets/sponsors/LogoBcSoft_Orizz_Negativo.svg",
+            "url": "https://www.bcsoft.net/",
+            "description": "BcSoft è Gold sponsor di XmasDev 2026."
           }
         ]
       },
