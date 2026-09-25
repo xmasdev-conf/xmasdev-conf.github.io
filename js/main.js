@@ -352,30 +352,40 @@ async function initFooterCommunities() {
   const editionData = await loadEditionDataFromIndex(configUrl, requestedEdition);
 
   const organizing = (editionData?.communities?.organizing || []).filter((c) => c && c.name);
-  if (!organizing.length) return;
+  const supporting = (editionData?.communities?.supporting || []).filter((c) => c && c.name);
+  if (!organizing.length && !supporting.length) return;
 
   const bottom = footer.querySelector('.footer__bottom');
 
-  const strip = document.createElement('div');
-  strip.className = 'footer__communities';
+  const buildStrip = (communities, variant, headingKey, headingFallback) => {
+    const strip = document.createElement('div');
+    strip.className = variant ? `footer__communities footer__communities--${variant}` : 'footer__communities';
 
-  const heading = document.createElement('h4');
-  heading.textContent = uiText('footer.organizedBy', 'Organizzato dalle community');
-  strip.appendChild(heading);
+    const heading = document.createElement('h4');
+    heading.textContent = uiText(headingKey, headingFallback);
+    strip.appendChild(heading);
 
-  const list = document.createElement('div');
-  list.className = 'footer__communities-list';
+    const list = document.createElement('div');
+    list.className = 'footer__communities-list';
 
-  shuffleArray(organizing.slice()).forEach((community) => {
-    list.appendChild(buildFooterCommunity(community));
-  });
+    shuffleArray(communities.slice()).forEach((community) => {
+      list.appendChild(buildFooterCommunity(community));
+    });
 
-  strip.appendChild(list);
+    strip.appendChild(list);
+    return strip;
+  };
 
-  if (bottom) {
-    footer.insertBefore(strip, bottom);
-  } else {
-    footer.appendChild(strip);
+  if (organizing.length) {
+    const strip = buildStrip(organizing, null, 'footer.organizedBy', 'Organizzato dalle community');
+    if (bottom) footer.insertBefore(strip, bottom);
+    else footer.appendChild(strip);
+  }
+
+  if (supporting.length) {
+    const strip = buildStrip(supporting, 'supporting', 'footer.supportedBy', 'Con il supporto delle community');
+    if (bottom) footer.insertBefore(strip, bottom);
+    else footer.appendChild(strip);
   }
 }
 

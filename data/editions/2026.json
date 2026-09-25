@@ -212,7 +212,20 @@
         "logoMaxWidth": "240px"
       }
     ],
-    "supporting": []
+    "supporting": [
+      {
+        "name": "Azure Italia Podcast",
+        "url": "https://azureitalia.cloud/",
+        "logo": "assets/supporting_communities/azure_italia_podcast.jpeg",
+        "background": "#ffffff"
+      },
+      {
+        "name": "Azure Meetup Puglia",
+        "url": "https://www.meetup.com/azure-meetup-puglia/",
+        "logo": "assets/supporting_communities/azure_meetup_puglia.jpeg",
+        "background": "#ffffff"
+      }
+    ]
   },
   "staff": [
     {

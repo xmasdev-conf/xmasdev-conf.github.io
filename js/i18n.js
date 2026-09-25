@@ -94,6 +94,7 @@
       'footer.rights': '© 2026 XmasDev Conference. Tutti i diritti riservati.',
       'footer.madeWith': 'Made with ❤️ by the community',
       'footer.organizedBy': 'Organizzato dalle community',
+      'footer.supportedBy': 'Con il supporto delle community',
 
       'agendaPage.title': '🗓 Agenda',
       'agendaPage.subtitle': 'Il programma completo della conferenza. 3 track + workshop, con slot da 40 minuti + 5 di domande.',
@@ -220,6 +221,7 @@
       'footer.rights': '© 2026 XmasDev Conference. All rights reserved.',
       'footer.madeWith': 'Made with ❤️ by the community',
       'footer.organizedBy': 'Organized by the communities',
+      'footer.supportedBy': 'Supported by the communities',
 
       'agendaPage.title': '🗓 Agenda',
       'agendaPage.subtitle': 'The full conference program. 3 tracks + workshop, with 40-minute slots + 5 for questions.',

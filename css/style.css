@@ -1346,6 +1346,31 @@ p {
   color: var(--color-bg);
 }
 
+/* Supporting communities: less prominent than organizers */
+.footer__communities--supporting {
+  padding-top: 1.75rem;
+}
+
+.footer__communities--supporting h4 {
+  font-size: 0.7rem;
+  margin-bottom: 1rem;
+}
+
+.footer__communities--supporting .footer__community {
+  padding: 0.7rem 1rem;
+  opacity: 0.7;
+  transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+}
+
+.footer__communities--supporting .footer__community:hover {
+  opacity: 1;
+}
+
+.footer__communities--supporting .footer__community img {
+  height: 44px;
+  max-width: 140px;
+}
+
 
 /* ---- Snowflakes decoration --------------------------------- */
 .snowflakes {
