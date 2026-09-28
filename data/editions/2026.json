@@ -224,6 +224,11 @@
         "url": "https://www.meetup.com/azure-meetup-puglia/",
         "logo": "assets/supporting_communities/azure_meetup_puglia.jpeg",
         "background": "#ffffff"
+      },
+      {
+        "name": "Pirloverflow",
+        "logo": "assets/supporting_communities/Pirloverflow.svg",
+        "background": "#ffffff"
       }
     ]
   },
