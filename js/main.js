@@ -41,7 +41,6 @@ function initNavbar() {
     hamburger.setAttribute('aria-expanded', isOpen);
   });
 
-  // Close menu on link click (mobile)
   links.querySelectorAll('a').forEach((a) => {
     a.addEventListener('click', () => {
       links.classList.remove('open');
@@ -251,63 +250,23 @@ async function initLocationSection() {
   if (transportEl && logistics.transport) transportEl.textContent = tr(logistics.transport);
 
   const map = logistics?.map || {};
+  const embedUrl = normalizeHttpUrl(map.embedUrl);
   const linkUrl = normalizeHttpUrl(map.linkUrl);
   const fallbackText = tr(map.fallbackText);
 
   if (mapFallbackTextEl && fallbackText) mapFallbackTextEl.textContent = fallbackText;
-  if (mapEmbedEl && map.ariaLabel) mapEmbedEl.setAttribute('aria-label', tr(map.ariaLabel));
+  if (mapEmbedEl && map.ariaLabel) mapEmbedEl.setAttribute('title', tr(map.ariaLabel));
 
-  const showMapFallback = () => {
-    if (mapEmbedEl) {
-      mapEmbedEl.replaceChildren();
+  if (mapEmbedEl) {
+    if (embedUrl) {
+      mapEmbedEl.src = embedUrl;
+      mapEmbedEl.style.display = 'block';
+      if (mapFallbackEl) mapFallbackEl.style.display = 'none';
+    } else {
+      mapEmbedEl.removeAttribute('src');
       mapEmbedEl.style.display = 'none';
+      if (mapFallbackEl) mapFallbackEl.style.display = 'block';
     }
-    if (mapFallbackEl) mapFallbackEl.style.display = 'block';
-  };
-
-  const auth = map.auth || {};
-  const runtimeAuth = window.XMASDEV_AZURE_MAPS_CONFIG || {};
-  const subscriptionKey = runtimeAuth.subscriptionKey || auth.subscriptionKey;
-  const center = Array.isArray(map.center) && map.center.length === 2
-    ? map.center.map(Number)
-    : null;
-  const canInitializeAzureMap = map.provider === 'azure-maps'
-    && window.atlas
-    && typeof window.atlas.Map === 'function'
-    && auth.type === 'subscriptionKey'
-    && typeof subscriptionKey === 'string'
-    && subscriptionKey.trim() !== ''
-    && center
-    && center.every(Number.isFinite);
-
-  if (mapEmbedEl && canInitializeAzureMap) {
-    try {
-      const azureMap = new atlas.Map(mapEmbedEl, {
-        center,
-        zoom: Number.isFinite(Number(map.zoom)) ? Number(map.zoom) : 16,
-        view: 'Auto',
-        authOptions: {
-          authType: 'subscriptionKey',
-          subscriptionKey: subscriptionKey.trim(),
-        },
-      });
-
-      azureMap.events.add('ready', () => {
-        azureMap.markers.add(new atlas.HtmlMarker({
-          position: center,
-          color: '#e63946',
-          text: '●',
-          ariaLabel: tr(map.markerLabel) || 'Seraphicum',
-        }));
-        mapEmbedEl.style.display = 'block';
-        if (mapFallbackEl) mapFallbackEl.style.display = 'none';
-      });
-      azureMap.events.add('error', showMapFallback);
-    } catch {
-      showMapFallback();
-    }
-  } else {
-    showMapFallback();
   }
 
   if (mapLinkEl) {

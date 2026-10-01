@@ -14,7 +14,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.css" />
   <link rel="icon" href="assets/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
@@ -162,7 +161,7 @@
       <div class="feature">
         <div class="feature__content">
           <h2 data-i18n-html="event.title">Un giorno dedicato al <span style="color:var(--color-primary)">tuo</span> percorso da sviluppatore</h2>
-          <p data-i18n="event.desc">XmasDev nasce dall'idea che la crescita professionale passa anche dallo scambio con i propri pari. L'evento si svolge in una giornata intensa, ricca di contenuti di qualità e momenti informali, con l'obiettivo di creare legami duraturi nella community.</p>
+          <p data-i18n="event.desc">XmasDev nasce dall'idea che la crescita professionale passa anche dallo scambio con i propri pari. L'evento si svolge in una giornata intensa, ricca di contenuti e momenti di confronto.</p>
           <ul class="feature__list">
             <li data-i18n="event.li1">3 track tecniche + 1 workshop pratico</li>
             <li data-i18n="event.li2">Speaker selezionati dalla community</li>
@@ -232,7 +231,7 @@
         <p id="location-description">L'evento si terrà a Roma in una sede ancora TBD.</p>
       </div>
 
-      <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;" role="region" aria-label="Dettagli location">
+      <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:2.5rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:stretch;">
         <div>
           <h3 id="location-city" style="margin-bottom:1rem;">📍 Roma, Italia</h3>
           <p style="margin-bottom:0.5rem;"><strong id="location-address-label" style="color:var(--color-text);">Indirizzo:</strong></p>
@@ -241,8 +240,14 @@
           <p id="location-transport">Raggiungibile con Metro A, B e C. Ampia disponibilità di mezzi di superficie nelle vicinanze.</p>
         </div>
         <div id="location-map-container" style="background:var(--color-bg);border-radius:var(--radius-md);padding:1rem;min-height:280px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.75rem;">
-          <div id="location-map-embed" role="application" aria-label="Mappa location" style="width:100%;height:280px;border:0;border-radius:8px;display:none;"></div>
-          <div id="location-map-fallback" style="text-align:center;line-height:1;">
+          <iframe
+            id="location-map-embed"
+            title="Mappa location"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            style="width:100%;height:280px;border:0;border-radius:8px;display:none;"
+          ></iframe>
+          <div id="location-map-fallback" style="text-align:center;line-height:1;display:block;">
             <div aria-hidden="true" style="font-size:4rem;">🗺</div>
             <p id="location-map-fallback-text" style="margin:0.75rem 0 0;">Mappa non disponibile. Consulta l'indirizzo della sede.</p>
           </div>
@@ -323,7 +328,6 @@
     </div>
   </footer>
 
-  <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
