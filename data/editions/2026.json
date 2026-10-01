@@ -51,10 +51,21 @@
       "en": "The venue is accessible by public transport. Check current routes and schedules before travelling."
     },
     "map": {
-      "embedUrl": "https://www.openstreetmap.org/export/embed.html?bbox=12.4712119%2C41.81968072%2C12.4912119%2C41.83968072&layer=mapnik&marker=41.82968072%2C12.4812119",
-      "linkUrl": "https://www.openstreetmap.org/?mlat=41.82968072&mlon=12.4812119#map=16/41.82968072/12.4812119",
+      "provider": "azure-maps",
+      "center": [12.4812119, 41.82968072],
+      "zoom": 16,
+      "auth": {
+        "type": "subscriptionKey",
+        "subscriptionKey": ""
+      },
+      "linkUrl": "",
       "linkLabel": { "it": "Apri la mappa del Seraphicum", "en": "Open the map of Seraphicum" },
-      "ariaLabel": { "it": "Mappa della location dell'evento", "en": "Map of the event location" }
+      "ariaLabel": { "it": "Mappa Azure Maps della location dell'evento", "en": "Azure Maps map of the event location" },
+      "markerLabel": { "it": "Seraphicum, Via del Serafico 1", "en": "Seraphicum, Via del Serafico 1" },
+      "fallbackText": {
+        "it": "Mappa non disponibile. Indirizzo: Seraphicum, Via del Serafico 1, 00142 Roma, Italia.",
+        "en": "Map unavailable. Address: Seraphicum, Via del Serafico 1, 00142 Rome, Italy."
+      }
     }
   },
   "sponsors": {

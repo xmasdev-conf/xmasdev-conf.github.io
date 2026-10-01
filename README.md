@@ -11,6 +11,7 @@ Il sito è pubblicato su GitHub Pages all'indirizzo **[xmasdev.net](https://xmas
 - [Struttura del repository](#struttura-del-repository)
 - [Prerequisiti](#prerequisiti)
 - [Eseguire il sito in locale](#eseguire-il-sito-in-locale)
+- [Configurare Azure Maps](#configurare-azure-maps)
 - [Flusso di sviluppo consigliato](#flusso-di-sviluppo-consigliato)
 - [Modificare i contenuti](#modificare-i-contenuti)
 - [Stile (CSS)](#stile-css)
@@ -107,6 +108,46 @@ Per visualizzare il sito in locale è sufficiente uno dei seguenti strumenti:
    ```
 
 3. Apri il browser su **[http://localhost:8080](http://localhost:8080)**.
+
+---
+
+## Configurare Azure Maps
+
+La location 2026 usa Azure Maps Web SDK v3. Senza una credenziale la pagina mostra
+deliberatamente solo l'indirizzo del Seraphicum, senza caricare una mappa alternativa.
+Il repository non contiene chiavi: per attivare la mappa il proprietario deve:
+
+1. creare un account Azure e una risorsa **Azure Maps** nel portale Azure;
+2. assegnare i permessi/accessi necessari e scegliere un piano tariffario (Azure Maps
+   può comportare costi in base alle transazioni e al piano scelto);
+3. creare una subscription key con restrizioni per il solo dominio GitHub Pages
+   (e per `localhost` durante lo sviluppo), monitorarla e ruotarla periodicamente;
+4. rendere disponibile la chiave pubblica al browser **prima di `js/main.js`**, ad
+   esempio con un file di configurazione non versionato:
+
+   ```html
+   <script>
+     window.XMASDEV_AZURE_MAPS_CONFIG = {
+       subscriptionKey: 'LA_TUA_CHIAVE_LIMITATA_AL_DOMINIO'
+     };
+   </script>
+   <script src="js/main.js"></script>
+   ```
+
+   In una pipeline di deploy è preferibile generare questo blocco da un secret
+   dell'ambiente, senza inserirlo nei commit. Una subscription key usata dal
+   browser non è un segreto: va quindi limitata per dominio/IP e privilegi, e
+   non va mai confusa con una chiave server-side. Per scenari con dati realmente
+   riservati usare un backend/token Entra ID e non esporre client secret in
+   GitHub Pages.
+
+Il file `data/editions/2026.json` contiene già provider, coordinate, zoom e
+`auth.type: "subscriptionKey"`, ma lascia intenzionalmente vuoto
+`subscriptionKey`. Non è stato configurato un link esterno a una posizione
+Azure Maps: l'SDK Web non fornisce un URL pubblico di condivisione documentato,
+quindi non viene inventato alcun URL. Dopo aver predisposto la credenziale,
+la mappa interattiva mostra il pin su Seraphicum; in caso di configurazione
+mancante o errore SDK resta visibile l'indirizzo bilingue.
 
 ---
 
