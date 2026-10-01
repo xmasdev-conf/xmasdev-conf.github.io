@@ -51,17 +51,11 @@
       "en": "The venue is accessible by public transport. Check current routes and schedules before travelling."
     },
     "map": {
-      "provider": "azure-maps",
-      "center": [12.4812119, 41.82968072],
-      "zoom": 16,
-      "auth": {
-        "type": "subscriptionKey",
-        "subscriptionKey": ""
-      },
-      "linkUrl": "",
+      "provider": "openstreetmap",
+      "embedUrl": "https://www.openstreetmap.org/export/embed.html?bbox=12.4712119%2C41.81968072%2C12.4912119%2C41.83968072&layer=mapnik&marker=41.82968072%2C12.4812119",
+      "linkUrl": "https://www.openstreetmap.org/?mlat=41.82968072&mlon=12.4812119#map=16/41.82968072/12.4812119",
       "linkLabel": { "it": "Apri la mappa del Seraphicum", "en": "Open the map of Seraphicum" },
-      "ariaLabel": { "it": "Mappa Azure Maps della location dell'evento", "en": "Azure Maps map of the event location" },
-      "markerLabel": { "it": "Seraphicum, Via del Serafico 1", "en": "Seraphicum, Via del Serafico 1" },
+      "ariaLabel": { "it": "Mappa della location dell'evento", "en": "Map of the event location" },
       "fallbackText": {
         "it": "Mappa non disponibile. Indirizzo: Seraphicum, Via del Serafico 1, 00142 Roma, Italia.",
         "en": "Map unavailable. Address: Seraphicum, Via del Serafico 1, 00142 Rome, Italy."
@@ -250,7 +244,7 @@
       "firstName": "Marco",
       "lastName": "Dal Pino",
       "role": "Co-organizer",
-      "photo": "https://media.licdn.com/dms/image/v2/D4D03AQE8g6L5sJ_XlA/profile-displayphoto-shrink_400_400/B4DZZ7r8kyG0Ak-/0/1745831840556?e=1784764800&v=beta&t=og_2nAVfCpJeUME7lWCMwuU9W5hf648PMq2p-w1svZY",
+      "photo": "https://media.licdn.com/dms/image/v2/D4D03AQE8g6L5sJ_XlA/profile-displayphoto-shrink_400_400/B4DZZ7r8kyG0Ak-/0/1745831840556?e=1784764800&v=beta&t=og_2nAVfCpJeUME7lWCMwuU9W5hf648P0E",
       "socials": {
         "linkedin": "https://www.linkedin.com/in/marcodalpino/"
       }
@@ -260,7 +254,7 @@
       "firstName": "Alessio",
       "lastName": "Iafrate",
       "role": "Co-organizer",
-      "photo": "https://media.licdn.com/dms/image/v2/D4D03AQET6reKVU-UJg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1691501807108?e=1784764800&v=beta&t=ab-rGz8goV6pnAa8LbCdQ_5QbKqrdHQHtZ17_1GG66M",
+      "photo": "https://media.licdn.com/dms/image/v2/D4D03AQET6reKVU-UJg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1691501807108?e=1784764800&v=beta&t=ab-rGz8goV6pP0nOq4cY0GJc8jAULsY4Vn6CjAvQ2M",
       "socials": {
         "linkedin": "https://www.linkedin.com/in/alessio-iafrate/"
       }
@@ -270,7 +264,7 @@
       "firstName": "Fabio",
       "lastName": "Spaziani",
       "role": "Co-organizer",
-      "photo": "https://media.licdn.com/dms/image/v2/C5603AQGNUfvXxIZXlQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1554932490953?e=1784764800&v=beta&t=QvblwP8V1XP5MG6P-XajDNwyXoGQpQqHxzNvN6cNnVE",
+      "photo": "https://media.licdn.com/dms/image/v2/C5603AQGNUfvXxIZXlQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1554932490953?e=1784764800&v=beta&t=QvblwP8V1XP5kTzYjVx6B0hyV9wP8Aq3h0hKk3J5Xf0",
       "socials": {
         "linkedin": "https://www.linkedin.com/in/fabio-spaz/"
       }
@@ -280,7 +274,7 @@
       "firstName": "Emanuele",
       "lastName": "Garofalo",
       "role": "Co-organizer",
-      "photo": "https://media.licdn.com/dms/image/v2/D4D03AQFHcO-uhqrxQA/profile-displayphoto-scale_400_400/B4DZ8EmATKGkAg-/0/1782488502551?e=1784764800&v=beta&t=1VngWpbt8dzGzsbcCMIul4DQ7dCLm2K9ceu50y0CiSE",
+      "photo": "https://media.licdn.com/dms/image/v2/D4D03AQFHcO-uhqrxQA/profile-displayphoto-scale_400_400/B4DZ8EmATKGkAg-/0/1782488502551?e=1784764800&v=beta&t=1VngWpbt8dzGzsbcCMIul4DQ7dCLm2K9cM6OHQ2J4E",
       "socials": {
         "linkedin": "https://www.linkedin.com/in/emanuele-garofalo/"
       }
@@ -290,7 +284,7 @@
       "firstName": "Massimo",
       "lastName": "Bonanni",
       "role": "Co-organizer",
-      "photo": "https://media.licdn.com/dms/image/v2/D4D03AQE2cmsJP7PIag/profile-displayphoto-scale_400_400/B4DZ5USgjkH4Ag-/0/1779530599538?e=1784764800&v=beta&t=APvViEoGYc6kw-bcDm399r_rx1qocUInIxg7Fcyc7SU",
+      "photo": "https://media.licdn.com/dms/image/v2/D4D03AQE2cmsJP7PIag/profile-displayphoto-scale_400_400/B4DZ5USgjkH4Ag-/0/1779530599538?e=1784764800&v=beta&t=APvViEoGYc6kw-bcDm399r_rx1qocUInI0Nbh1R2-Ws",
       "socials": {
         "linkedin": "https://www.linkedin.com/in/massimobonanni/"
       }
@@ -300,7 +294,7 @@
       "firstName": "Francesco",
       "lastName": "Gallo",
       "role": "Co-organizer",
-      "photo": "https://media.licdn.com/dms/image/v2/D4D03AQE4PYnFDBKoiA/profile-displayphoto-scale_400_400/B4DZ68Ke_nIsAg-/0/1781273328863?e=1784764800&v=beta&t=6a0cedT8Rg381gLdER3Hr9GSUABoEBzP2_6ggcb_sR4",
+      "photo": "https://media.licdn.com/dms/image/v2/D4D03AQE4PYnFDBKoiA/profile-displayphoto-scale_400_400/B4DZ68Ke_nIsAg-/0/1781273328863?e=1784764800&v=beta&t=6a0cedT8Rg381gLdER3Hr9GSUABoEBzP2M9U4faRjqg",
       "socials": {
         "linkedin": "https://www.linkedin.com/in/fgallodev/s"
       }
@@ -310,7 +304,7 @@
       "firstName": "Fabio",
       "lastName": "Piras",
       "role": "Co-organizer",
-      "photo": "https://media.licdn.com/dms/image/v2/D4D03AQHdF005qMQjgA/profile-displayphoto-scale_400_400/B4DZlwk8kUIYAg-/0/1758530359839?e=1784764800&v=beta&t=OauaR5QVtukztmeDkMno7U2VOd3zZgkEm4cdvFoVDyc",
+      "photo": "https://media.licdn.com/dms/image/v2/D4D03AQHdF005qMQjgA/profile-displayphoto-scale_400_400/B4DZlwk8kUIYAg-/0/1758530359839?e=1784764800&v=beta&t=OauaR5QVtukztmeDkMno7U2VOd3zZgkEmf5M7Aqji6I",
       "socials": {
         "linkedin": "https://www.linkedin.com/in/fabio-piras-pst/"
       }
@@ -320,7 +314,7 @@
       "firstName": "Antonio",
       "lastName": "Pierascenzi",
       "role": "Co-organizer",
-      "photo": "https://media.licdn.com/dms/image/v2/D4D03AQHxQxAGNJSHCg/profile-displayphoto-scale_400_400/B4DZ006aftGoAg-/0/1774709224404?e=1784764800&v=beta&t=6kB5D78VjAsytEODNQ7aZwg2qm_FkXqH5nnYYVtwciY",
+      "photo": "https://media.licdn.com/dms/image/v2/D4D03AQHxQxAGNJSHCg/profile-displayphoto-scale_400_400/B4DZ006aftGoAg-/0/1774709224404?e=1784764800&v=beta&t=6kB5D78VjAsytEODNQ7aZwg2qm_FkXqH5qg1oGPlq6M",
       "socials": {
         "linkedin": "https://www.linkedin.com/in/antoniopierascenzi/"
       }
@@ -330,7 +324,7 @@
       "firstName": "Ivano",
       "lastName": "Scifoni",
       "role": "Co-organizer",
-      "photo": "https://media.licdn.com/dms/image/v2/D4D03AQGIhTaBHVFkCA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1720706784778?e=1784764800&v=beta&t=5iTcccZrPpfC6N4wQe34GDVw9e0k1Xhe1d95cig0vv0",
+      "photo": "https://media.licdn.com/dms/image/v2/D4D03AQGIhTaBHVFkCA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1720706784778?e=1784764800&v=beta&t=5iTcccT0RpfC7X2XjhvboXJ1vS_0yQMU4I3m1p0zB8E",
       "socials": {
         "linkedin": "https://www.linkedin.com/in/ivano-scifoni/"
       }

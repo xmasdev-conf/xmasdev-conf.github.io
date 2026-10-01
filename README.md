@@ -11,7 +11,7 @@ Il sito è pubblicato su GitHub Pages all'indirizzo **[xmasdev.net](https://xmas
 - [Struttura del repository](#struttura-del-repository)
 - [Prerequisiti](#prerequisiti)
 - [Eseguire il sito in locale](#eseguire-il-sito-in-locale)
-- [Configurare Azure Maps](#configurare-azure-maps)
+- [Location senza chiavi](#location-senza-chiavi)
 - [Flusso di sviluppo consigliato](#flusso-di-sviluppo-consigliato)
 - [Modificare i contenuti](#modificare-i-contenuti)
 - [Stile (CSS)](#stile-css)
@@ -81,7 +81,7 @@ Per visualizzare il sito in locale è sufficiente uno dei seguenti strumenti:
 - **[Node.js](https://nodejs.org/)** (opzionale, per `npx serve` o `http-server`)
 - Qualsiasi altro server HTTP statico locale
 
-> ⚠️ Aprire `index.html` direttamente con il browser (protocollo `file://`) non funziona correttamente perché le chiamate `fetch()` ai file JSON vengono bloccate dal browser per ragioni di sicurezza (CORS). È necessario utilizzare un server HTTP.
+> ⚠️ Aprire `index.html` direttamente con il browser (protocollo `file://`) non funziona correttamente perché le chiamate `fetch()` ai file JSON vengono bloccate dal browser per ragioni di sicurezza.
 
 ---
 
@@ -111,43 +111,18 @@ Per visualizzare il sito in locale è sufficiente uno dei seguenti strumenti:
 
 ---
 
-## Configurare Azure Maps
+## Location senza chiavi
 
-La location 2026 usa Azure Maps Web SDK v3. Senza una credenziale la pagina mostra
-deliberatamente solo l'indirizzo del Seraphicum, senza caricare una mappa alternativa.
-Il repository non contiene chiavi: per attivare la mappa il proprietario deve:
+La location 2026 usa **OpenStreetMap** invece di un provider con chiave di accesso. Questo mantiene il sito statico e compatibile con GitHub Pages, senza segreti, credenziali o configurazioni extra da eseguire in produzione.
 
-1. creare un account Azure e una risorsa **Azure Maps** nel portale Azure;
-2. assegnare i permessi/accessi necessari e scegliere un piano tariffario (Azure Maps
-   può comportare costi in base alle transazioni e al piano scelto);
-3. creare una subscription key con restrizioni per il solo dominio GitHub Pages
-   (e per `localhost` durante lo sviluppo), monitorarla e ruotarla periodicamente;
-4. rendere disponibile la chiave pubblica al browser **prima di `js/main.js`**, ad
-   esempio con un file di configurazione non versionato:
+La mappa viene caricata in modo nativo tramite un `iframe` pubblico di OpenStreetMap e usa le coordinate già presenti nel repository:
 
-   ```html
-   <script>
-     window.XMASDEV_AZURE_MAPS_CONFIG = {
-       subscriptionKey: 'LA_TUA_CHIAVE_LIMITATA_AL_DOMINIO'
-     };
-   </script>
-   <script src="js/main.js"></script>
-   ```
+- latitudine: `41.82968072`
+- longitudine: `12.4812119`
 
-   In una pipeline di deploy è preferibile generare questo blocco da un secret
-   dell'ambiente, senza inserirlo nei commit. Una subscription key usata dal
-   browser non è un segreto: va quindi limitata per dominio/IP e privilegi, e
-   non va mai confusa con una chiave server-side. Per scenari con dati realmente
-   riservati usare un backend/token Entra ID e non esporre client secret in
-   GitHub Pages.
+Il link esterno punta a OpenStreetMap con il marker sulla sede del Seraphicum. Se la mappa non dovesse essere disponibile, la pagina mostra comunque il testo con l'indirizzo completo e resta accessibile in italiano e inglese.
 
-Il file `data/editions/2026.json` contiene già provider, coordinate, zoom e
-`auth.type: "subscriptionKey"`, ma lascia intenzionalmente vuoto
-`subscriptionKey`. Non è stato configurato un link esterno a una posizione
-Azure Maps: l'SDK Web non fornisce un URL pubblico di condivisione documentato,
-quindi non viene inventato alcun URL. Dopo aver predisposto la credenziale,
-la mappa interattiva mostra il pin su Seraphicum; in caso di configurazione
-mancante o errore SDK resta visibile l'indirizzo bilingue.
+Il file `data/editions/2026.json` contiene quindi un blocco `map` con `provider: "openstreetmap"`, gli URL di embed e di apertura, e il testo di fallback. Non è richiesta alcuna chiave né altra configurazione.
 
 ---
 
@@ -314,3 +289,4 @@ Consulta il file **[CONTRIBUTING.md](CONTRIBUTING.md)** per le linee guida su co
 ---
 
 *Made with ❤️ by the XmasDev community*
+
