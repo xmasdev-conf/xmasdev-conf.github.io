@@ -36,24 +36,24 @@
   "logistics": {
     "sectionTitle": { "it": "Location", "en": "Location" },
     "sectionDescription": {
-      "it": "L'evento si terrà a Roma in una sede ancora TBD.",
-      "en": "The event will take place in Rome at a venue still to be defined."
+      "it": "XmasDev 2026 si terrà al Seraphicum, a Roma.",
+      "en": "XmasDev 2026 will take place at Seraphicum in Rome."
     },
-    "city": { "it": "Roma, Italia", "en": "Rome, Italy" },
+    "city": { "it": "Seraphicum, Roma, Italia", "en": "Seraphicum, Rome, Italy" },
     "addressLabel": { "it": "Indirizzo:", "en": "Address:" },
     "address": {
-      "it": "Da definire — la sede verrà comunicata nelle prossime settimane.",
-      "en": "To be defined — the venue will be announced in the coming weeks."
+      "it": "Seraphicum, Via del Serafico 1, 00142 Roma, Italia",
+      "en": "Seraphicum, Via del Serafico 1, 00142 Rome, Italy"
     },
     "transportLabel": { "it": "Come arrivare:", "en": "Getting there:" },
     "transport": {
-      "it": "Raggiungibile con Metro A, B e C. Ampia disponibilità di mezzi di superficie nelle vicinanze.",
-      "en": "Reachable via Metro A, B and C. Plenty of surface transport available nearby."
+      "it": "La sede è raggiungibile con i mezzi pubblici. Verifica percorsi e orari aggiornati prima della partenza.",
+      "en": "The venue is accessible by public transport. Check current routes and schedules before travelling."
     },
     "map": {
-      "embedUrl": "https://www.openstreetmap.org/export/embed.html?bbox=12.44%2C41.87%2C12.54%2C41.93&layer=mapnik&marker=41.9028%2C12.4964",
-      "linkUrl": "https://www.openstreetmap.org/?mlat=41.9028&mlon=12.4964#map=12/41.9028/12.4964",
-      "linkLabel": { "it": "Apri la mappa di Roma", "en": "Open the map of Rome" },
+      "embedUrl": "https://www.openstreetmap.org/export/embed.html?bbox=12.4712119%2C41.81968072%2C12.4912119%2C41.83968072&layer=mapnik&marker=41.82968072%2C12.4812119",
+      "linkUrl": "https://www.openstreetmap.org/?mlat=41.82968072&mlon=12.4812119#map=16/41.82968072/12.4812119",
+      "linkLabel": { "it": "Apri la mappa del Seraphicum", "en": "Open the map of Seraphicum" },
       "ariaLabel": { "it": "Mappa della location dell'evento", "en": "Map of the event location" }
     }
   },
