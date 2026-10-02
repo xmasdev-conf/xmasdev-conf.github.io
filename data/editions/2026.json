@@ -52,8 +52,8 @@
     },
     "map": {
       "provider": "openstreetmap",
-      "embedUrl": "https://www.openstreetmap.org/export/embed.html?bbox=12.4712119%2C41.81968072%2C12.4912119%2C41.83968072&layer=mapnik&marker=41.82968072%2C12.4812119",
-      "linkUrl": "https://www.openstreetmap.org/?mlat=41.82968072&mlon=12.4812119#map=16/41.82968072/12.4812119",
+      "coordinates": { "lat": 41.82968072, "lon": 12.4812119 },
+      "zoom": 16,
       "linkLabel": { "it": "Apri la mappa del Seraphicum", "en": "Open the map of Seraphicum" },
       "ariaLabel": { "it": "Mappa della location dell'evento", "en": "Map of the event location" },
       "fallbackText": {

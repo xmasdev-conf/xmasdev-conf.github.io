@@ -115,14 +115,19 @@ Per visualizzare il sito in locale è sufficiente uno dei seguenti strumenti:
 
 La location 2026 usa **OpenStreetMap** invece di un provider con chiave di accesso. Questo mantiene il sito statico e compatibile con GitHub Pages, senza segreti, credenziali o configurazioni extra da eseguire in produzione.
 
-La mappa viene caricata in modo nativo tramite un `iframe` pubblico di OpenStreetMap e usa le coordinate già presenti nel repository:
+La mappa viene caricata tramite un `iframe` pubblico di OpenStreetMap. Gli URL di embed e di apertura vengono generati da `js/main.js` a partire dalle coordinate presenti nel blocco `logistics.map` di `data/editions/2026.json`:
 
-- latitudine: `41.82968072`
-- longitudine: `12.4812119`
+```json
+"map": {
+  "provider": "openstreetmap",
+  "coordinates": { "lat": 41.82968072, "lon": 12.4812119 },
+  "zoom": 16
+}
+```
 
-Il link esterno punta a OpenStreetMap con il marker sulla sede del Seraphicum. Se la mappa non dovesse essere disponibile, la pagina mostra comunque il testo con l'indirizzo completo e resta accessibile in italiano e inglese.
+Il link esterno punta a OpenStreetMap con il marker sulla sede del Seraphicum. Se le coordinate non sono disponibili, vengono usati gli eventuali URL espliciti `embedUrl` e `linkUrl` del blocco `map`; in assenza anche di questi, la pagina mostra il testo di fallback (`fallbackText`) con l'indirizzo completo e il link apre una ricerca OpenStreetMap sull'indirizzo (`logistics.address`). Il contenuto resta accessibile in italiano e inglese.
 
-Il file `data/editions/2026.json` contiene quindi un blocco `map` con `provider: "openstreetmap"`, gli URL di embed e di apertura, e il testo di fallback. Non è richiesta alcuna chiave né altra configurazione.
+Non è richiesta alcuna chiave né altra configurazione.
 
 ---
 
