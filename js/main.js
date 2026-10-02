@@ -250,8 +250,13 @@ async function initLocationSection() {
   if (transportEl && logistics.transport) transportEl.textContent = tr(logistics.transport);
 
   const map = logistics?.map || {};
-  const embedUrl = normalizeHttpUrl(map.embedUrl);
-  const linkUrl = normalizeHttpUrl(map.linkUrl);
+  const osmUrls = buildOpenStreetMapUrls(map.coordinates, map.zoom);
+  const translatedAddress = tr(logistics.address);
+  const addressQuery = typeof translatedAddress === 'string' ? translatedAddress.trim() : '';
+  const embedUrl = osmUrls?.embedUrl || normalizeHttpUrl(map.embedUrl);
+  const linkUrl = osmUrls?.linkUrl
+    || normalizeHttpUrl(map.linkUrl)
+    || (addressQuery ? `https://www.openstreetmap.org/search?query=${encodeURIComponent(addressQuery)}` : null);
   const fallbackText = tr(map.fallbackText);
 
   if (mapFallbackTextEl && fallbackText) mapFallbackTextEl.textContent = fallbackText;
@@ -437,6 +442,30 @@ function shuffleArray(array) {
     [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
+}
+
+/* Builds keyless OpenStreetMap embed/link URLs from { lat, lon } coordinates. */
+function buildOpenStreetMapUrls(coordinates, zoomValue) {
+  const toNumber = (v) => (typeof v === 'number' || (typeof v === 'string' && v.trim() !== '')) ? Number(v) : NaN;
+  const lat = toNumber(coordinates?.lat);
+  const lon = toNumber(coordinates?.lon);
+  if (!Number.isFinite(lat) || !Number.isFinite(lon) || Math.abs(lat) > 90 || Math.abs(lon) > 180) return null;
+
+  const zoom = Number.isInteger(zoomValue) && zoomValue >= 1 && zoomValue <= 19 ? zoomValue : 16;
+  const delta = 0.01 * Math.pow(2, 16 - zoom);
+  const bbox = [lon - delta, lat - delta, lon + delta, lat + delta].join(',');
+
+  const embed = new URL('https://www.openstreetmap.org/export/embed.html');
+  embed.searchParams.set('bbox', bbox);
+  embed.searchParams.set('layer', 'mapnik');
+  embed.searchParams.set('marker', `${lat},${lon}`);
+
+  const link = new URL('https://www.openstreetmap.org/');
+  link.searchParams.set('mlat', String(lat));
+  link.searchParams.set('mlon', String(lon));
+  link.hash = `map=${zoom}/${lat}/${lon}`;
+
+  return { embedUrl: embed.toString(), linkUrl: link.toString() };
 }
 
 function normalizeHttpUrl(urlValue) {

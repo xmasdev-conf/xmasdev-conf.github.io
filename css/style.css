@@ -1421,8 +1421,27 @@ p {
 .badge--yellow { background: rgba(244, 208, 63, 0.15); color: var(--color-accent); }
 .badge--blue   { background: rgba(56, 139, 253, 0.15); color: #79c0ff; }
 
+/* ---- Location ---------------------------------------------- */
+.location-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 2.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.location-card > * { min-width: 0; }
+
 /* ---- Responsive -------------------------------------------- */
 @media (max-width: 900px) {
+  .location-card {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+
   .feature {
     grid-template-columns: 1fr;
     gap: 2rem;
