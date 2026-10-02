@@ -125,7 +125,7 @@ La mappa viene caricata tramite un `iframe` pubblico di OpenStreetMap. Gli URL d
 }
 ```
 
-Il link esterno punta a OpenStreetMap con il marker sulla sede del Seraphicum. Se le coordinate non sono disponibili, la pagina mostra il testo di fallback (`fallbackText`) con l'indirizzo completo e il link apre una ricerca OpenStreetMap sull'indirizzo (`logistics.address`). Il contenuto resta accessibile in italiano e inglese.
+Il link esterno punta a OpenStreetMap con il marker sulla sede del Seraphicum. Se le coordinate non sono disponibili, vengono usati gli eventuali URL espliciti `embedUrl` e `linkUrl` del blocco `map`; in assenza anche di questi, la pagina mostra il testo di fallback (`fallbackText`) con l'indirizzo completo e il link apre una ricerca OpenStreetMap sull'indirizzo (`logistics.address`). Il contenuto resta accessibile in italiano e inglese.
 
 Non è richiesta alcuna chiave né altra configurazione.
 

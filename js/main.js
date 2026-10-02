@@ -451,9 +451,11 @@ function buildOpenStreetMapUrls(coordinates, zoomValue) {
   const lon = toNumber(coordinates?.lon);
   if (!Number.isFinite(lat) || !Number.isFinite(lon) || Math.abs(lat) > 90 || Math.abs(lon) > 180) return null;
 
-  const zoom = Number.isInteger(zoomValue) && zoomValue >= 1 && zoomValue <= 19 ? zoomValue : 16;
+  const parsedZoom = toNumber(zoomValue);
+  const zoom = Number.isInteger(parsedZoom) && parsedZoom >= 1 && parsedZoom <= 19 ? parsedZoom : 16;
   const delta = 0.01 * Math.pow(2, 16 - zoom);
-  const bbox = [lon - delta, lat - delta, lon + delta, lat + delta].join(',');
+  const clamp = (v, limit) => Math.min(limit, Math.max(-limit, v));
+  const bbox = [clamp(lon - delta, 180), clamp(lat - delta, 90), clamp(lon + delta, 180), clamp(lat + delta, 90)].join(',');
 
   const embed = new URL('https://www.openstreetmap.org/export/embed.html');
   embed.searchParams.set('bbox', bbox);
