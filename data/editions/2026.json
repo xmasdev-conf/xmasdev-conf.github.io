@@ -47,8 +47,8 @@
     },
     "transportLabel": { "it": "Come arrivare:", "en": "Getting there:" },
     "transport": {
-      "it": "La sede è raggiungibile con i mezzi pubblici. Verifica percorsi e orari aggiornati prima della partenza.",
-      "en": "The venue is accessible by public transport. Check current routes and schedules before travelling."
+      "it": "Metro B fino al capolinea Laurentina: dalla stazione percorri via Laurentina per circa 200 m e, al semaforo, svolta a destra in via del Serafico. In auto: G.R.A., uscita 25 (Laurentina centro), poi prosegui per circa 2,5 km e svolta a destra al semaforo. Da Ciampino è disponibile il bus 720 fino a Laurentina.",
+      "en": "Take Metro B to Laurentina, the terminal station. From the station, walk about 200 m along Via Laurentina and turn right at the traffic lights onto Via del Serafico. By car, take G.R.A. exit 25 (Laurentina centro), continue for about 2.5 km, then turn right at the traffic lights. From Ciampino Airport, take bus 720 to Laurentina."
     },
     "map": {
       "provider": "openstreetmap",
