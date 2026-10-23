@@ -438,6 +438,8 @@ p {
   opacity: 0.8;
 }
 
+.btn[hidden] { display: none; }
+
 .btn.btn--disabled,
 .btn[aria-disabled='true'] {
   pointer-events: none;
@@ -449,6 +451,17 @@ p {
   color: var(--color-text-muted);
   font-size: 0.92rem;
 }
+
+.eventbrite-checkout {
+  margin: 2rem auto 0;
+  max-width: 900px;
+  background: #fff;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  text-align: left;
+}
+
+.eventbrite-checkout[hidden] { display: none; }
 
 /* ---- Stats bar --------------------------------------------- */
 .stats {

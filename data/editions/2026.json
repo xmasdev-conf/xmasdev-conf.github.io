@@ -14,8 +14,9 @@
     "link": "https://sessionize.com/xmasdev-2026/"
   },
   "registration": {
-    "enabled": false,
-    "url": "",
+    "enabled": true,
+    "url": "https://www.eventbrite.com/e/2002062756599",
+    "eventbriteEventId": "2002062756599",
     "openCtaLabel": { "it": "Registrati gratuitamente →", "en": "Register for free →" },
     "closedCtaLabel": { "it": "Registrazione non ancora aperta", "en": "Registration not open yet" },
     "openSectionTitle": { "it": "Prenota il tuo posto 🎁", "en": "Book your seat 🎁" },

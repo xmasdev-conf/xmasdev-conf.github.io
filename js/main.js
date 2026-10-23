@@ -315,6 +315,10 @@ async function initRegistrationCtas() {
       : (tr(registration.closedSectionDescription) || uiText('registration.closedDesc', 'Le iscrizioni non sono ancora aperte. Ti aggiorneremo appena sarà possibile registrarsi.'));
   }
 
+  const embedded = registrationEnabled
+    ? await embedEventbriteCheckout(registration.eventbriteEventId)
+    : false;
+
   ctas.forEach((cta) => {
     const messageTargetId = cta.dataset.registrationMessageTarget;
     const messageEl = messageTargetId ? document.getElementById(messageTargetId) : null;
@@ -324,7 +328,13 @@ async function initRegistrationCtas() {
       : closedCtaLabel;
 
     if (registrationEnabled) {
-      cta.href = registrationUrl;
+      // Con il checkout incorporato i CTA puntano alla sezione; quello dentro la sezione diventa superfluo.
+      cta.href = embedded ? '#tickets' : registrationUrl;
+      if (!embedded) {
+        cta.target = '_blank';
+        cta.rel = 'noopener noreferrer';
+      }
+      cta.hidden = embedded && Boolean(cta.closest('#tickets'));
       cta.removeAttribute('aria-disabled');
       cta.removeAttribute('title');
       cta.classList.remove('btn--disabled');
@@ -348,6 +358,39 @@ async function initRegistrationCtas() {
       messageEl.textContent = closedMessage;
     }
   });
+}
+
+/* Embeds the Eventbrite checkout widget; resolves to false if it cannot be loaded. */
+async function embedEventbriteCheckout(eventId) {
+  const container = document.getElementById('eventbrite-checkout');
+  const id = typeof eventId === 'string' || typeof eventId === 'number' ? String(eventId).trim() : '';
+  if (!container || !/^\d+$/.test(id) || window.location.protocol !== 'https:') return false;
+
+  try {
+    if (!window.EBWidgets) {
+      await new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://www.eventbrite.com/static/widgets/eb_widgets.js';
+        script.async = true;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+      });
+    }
+    if (!window.EBWidgets || typeof window.EBWidgets.createWidget !== 'function') return false;
+
+    container.hidden = false;
+    window.EBWidgets.createWidget({
+      widgetType: 'checkout',
+      eventId: id,
+      iframeContainerId: container.id,
+      iframeContainerHeight: 650,
+    });
+    return true;
+  } catch {
+    container.hidden = true;
+    return false;
+  }
 }
 
 /* ---- Footer communities (all pages) ----------------------- */
