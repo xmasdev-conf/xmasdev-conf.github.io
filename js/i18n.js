@@ -69,7 +69,6 @@
       'event.li2': 'Speaker selezionati dalla community',
       'event.li3': 'Solo slot da 40 minuti + 5 minuti di domande',
       'event.li4': 'Pranzo e coffee break inclusi',
-      'event.li5': 'Streaming live per chi non può essere presente',
 
       'homeSponsors.becomeSponsor': 'Diventa sponsor',
       'cfp.body': 'Condividi la tua esperienza con la community: stiamo cercando talk che ispirino confronto, collaborazione e unione tra professionisti con background diversi.',
@@ -111,7 +110,7 @@
       'sponsorsPage.whyTitle': 'Perché sponsorizzare XmasDev?',
       'sponsorsPage.whyDesc': 'Raggiungi una community attiva e qualificata di sviluppatori professionisti.',
       'sponsorsPage.visibilityTitle': 'Visibilità',
-      'sponsorsPage.visibilityDesc': "Il tuo logo su tutti i materiali dell'evento: sito, badge, slide e streaming live.",
+      'sponsorsPage.visibilityDesc': "Il tuo logo su tutti i materiali dell'evento: sito, badge, slide e registrazioni online pubblicate dopo l'evento.",
       'sponsorsPage.targetTitle': 'Target qualificato',
       'sponsorsPage.targetDesc': '200+ sviluppatori, tech lead e decision maker che partecipano attivamente alla community.',
       'sponsorsPage.networkingTitle': 'Networking diretto',
@@ -196,7 +195,6 @@
       'event.li2': 'Speakers selected by the community',
       'event.li3': '40-minute slots + 5 minutes of Q&A only',
       'event.li4': 'Lunch and coffee breaks included',
-      'event.li5': 'Live streaming for those who cannot attend',
 
       'homeSponsors.becomeSponsor': 'Become a sponsor',
       'cfp.body': 'Share your experience with the community: we are looking for talks that inspire discussion, collaboration and unity among professionals with different backgrounds.',
@@ -238,7 +236,7 @@
       'sponsorsPage.whyTitle': 'Why sponsor XmasDev?',
       'sponsorsPage.whyDesc': 'Reach an active and qualified community of professional developers.',
       'sponsorsPage.visibilityTitle': 'Visibility',
-      'sponsorsPage.visibilityDesc': 'Your logo on all event materials: website, badges, slides and live streaming.',
+      'sponsorsPage.visibilityDesc': 'Your logo on all event materials: website, badges, slides and online recordings published after the event.',
       'sponsorsPage.targetTitle': 'Qualified audience',
       'sponsorsPage.targetDesc': '200+ developers, tech leads and decision makers actively involved in the community.',
       'sponsorsPage.networkingTitle': 'Direct networking',
