@@ -3,8 +3,8 @@
     "enabled": true,
     "sessionizeApiUrl": "",
     "subtitle": {
-      "it": "Il programma completo della conferenza. 3 track + workshop, con slot da 40 minuti + 5 di domande.",
-      "en": "The full conference program. 3 tracks + workshop, with 40-minute slots + 5 for questions."
+      "it": "Il programma completo della conferenza. 2 track + workshop, con slot da 40 minuti + 5 di domande.",
+      "en": "The full conference program. 2 tracks + workshop, with 40-minute slots + 5 for questions."
     }
   },
   "cfp": {

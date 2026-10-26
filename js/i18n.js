@@ -65,7 +65,7 @@
 
       'event.title': 'Un giorno dedicato al <span style="color:var(--color-primary)">tuo</span> percorso da sviluppatore',
       'event.desc': "XmasDev nasce dall'idea che la crescita professionale passa anche dallo scambio con i propri pari. L'evento si svolge in una giornata intensa, ricca di contenuti di qualità e momenti informali, con l'obiettivo di creare legami duraturi nella community.",
-      'event.li1': '3 track tecniche + 1 workshop pratico',
+      'event.li1': '2 track tecniche + 1 workshop pratico',
       'event.li2': 'Speaker selezionati dalla community',
       'event.li3': 'Solo slot da 40 minuti + 5 minuti di domande',
       'event.li4': 'Pranzo e coffee break inclusi',
@@ -96,7 +96,7 @@
       'footer.supportedBy': 'Con il supporto delle community',
 
       'agendaPage.title': '🗓 Agenda',
-      'agendaPage.subtitle': 'Il programma completo della conferenza. 3 track + workshop, con slot da 40 minuti + 5 di domande.',
+      'agendaPage.subtitle': 'Il programma completo della conferenza. 2 track + workshop, con slot da 40 minuti + 5 di domande.',
       'agenda.allTracks': 'Tutte le track',
       'agenda.noSessionsTrack': 'Nessuna sessione disponibile per questa track.',
       'agenda.noSessionsEdition': 'Nessuna sessione disponibile per questa edizione.',
@@ -191,7 +191,7 @@
 
       'event.title': 'A day dedicated to <span style="color:var(--color-primary)">your</span> journey as a developer',
       'event.desc': 'XmasDev is born from the idea that professional growth also comes from exchanging with your peers. The event takes place in one intense day, full of quality content and informal moments, with the goal of building lasting bonds within the community.',
-      'event.li1': '3 technical tracks + 1 hands-on workshop',
+      'event.li1': '2 technical tracks + 1 hands-on workshop',
       'event.li2': 'Speakers selected by the community',
       'event.li3': '40-minute slots + 5 minutes of Q&A only',
       'event.li4': 'Lunch and coffee breaks included',
@@ -222,7 +222,7 @@
       'footer.supportedBy': 'Supported by the communities',
 
       'agendaPage.title': '🗓 Agenda',
-      'agendaPage.subtitle': 'The full conference program. 3 tracks + workshop, with 40-minute slots + 5 for questions.',
+      'agendaPage.subtitle': 'The full conference program. 2 tracks + workshop, with 40-minute slots + 5 for questions.',
       'agenda.allTracks': 'All tracks',
       'agenda.noSessionsTrack': 'No sessions available for this track.',
       'agenda.noSessionsEdition': 'No sessions available for this edition.',
