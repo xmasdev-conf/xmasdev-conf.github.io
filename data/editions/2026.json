@@ -199,12 +199,6 @@
         "background": "#ffffff"
       },
       {
-        "name": "DotNetCode",
-        "url": "https://www.dotnetcode.it/",
-        "logo": "assets/communities/dotnetcode.png",
-        "background": "#ffffff"
-      },
-      {
         "name": "SharpCoding",
         "url": "https://www.sharpcoding.it/",
         "logo": "assets/communities/sharpcoding.png",
