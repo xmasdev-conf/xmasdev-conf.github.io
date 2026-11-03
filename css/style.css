@@ -725,6 +725,8 @@ p {
 }
 
 .session-card {
+  display: flex;
+  flex-direction: column;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-left: 3px solid var(--color-primary);
@@ -743,6 +745,22 @@ p {
   background: rgba(139, 148, 158, 0.05);
 }
 
+.session-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.session-card__time {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  margin-left: auto;
+}
+
 .session-card__track {
   display: inline-block;
   font-size: 0.75rem;
@@ -751,7 +769,6 @@ p {
   letter-spacing: 0.08em;
   padding: 0.15rem 0.6rem;
   border-radius: 4px;
-  margin-bottom: 0.5rem;
 }
 
 .session-card__title {
@@ -765,7 +782,8 @@ p {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: 0.75rem;
+  margin-top: auto;
+  padding-top: 0.75rem;
 }
 
 .session-card__speaker {
@@ -845,7 +863,7 @@ p {
   display: grid;
   grid-template-columns: repeat(var(--tracks-count, 2), minmax(0, 1fr));
   gap: 0.75rem;
-  align-items: start;
+  align-items: stretch;
 }
 
 .timeslot--tracks-header {
@@ -862,11 +880,16 @@ p {
   gap: 0.75rem;
 }
 
+.timeslot__track-col > .session-card {
+  flex: 1;
+}
+
 .timeslot__track-col--full {
   grid-column: 1 / -1;
 }
 
 .timeslot__track-empty {
+  flex: 1;
   min-height: 76px;
   border: 1px dashed var(--color-border);
   border-radius: var(--radius-md);

@@ -51,7 +51,40 @@ async function fetchAgenda(sessionizeApiUrl) {
   if (!res.ok) {
     throw new Error(`Could not load agenda (HTTP ${res.status}).`);
   }
-  return res.json();
+  const data = await res.json();
+  await mergeServiceSessions(data, sessionizeApiUrl);
+  return data;
+}
+
+/* The /view/All endpoint omits service sessions (registration, coffee
+   breaks, lunch…): those only exist in the GridSmart view, so we fetch
+   it too and merge them into the session list. */
+async function mergeServiceSessions(data, sessionizeApiUrl) {
+  if (!data || !Array.isArray(data.sessions)) return;
+
+  const gridUrl = sessionizeApiUrl.replace(/\/view\/All\b/i, '/view/GridSmart');
+  if (gridUrl === sessionizeApiUrl) return;
+
+  try {
+    const res = await fetch(gridUrl);
+    if (!res.ok) return;
+    const days = await res.json();
+    if (!Array.isArray(days)) return;
+
+    const known = new Set(data.sessions.map((s) => String(s.id)));
+    days.forEach((day) => {
+      (day.rooms || []).forEach((room) => {
+        (room.sessions || []).forEach((s) => {
+          if (!(s.isServiceSession || s.isPlenumSession)) return;
+          if (known.has(String(s.id))) return;
+          known.add(String(s.id));
+          data.sessions.push({ ...s, roomId: s.roomId ?? room.id });
+        });
+      });
+    });
+  } catch {
+    /* Breaks are nice-to-have — still render the talks without them. */
+  }
 }
 
 async function resolveAgendaContext(container) {
@@ -390,20 +423,25 @@ function buildTimeslotTracks(time, sessions, rooms, speakers, trackColors) {
     matrix.appendChild(full);
   }
 
-  rooms.forEach((room) => {
-    const col = createEl('div', 'timeslot__track-col');
-    const roomSessions = sessions.filter((s) => isSessionInRoom(s, room.id) && !isGlobalServiceSession(s, rooms));
+  // Skip the per-track columns when the slot only holds plenum sessions
+  // (breaks, lunch…): a row of empty "—" cells would just add noise.
+  const hasTrackSessions = sessions.some((s) => !isGlobalServiceSession(s, rooms));
+  if (hasTrackSessions) {
+    rooms.forEach((room) => {
+      const col = createEl('div', 'timeslot__track-col');
+      const roomSessions = sessions.filter((s) => isSessionInRoom(s, room.id) && !isGlobalServiceSession(s, rooms));
 
-    if (!roomSessions.length) {
-      const empty = createEl('div', 'timeslot__track-empty');
-      empty.textContent = '—';
-      col.appendChild(empty);
-    } else {
-      roomSessions.forEach((s) => col.appendChild(buildSessionCard(s, speakers, trackColors)));
-    }
+      if (!roomSessions.length) {
+        const empty = createEl('div', 'timeslot__track-empty');
+        empty.textContent = '—';
+        col.appendChild(empty);
+      } else {
+        roomSessions.forEach((s) => col.appendChild(buildSessionCard(s, speakers, trackColors)));
+      }
 
-    matrix.appendChild(col);
-  });
+      matrix.appendChild(col);
+    });
+  }
 
   row.appendChild(timeEl);
   row.appendChild(matrix);
@@ -432,6 +470,8 @@ function buildSessionCard(session, speakers, trackColors) {
   const isBreak = session.isServiceSession || session.isPlenumSession;
   const card = createEl('div', isBreak ? 'session-card session-card--break' : 'session-card');
 
+  const meta = createEl('div', 'session-card__meta');
+
   // Track badge
   if (Array.isArray(session.categoryItems) && session.categoryItems.length) {
     const item = session.categoryItems[0];
@@ -440,8 +480,19 @@ function buildSessionCard(session, speakers, trackColors) {
     badge.style.background = color.bg;
     badge.style.color = color.text;
     badge.textContent = item.name;
-    card.appendChild(badge);
+    meta.appendChild(badge);
   }
+
+  // Start–end time
+  if (session.startsAt) {
+    const time = createEl('span', 'session-card__time');
+    const start = formatTime(session.startsAt);
+    const end = session.endsAt ? formatTime(session.endsAt) : '';
+    time.textContent = end ? `${start} – ${end}` : start;
+    meta.appendChild(time);
+  }
+
+  if (meta.childNodes.length) card.appendChild(meta);
 
   const title = createEl('div', 'session-card__title');
   title.textContent = session.title;
@@ -519,6 +570,10 @@ function isSessionInRoom(session, roomId) {
 
 function isGlobalServiceSession(session, rooms) {
   if (!(session?.isServiceSession || session?.isPlenumSession)) return false;
+
+  // Plenum sessions (lunch, coffee breaks…) span every track even though
+  // Sessionize assigns them to a single room.
+  if (session.isPlenumSession) return true;
 
   const hasKnownRoom = rooms.some((r) => isSessionInRoom(session, r.id));
   return !hasKnownRoom;
