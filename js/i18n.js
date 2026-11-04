@@ -104,6 +104,7 @@
       'agenda.soon': "L'agenda sarà disponibile a breve. Torna presto!",
       'agenda.empty': "Nessuna sessione disponibile per il momento.",
       'agenda.error': "Impossibile caricare l'agenda.",
+      'agenda.close': 'Chiudi',
 
       'sponsorsPage.title': '🤝 I nostri Sponsor',
       'sponsorsPage.subtitle': 'Grazie alle aziende che credono nella community degli sviluppatori e rendono XmasDev possibile.',
@@ -230,6 +231,7 @@
       'agenda.soon': 'The agenda will be available soon. Check back later!',
       'agenda.empty': 'No sessions available at the moment.',
       'agenda.error': 'Could not load the agenda.',
+      'agenda.close': 'Close',
 
       'sponsorsPage.title': '🤝 Our Sponsors',
       'sponsorsPage.subtitle': 'Thanks to the companies that believe in the developer community and make XmasDev possible.',

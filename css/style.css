@@ -811,6 +811,115 @@ p {
   overflow: hidden;
 }
 
+.session-card--clickable {
+  cursor: pointer;
+}
+
+/* Session detail popup */
+.session-dialog {
+  margin: auto;
+  width: min(560px, calc(100% - 2rem));
+  max-height: calc(100vh - 4rem);
+  padding: 0;
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-top: 3px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+
+.session-dialog::backdrop {
+  background: rgba(13, 17, 23, 0.75);
+  backdrop-filter: blur(2px);
+}
+
+.session-dialog__box {
+  position: relative;
+  padding: 1.75rem;
+}
+
+.session-dialog__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--color-text-muted);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition);
+}
+
+.session-dialog__close:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-text);
+}
+
+.session-dialog__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  padding-right: 2rem;
+}
+
+.session-dialog__info {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.session-dialog__title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 1rem;
+  padding-right: 2rem;
+}
+
+.session-dialog__description {
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+  white-space: pre-line;
+}
+
+.session-dialog__speakers {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.session-dialog__speaker {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.session-dialog__speaker img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.session-dialog__speaker-name {
+  font-weight: 600;
+}
+
+.session-dialog__speaker-tagline {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
 .agenda-tabs {
   display: flex;
   gap: 0;

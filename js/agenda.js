@@ -21,6 +21,9 @@ const TRACK_COLORS = [
   { bg: 'rgba(255,166,0,0.15)', text: '#ffa600' },
 ];
 
+/* Room lookup {id → name}, filled in by renderAgenda */
+let roomNames = {};
+
 document.addEventListener('DOMContentLoaded', async () => {
   const container = document.getElementById('agenda-container');
   if (!container) return;
@@ -199,6 +202,8 @@ function renderAgenda(container, data) {
 
   // Build speaker lookup  {id → speaker}
   const speakers = buildSpeakerMap(views);
+  // Build room lookup  {id → name}, used by the session detail popup
+  roomNames = buildRoomNameMap(views);
   // Build category/track lookup
   const trackColors = buildTrackColorMap(views);
 
@@ -530,10 +535,144 @@ function buildSessionCard(session, speakers, trackColors) {
     card.appendChild(speakersEl);
   }
 
+  // Talks open a detail popup; breaks have nothing more to show
+  if (!isBreak) {
+    card.classList.add('session-card--clickable');
+    card.tabIndex = 0;
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-haspopup', 'dialog');
+    card.addEventListener('click', () => openSessionDialog(session, speakers, trackColors));
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openSessionDialog(session, speakers, trackColors);
+      }
+    });
+  }
+
   return card;
 }
 
+/* ---- Session detail popup ---------------------------------- */
+function getSessionDialog() {
+  let dialog = document.getElementById('session-dialog');
+  if (dialog) return dialog;
+
+  dialog = createEl('dialog', 'session-dialog');
+  dialog.id = 'session-dialog';
+  dialog.setAttribute('aria-labelledby', 'session-dialog-title');
+
+  // Close when clicking on the backdrop (outside the dialog box)
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) dialog.close();
+  });
+
+  document.body.appendChild(dialog);
+  return dialog;
+}
+
+function openSessionDialog(session, speakers, trackColors) {
+  const dialog = getSessionDialog();
+  dialog.innerHTML = '';
+
+  const box = createEl('div', 'session-dialog__box');
+
+  const closeBtn = createEl('button', 'session-dialog__close');
+  closeBtn.type = 'button';
+  closeBtn.setAttribute('aria-label', agendaUi('agenda.close', 'Chiudi'));
+  closeBtn.textContent = '×';
+  closeBtn.addEventListener('click', () => dialog.close());
+  box.appendChild(closeBtn);
+
+  const meta = createEl('div', 'session-dialog__meta');
+
+  if (Array.isArray(session.categoryItems) && session.categoryItems.length) {
+    const item = session.categoryItems[0];
+    const badge = createEl('span', 'session-card__track');
+    const color = trackColors[item.id] || trackColors['default'];
+    badge.style.background = color.bg;
+    badge.style.color = color.text;
+    badge.textContent = item.name;
+    meta.appendChild(badge);
+  }
+
+  const details = [];
+  if (session.startsAt) {
+    const start = formatTime(session.startsAt);
+    const end = session.endsAt ? formatTime(session.endsAt) : '';
+    details.push(end ? `${start} – ${end}` : start);
+  }
+  const room = session.room || roomNames[session.roomId];
+  if (room) details.push(room);
+
+  if (details.length) {
+    const info = createEl('span', 'session-dialog__info');
+    info.textContent = details.join(' · ');
+    meta.appendChild(info);
+  }
+
+  if (meta.childNodes.length) box.appendChild(meta);
+
+  const title = createEl('h2', 'session-dialog__title');
+  title.id = 'session-dialog-title';
+  title.textContent = session.title;
+  box.appendChild(title);
+
+  if (session.description) {
+    const desc = createEl('p', 'session-dialog__description');
+    desc.textContent = session.description;
+    box.appendChild(desc);
+  }
+
+  if (session.speakers && session.speakers.length) {
+    const speakersEl = createEl('div', 'session-dialog__speakers');
+    session.speakers.forEach((ref) => {
+      const speakerId = typeof ref === 'string' ? ref : ref?.id;
+      const sp = speakerId ? (speakers[speakerId] || ref) : ref;
+      const speakerEl = createEl('div', 'session-dialog__speaker');
+
+      if (sp.profilePicture) {
+        const img = createEl('img');
+        img.src = sp.profilePicture;
+        img.alt = '';
+        img.width = 48;
+        img.height = 48;
+        speakerEl.appendChild(img);
+      }
+
+      const text = createEl('div');
+      const name = createEl('div', 'session-dialog__speaker-name');
+      name.textContent = sp.fullName || sp.name || (typeof ref === 'string' ? ref : '');
+      text.appendChild(name);
+
+      if (sp.tagLine) {
+        const tagLine = createEl('div', 'session-dialog__speaker-tagline');
+        tagLine.textContent = sp.tagLine;
+        text.appendChild(tagLine);
+      }
+
+      speakerEl.appendChild(text);
+      speakersEl.appendChild(speakerEl);
+    });
+    box.appendChild(speakersEl);
+  }
+
+  dialog.appendChild(box);
+  dialog.showModal();
+  closeBtn.focus();
+}
+
 /* ---- Helpers ----------------------------------------------- */
+function buildRoomNameMap(data) {
+  const map = {};
+  data.forEach((view) => {
+    (view.rooms || []).forEach((room) => {
+      map[room.id] = room.name;
+    });
+  });
+  return map;
+}
+
 function buildSpeakerMap(data) {
   if (!Array.isArray(data)) return {};
 
